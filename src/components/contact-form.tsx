@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -28,6 +29,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -38,12 +40,47 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(data: ContactFormValues) {
-    toast({
-        title: 'Form Submitted',
-        description: 'This is a demo. Form submissions are not active.',
-    });
-    console.log(data);
+  async function onSubmit(data: ContactFormValues) {
+    setIsSubmitting(true);
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({
+                access_key: "a4a01167-871c-43f3-b0fb-9043c0e3bf69",
+                ...data
+            }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            toast({
+                title: 'Message Sent!',
+                description: 'Thank you for reaching out. I will get back to you soon.',
+            });
+            form.reset();
+        } else {
+            console.error("Submission failed", result);
+            toast({
+                variant: 'destructive',
+                title: 'Something went wrong.',
+                description: result.message || 'Could not send the message.',
+            });
+        }
+    } catch (error) {
+        console.error("Submission error", error);
+        toast({
+            variant: 'destructive',
+            title: 'Something went wrong.',
+            description: 'Could not send the message. Please try again later.',
+        });
+    } finally {
+        setIsSubmitting(false);
+    }
   }
 
   return (
@@ -79,8 +116,8 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Send Message
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
         </Form>
