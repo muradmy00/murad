@@ -1,5 +1,4 @@
 
-'use client';
 import type { Skill } from '@/lib/types';
 import { skills } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
