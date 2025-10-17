@@ -33,6 +33,14 @@ export type Skill = {
   proficiency: number;
 };
 
+export type Achievement = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  imageHint?: string;
+};
+
 export type Blog = {
   id: string;
   slug: string;

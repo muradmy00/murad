@@ -47,6 +47,24 @@
       "description": "A professional portrait of a developer.",
       "imageUrl": "https://picsum.photos/seed/aboutme/600/800",
       "imageHint": "professional portrait"
+    },
+    {
+      "id": "achievement-1",
+      "description": "A certificate of achievement.",
+      "imageUrl": "https://picsum.photos/seed/achieve1/600/400",
+      "imageHint": "certificate achievement"
+    },
+    {
+      "id": "achievement-2",
+      "description": "A trophy for a competition.",
+      "imageUrl": "https://picsum.photos/seed/achieve2/600/400",
+      "imageHint": "trophy competition"
+    },
+    {
+      "id": "achievement-3",
+      "description": "A badge for open source contribution.",
+      "imageUrl": "https://picsum.photos/seed/achieve3/600/400",
+      "imageHint": "badge contribution"
     }
   ]
 }

@@ -1,5 +1,5 @@
 
-import type { Project, Experience, Skill, Blog, Message, Education } from './types';
+import type { Project, Experience, Skill, Blog, Message, Education, Achievement } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 export const getPlaceholder = (id: string) => {
@@ -82,6 +82,30 @@ export const skills: Skill[] = [
   { id: '6', name: 'Node.js', category: 'Backend', proficiency: 80 },
   { id: '9', name: 'Git & GitHub', category: 'Tools', proficiency: 95 },
   { id: '10', name: 'Figma', category: 'Tools', proficiency: 85 },
+];
+
+export const achievements: Achievement[] = [
+  {
+    id: '1',
+    title: 'Codefest 2023 Winner',
+    description: 'Won first place in the annual Codefest hackathon, developing a web application for local community engagement in under 48 hours.',
+    imageUrl: getPlaceholder('achievement-1').imageUrl,
+    imageHint: getPlaceholder('achievement-1').imageHint,
+  },
+  {
+    id: '2',
+    title: 'Top Performer Award',
+    description: 'Recognized as a top performer for outstanding contributions to the frontend development team and successful project delivery.',
+    imageUrl: getPlaceholder('achievement-2').imageUrl,
+    imageHint: getPlaceholder('achievement-2').imageHint,
+  },
+  {
+    id: '3',
+    title: 'Open Source Contributor',
+    description: 'Actively contributed to a popular open-source UI library, with several pull requests merged into the main branch.',
+    imageUrl: getPlaceholder('achievement-3').imageUrl,
+    imageHint: getPlaceholder('achievement-3').imageHint,
+  },
 ];
 
 export const blogPosts: Blog[] = [
