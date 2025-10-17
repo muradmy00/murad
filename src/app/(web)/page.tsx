@@ -1,4 +1,6 @@
 
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Download, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
@@ -9,6 +11,7 @@ import {
 import Image from 'next/image';
 import { getPlaceholder } from '@/lib/data';
 import { assets } from '@/assets/assets';
+import { useState, useEffect } from 'react';
 
 export default function HomePage() {
   const socialLinks = [
@@ -19,15 +22,53 @@ export default function HomePage() {
 
   const aboutImage = getPlaceholder('about-me');
 
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const toRotate = ["Mohiuddin Murad"];
+  const period = 2000; // Time between typing cycles
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, typingSpeed);
+
+    return () => {
+      clearInterval(ticker);
+    };
+  }, [text, typingSpeed]);
+
+  const tick = () => {
+    let i = loopNum % toRotate.length;
+    let fullText = toRotate[i];
+    let updatedText = isDeleting
+      ? fullText.substring(0, text.length - 1)
+      : fullText.substring(0, text.length + 1);
+
+    setText(updatedText);
+
+    setTypingSpeed(isDeleting ? 80 : 150);
+
+    if (!isDeleting && updatedText === fullText) {
+      setIsDeleting(true);
+      setTypingSpeed(period);
+    } else if (isDeleting && updatedText === '') {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <main className="text-center">
         <div className="relative inline-block">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-          <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold">
+          <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold h-24 md:h-32 lg:h-36">
             I'm{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
-              Mohiuddin Murad
+              {text}
+              <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
             </span>
           </h1>
         </div>
