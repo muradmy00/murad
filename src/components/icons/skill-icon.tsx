@@ -19,11 +19,9 @@ import {
   SiYarn,
   SiC,
   SiCplusplus,
-  SiJava,
   SiPython,
   SiReacthookform,
   SiZustand,
-  SiQuill,
   SiExpo,
   SiAxios,
 } from '@icons-pack/react-simple-icons';
@@ -76,16 +74,12 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
         return <SiC className={className} color="#A8B9CC" />;
     case 'C++':
         return <SiCplusplus className={className} color="#00599C" />;
-    case 'Java':
-        return <SiJava className={className} color="#007396" />;
     case 'Python':
         return <SiPython className={className} color="#3776AB" />;
     case 'React Hook Form':
         return <SiReacthookform className={className} color="#EC5990" />;
     case 'Zustand':
         return <SiZustand className={className} color="#000000" />;
-    case 'Quill':
-        return <SiQuill className={className} color="#00A9E2" />;
     case 'Expo':
         return <SiExpo className={className} color="#000020" />;
     case 'Axios':
