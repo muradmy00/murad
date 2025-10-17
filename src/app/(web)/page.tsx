@@ -70,25 +70,15 @@ export default function HomePage() {
 
       {/* About Me Snippet */}
       <section className="py-16 md:py-24 bg-card border rounded-xl">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="px-6">
-                <h2 className="font-headline text-3xl sm:text-4xl font-bold text-primary mb-4">About Me</h2>
-                <p className="text-muted-foreground mb-4">
+        <div className="text-center px-6">
+            <h2 className="font-headline text-3xl sm:text-4xl font-bold text-primary mb-4">About Me</h2>
+            <div className="max-w-3xl mx-auto">
+                <p className="text-muted-foreground mb-4 text-lg">
                     I am a passionate frontend developer with a knack for creating beautiful and functional web applications. With a strong foundation in modern JavaScript frameworks and a keen eye for design, I strive to build products that not only look good but also provide an exceptional user experience.
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-lg">
                     From architecting scalable component libraries to optimizing application performance, I love tackling challenging problems and continuously learning in the ever-evolving world of web development.
                 </p>
-            </div>
-            <div className="px-6">
-                 <Image
-                    src="https://picsum.photos/seed/aboutme/600/400"
-                    alt="A developer working on a laptop"
-                    width={600}
-                    height={400}
-                    className="rounded-lg shadow-lg object-cover"
-                    data-ai-hint="developer laptop"
-                />
             </div>
         </div>
       </section>
