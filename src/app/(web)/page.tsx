@@ -9,7 +9,7 @@ import {
   CardContent,
 } from '@/components/ui/card';
 import Image from 'next/image';
-import { getPlaceholder } from '@/lib/data';
+import { getPlaceholder, resume } from '@/lib/data';
 import { assets } from '@/assets/assets';
 import { useState, useEffect } from 'react';
 
@@ -86,9 +86,9 @@ export default function HomePage() {
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-            <Link href="/resume">
+            <a href={resume.url} target="_blank" rel="noopener noreferrer">
               Download Resume <Download className="ml-2" />
-            </Link>
+            </a>
           </Button>
         </div>
         
@@ -102,9 +102,9 @@ export default function HomePage() {
 
         <Card className="mt-24 max-w-6xl mx-auto bg-transparent border-none shadow-none">
             <CardContent className="p-0">
-                <div className="grid md:grid-cols-5 items-center gap-8 md:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-5 items-center gap-8 md:gap-16">
                     <div className="relative md:col-span-2 flex justify-center items-center">
-                      <div className="relative w-64 h-64 md:w-80 md-h-80">
+                      <div className="relative w-64 h-64 md:w-80 md:h-80">
                          <div className="absolute inset-0 bg-primary/20 rounded-lg blur-3xl -z-10 animate-pulse transform -rotate-6"></div>
                          {aboutImage && (
                             <Image
