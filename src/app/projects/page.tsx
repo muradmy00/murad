@@ -55,19 +55,17 @@ export default function ProjectsPage() {
             </div>
 
             <CardContent className="p-6 bg-card flex-grow flex flex-col">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-headline text-2xl font-bold group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-              </div>
-
+              <h3 className="font-headline text-2xl font-bold group-hover:text-primary transition-colors mb-2">
+                {project.title}
+              </h3>
+              
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack?.map((tech: string) => (
                   <Badge key={tech} variant="secondary">{tech}</Badge>
                 ))}
               </div>
               
-              <CardDescription className="text-muted-foreground flex-grow">
+              <CardDescription className="text-muted-foreground mt-auto">
                 {project.description}
               </CardDescription>
 
