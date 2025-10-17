@@ -59,14 +59,7 @@ export default function ProjectsPage() {
                   <Badge key={tech} variant="secondary">{tech}</Badge>
                 ))}
               </div>
-              <div className="mt-auto flex flex-wrap gap-2 justify-between items-center">
-                  {project.repoUrl && (
-                    <Button asChild variant="ghost" size="sm" className="hover:text-primary">
-                        <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="mr-2" /> Source Code
-                        </Link>
-                    </Button>
-                  )}
+              <div className="mt-auto flex flex-wrap gap-2 justify-end items-center">
                   {project.liveUrl && (
                     <Button asChild size="sm">
                         <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
