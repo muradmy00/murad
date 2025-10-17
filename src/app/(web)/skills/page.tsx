@@ -13,22 +13,20 @@ import {
 } from 'lucide-react';
 import React from 'react';
 
-const skillCategories: Exclude<Skill['category'], 'Database'>[] = [
+const skillCategories: Exclude<Skill['category'], 'Database' | 'Web3'>[] = [
   'Frontend',
   'Backend',
   'Languages',
   'Styling',
   'Tools',
-  'Web3',
 ];
 
-const categoryIcons: { [key in Exclude<Skill['category'], 'Database'>]: React.ReactNode } = {
+const categoryIcons: { [key in Exclude<Skill['category'], 'Database' | 'Web3'>]: React.ReactNode } = {
   Frontend: <Smartphone className="h-6 w-6" />,
   Backend: <Server className="h-6 w-6" />,
   Languages: <Languages className="h-6 w-6" />,
   Styling: <PenTool className="h-6 w-6" />,
   Tools: <Puzzle className="h-6 w-6" />,
-  Web3: <GitBranch className="h-6 w-6" />,
 };
 
 export default function SkillsPage() {
@@ -49,11 +47,14 @@ export default function SkillsPage() {
           const categorySkills = skills?.filter(
             (skill) => skill.category === category
           );
-          if (!categorySkills || categorySkills.length === 0) return null;
+
+          if (!categorySkills || categorySkills.length === 0) {
+            return null;
+          }
 
           return (
             <div key={category}>
-               <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="text-primary">{categoryIcons[category]}</div>
                 <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary">
                   {category}
