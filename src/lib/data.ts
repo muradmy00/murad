@@ -1,5 +1,5 @@
 
-import type { Project, Experience, Skill, Blog, Message } from './types';
+import type { Project, Experience, Skill, Blog, Message, Education } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 export const getPlaceholder = (id: string) => {
@@ -60,6 +60,23 @@ export const experience: Experience[] = [
     company: 'Web Starters Co.',
     duration: 'May 2016 - May 2017',
     description: 'Assisted in building and testing responsive websites using HTML, CSS, and jQuery. Gained foundational skills in version control with Git.',
+  },
+];
+
+export const education: Education[] = [
+  {
+    id: '1',
+    institution: 'University of Technology',
+    degree: 'Bachelor of Science in Computer Science',
+    duration: '2012 - 2016',
+    description: 'Graduated with honors, specializing in software engineering and web development. Active member of the coding club.',
+  },
+  {
+    id: '2',
+    institution: 'Online Learning Platform',
+    degree: 'Advanced Web Development Certification',
+    duration: '2019',
+    description: 'Completed an intensive certification program covering modern frontend and backend technologies, including React, Node.js, and advanced CSS.',
   },
 ];
 

@@ -1,3 +1,4 @@
+
 export type Project = {
   id: string;
   title: string;
@@ -13,6 +14,14 @@ export type Experience = {
   id: string;
   role: string;
   company: string;
+  duration: string;
+  description: string;
+};
+
+export type Education = {
+  id: string;
+  institution: string;
+  degree: string;
   duration: string;
   description: string;
 };
