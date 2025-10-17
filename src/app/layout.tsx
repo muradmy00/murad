@@ -4,10 +4,14 @@ import Footer from '@/components/footer';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from 'next';
+import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
   title: 'Mohiuddin Murad - Professional Portfolio',
   description: 'A professional portfolio for a full-stack developer built with Next.js.',
+  icons: {
+    icon: assets.favicon.src,
+  }
 };
 
 export default function RootLayout({
