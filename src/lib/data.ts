@@ -88,7 +88,6 @@ export const skills: Skill[] = [
   { id: '5', name: 'Tailwind CSS', category: 'Styling', proficiency: 92 },
   { id: '6', name: 'Node.js', category: 'Backend', proficiency: 80 },
   { id: '7', name: 'Solidity', category: 'Web3', proficiency: 75 },
-  { id: '8', name: 'PostgreSQL', category: 'Database', proficiency: 70 },
   { id: '9', name: 'Git & GitHub', category: 'Tools', proficiency: 95 },
   { id: '10', name: 'Figma', category: 'Tools', proficiency: 85 },
 ];

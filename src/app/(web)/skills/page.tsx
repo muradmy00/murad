@@ -28,7 +28,6 @@ const skillCategories: Skill['category'][] = [
   'Backend',
   'Languages',
   'Styling',
-  'Database',
   'Tools',
   'Web3',
 ];
@@ -38,9 +37,9 @@ const categoryIcons: { [key in Skill['category']]: React.ReactNode } = {
   Backend: <Server className="h-6 w-6" />,
   Languages: <Languages className="h-6 w-6" />,
   Styling: <PenTool className="h-6 w-6" />,
-  Database: <Database className="h-6 w-6" />,
   Tools: <Puzzle className="h-6 w-6" />,
   Web3: <GitBranch className="h-6 w-6" />,
+  Database: <Database className="h-6 w-6" />,
 };
 
 export default function SkillsPage() {
