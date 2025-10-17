@@ -61,7 +61,7 @@ export default function ProjectsPage() {
                   <Badge key={tech} variant="secondary">{tech}</Badge>
                 ))}
               </div>
-              <div className="mt-auto flex justify-between items-center">
+              <div className="mt-auto flex flex-wrap gap-2 justify-between items-center">
                   {project.repoUrl && (
                     <Button asChild variant="ghost" size="sm">
                         <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
