@@ -68,7 +68,7 @@ export default function HomePage() {
                                 src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
-                                className="object-contain rounded-lg shadow-2xl shadow-primary/40"
+                                className="object-cover rounded-full shadow-2xl shadow-primary/40"
                                 data-ai-hint={aboutImage.imageHint}
                             />
                          )}
