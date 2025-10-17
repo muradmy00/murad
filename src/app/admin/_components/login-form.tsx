@@ -16,50 +16,64 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { handleLogin, handleSignup } from '@/app/actions';
+import { handleLogin, handlePasswordReset } from '@/app/actions';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Terminal } from 'lucide-react';
+import { Terminal, CheckCircle2 } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
   password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
 });
 
-type LoginFormValues = z.infer<typeof loginSchema>;
+const passwordResetSchema = z.object({
+    email: z.string().email({ message: 'Invalid email address.' }),
+});
 
-const initialState = {
+type LoginFormValues = z.infer<typeof loginSchema>;
+type PasswordResetFormValues = z.infer<typeof passwordResetSchema>;
+
+const initialLoginState = {
+    message: '',
+    success: false,
+};
+
+const initialResetState = {
     message: '',
     success: false,
 };
 
 
 export function LoginForm() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [loginState, loginAction] = useActionState(handleLogin, initialState);
-  const [signupState, signupAction] = useActionState(handleSignup, initialState);
+  const [loginState, loginAction] = useActionState(handleLogin, initialLoginState);
+  const [resetState, resetAction] = useActionState(handlePasswordReset, initialResetState);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
-  const state = isLogin ? loginState : signupState;
-  const formAction = isLogin ? loginAction : signupAction;
-
-  const form = useForm<LoginFormValues>({
+  const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
-  
+
+  const resetForm = useForm<PasswordResetFormValues>({
+      resolver: zodResolver(passwordResetSchema),
+      defaultValues: { email: '' },
+  });
+
   return (
+    <>
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline text-2xl">{isLogin ? 'Admin Login' : 'Admin Signup'}</CardTitle>
-        <CardDescription>{isLogin ? 'Enter your credentials to access the dashboard.' : 'Create an admin account to get started.'}</CardDescription>
+        <CardTitle className="font-headline text-2xl">Admin Login</CardTitle>
+        <CardDescription>Enter your credentials to access the dashboard.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Form {...form}>
-          <form action={formAction} className="space-y-6">
+        <Form {...loginForm}>
+          <form action={loginAction} className="space-y-6">
             <FormField
-              control={form.control}
+              control={loginForm.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -72,7 +86,7 @@ export function LoginForm() {
               )}
             />
             <FormField
-              control={form.control}
+              control={loginForm.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
@@ -85,30 +99,71 @@ export function LoginForm() {
               )}
             />
             
-            {state?.message && !state.success && (
+            {loginState?.message && !loginState.success && (
                 <Alert variant="destructive">
                     <Terminal className="h-4 w-4" />
-                    <AlertTitle>Heads up!</AlertTitle>
+                    <AlertTitle>Login Failed</AlertTitle>
                     <AlertDescription>
-                        {state.message}
+                        {loginState.message}
                     </AlertDescription>
                 </Alert>
             )}
 
             <Button type="submit" className="w-full">
-              {isLogin ? 'Login' : 'Sign Up'}
+              Login
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="flex-col items-start text-sm">
-        <div>
-            {isLogin ? "Don't have an account?" : "Already have an account?"}
-            <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="p-1">
-                {isLogin ? 'Sign up' : 'Login'}
-            </Button>
-        </div>
+        <Button variant="link" onClick={() => setIsForgotPassword(true)} className="p-0">
+          Forgot Password?
+        </Button>
       </CardFooter>
     </Card>
+
+    <Dialog open={isForgotPassword} onOpenChange={setIsForgotPassword}>
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>Reset Password</DialogTitle>
+                <DialogDescription>
+                    Enter your email address and we'll send you a link to reset your password.
+                </DialogDescription>
+            </DialogHeader>
+            <Form {...resetForm}>
+                <form action={resetAction} className="space-y-4">
+                    <FormField
+                        control={resetForm.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input type="email" placeholder="your.email@example.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    
+                    {resetState?.message && (
+                        <Alert variant={resetState.success ? 'default' : 'destructive'} className={resetState.success ? 'bg-green-50 border-green-200' : ''}>
+                            {resetState.success ? <CheckCircle2 className="h-4 w-4" /> : <Terminal className="h-4 w-4" />}
+                            <AlertTitle>{resetState.success ? 'Check your inbox' : 'Error'}</AlertTitle>
+                            <AlertDescription>{resetState.message}</AlertDescription>
+                        </Alert>
+                    )}
+                    
+                    <DialogFooter>
+                        <Button type="submit">Submit</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary">Close</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </Form>
+        </DialogContent>
+    </Dialog>
+    </>
   );
 }

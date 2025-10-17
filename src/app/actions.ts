@@ -5,7 +5,11 @@ import { cookies } from 'next/headers';
 import { z } from 'zod';
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updatePassword,
+  updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from 'firebase/auth';
 import { initializeFirebase } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -15,10 +19,10 @@ const loginSchema = z.object({
   password: z.string().min(6),
 });
 
-const signupSchema = z.object({
+const passwordResetSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(6),
 });
+
 
 async function setAuthCookie(token: string) {
     cookies().set('devfolio-auth-token', token, {
@@ -67,36 +71,26 @@ export async function handleLogin(prevState: any, formData: FormData) {
   redirect('/admin/dashboard');
 }
 
-export async function handleSignup(prevState: any, formData: FormData) {
+export async function handlePasswordReset(prevState: any, formData: FormData) {
     try {
-      const parsed = signupSchema.parse({
-        email: formData.get('email'),
-        password: formData.get('password'),
-      });
-  
-      const { auth } = initializeFirebase();
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        parsed.email,
-        parsed.password
-      );
-      const token = await userCredential.user.getIdToken();
-      await setAuthCookie(token);
-      
-    } catch (e: any) {
-      let message = 'An unexpected error occurred.';
-      if (e instanceof z.ZodError) {
-          message = 'Invalid form data.';
-      } else if (e.code === 'auth/email-already-in-use') {
-          message = 'This email is already registered. Please login instead.';
-      } else {
-        message = 'An unknown error occurred during sign-up.';
-      }
-      return { message, success: false };
+        const parsed = passwordResetSchema.parse({
+            email: formData.get('email'),
+        });
+
+        const { auth } = initializeFirebase();
+        await sendPasswordResetEmail(auth, parsed.email);
+
+        return { message: 'If an account exists for this email, a password reset link has been sent.', success: true };
+    } catch (e) {
+        if (e instanceof z.ZodError) {
+            return { message: 'Please enter a valid email address.', success: false };
+        }
+        console.error('Password reset error:', e);
+        // Avoid disclosing whether an email exists or not
+        return { message: 'If an account exists for this email, a password reset link has been sent.', success: true };
     }
-  
-    redirect('/admin/dashboard');
 }
+
 
 export async function logout() {
     cookies().delete('devfolio-auth-token');
@@ -134,5 +128,94 @@ export async function handleContactForm(prevState: any, formData: FormData) {
         }
         console.error('Contact form submission error:', e);
         return { message: 'An unexpected error occurred while sending your message.', success: false };
+    }
+}
+
+const updateEmailSchema = z.object({
+  newEmail: z.string().email(),
+  currentPassword: z.string().min(1, 'Password is required'),
+});
+
+const updatePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'Current password is required'),
+    newPassword: z.string().min(6, 'New password must be at least 6 characters'),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "New passwords don't match",
+    path: ['confirmPassword'],
+  });
+
+async function reauthenticate(password: string) {
+    const { auth } = initializeFirebase();
+    const user = auth.currentUser;
+    if (!user || !user.email) throw new Error('User not authenticated');
+
+    const credential = EmailAuthProvider.credential(user.email, password);
+    await reauthenticateWithCredential(user, credential);
+}
+
+export async function handleUpdateEmail(prevState: any, formData: FormData) {
+    try {
+        const parsed = updateEmailSchema.parse({
+            newEmail: formData.get('newEmail'),
+            currentPassword: formData.get('currentPassword'),
+        });
+        
+        const { auth } = initializeFirebase();
+        const user = auth.currentUser;
+        if (!user) throw new Error('User not authenticated');
+
+        await reauthenticate(parsed.currentPassword);
+        await updateEmail(user, parsed.newEmail);
+
+        return { message: 'Your email has been updated successfully.', success: true };
+    } catch (e: any) {
+        let message = 'An unexpected error occurred.';
+         if (e instanceof z.ZodError) {
+            return { message: 'Invalid data provided.', success: false, errors: e.flatten().fieldErrors };
+        } else if (e.code) {
+            switch (e.code) {
+                case 'auth/invalid-credential':
+                    message = 'The password you entered is incorrect.';
+                    break;
+                case 'auth/email-already-in-use':
+                    message = 'This email is already in use by another account.';
+                    break;
+                default:
+                    message = e.message;
+            }
+        }
+        return { message, success: false };
+    }
+}
+
+export async function handleUpdatePassword(prevState: any, formData: FormData) {
+     try {
+        const parsed = updatePasswordSchema.parse({
+            currentPassword: formData.get('currentPassword'),
+            newPassword: formData.get('newPassword'),
+            confirmPassword: formData.get('confirmPassword'),
+        });
+        
+        const { auth } = initializeFirebase();
+        const user = auth.currentUser;
+        if (!user) throw new Error('User not authenticated');
+
+        await reauthenticate(parsed.currentPassword);
+        await updatePassword(user, parsed.newPassword);
+
+        return { message: 'Your password has been updated successfully.', success: true };
+    } catch (e: any) {
+        let message = 'An unexpected error occurred.';
+        if (e instanceof z.ZodError) {
+            return { message: 'Invalid data provided.', success: false, errors: e.flatten().fieldErrors };
+        } else if (e.code === 'auth/invalid-credential') {
+             message = 'The password you entered is incorrect.';
+        } else {
+             message = e.message || message;
+        }
+        return { message, success: false };
     }
 }

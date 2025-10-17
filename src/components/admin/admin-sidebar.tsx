@@ -30,6 +30,10 @@ const navItems = [
   { href: '/admin/messages', icon: Contact, label: 'Messages' },
 ];
 
+const bottomNavItems = [
+    { href: '/admin/settings', icon: Settings, label: 'Settings' },
+]
+
 export default function AdminSidebar() {
   const pathname = usePathname();
 
@@ -61,6 +65,21 @@ export default function AdminSidebar() {
           ))}
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+          {bottomNavItems.map((item) => (
+             <Tooltip key={item.href}>
+                <TooltipTrigger asChild>
+                    <Link
+                        href={item.href}
+                        className={cn("flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8", 
+                        pathname.startsWith(item.href) ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground')}
+                    >
+                        <item.icon className="h-5 w-5" />
+                        <span className="sr-only">{item.label}</span>
+                    </Link>
+                </TooltipTrigger>
+                <TooltipContent side="right">{item.label}</TooltipContent>
+            </Tooltip>
+          ))}
             <form action={logout}>
                 <Tooltip>
                     <TooltipTrigger asChild>
