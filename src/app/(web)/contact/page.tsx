@@ -22,25 +22,25 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="text-xl font-semibold">Email</h3>
+              <p className="text-muted-foreground text-sm mt-1">I'll get back to you as soon as possible.</p>
               <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline">
                mohiuddinmurad.my00@gmail.com
               </a>
-              <p className="text-muted-foreground text-sm mt-1">I'll get back to you as soon as possible.</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+            <div className="flex-shrink  -0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
               <Phone className="w-6 h-6" />
             </div>
             <div>
               <h3 className="text-xl font-semibold">Phone</h3>
+              <p className="text-muted-foreground text-sm mt-1">Available for calls during business hours.</p>
               <a href="tel:01755085174" className="text-accent hover:underline block">
                 01755085174
               </a>
               <a href="tel:01577264021" className="text-accent hover:underline block">
                 01577264021
               </a>
-              <p className="text-muted-foreground text-sm mt-1">Available for calls during business hours.</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
