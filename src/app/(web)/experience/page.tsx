@@ -40,9 +40,9 @@ export default function ExperiencePage() {
                 {/* Icon on the timeline */}
                 <div
                   className={cn(
-                    "absolute top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md",
-                    "left-[-22px] md:left-auto",
-                    index % 2 === 0 ? 'md:right-[-2.2rem]' : 'md:left-[-2.2rem]'
+                    "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md",
+                    "left-4 -translate-x-1/2 md:left-auto",
+                    index % 2 === 0 ? 'md:right-[-2.5rem] md:translate-x-1/2' : 'md:left-[-2.5rem] md:-translate-x-1/2'
                   )}
                 >
                   <Briefcase className="h-5 w-5" />
@@ -92,9 +92,9 @@ export default function ExperiencePage() {
                 {/* Icon on the timeline */}
                 <div
                   className={cn(
-                    "absolute top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md",
-                     "left-[-22px] md:left-auto",
-                    index % 2 === 0 ? 'md:right-[-2.2rem]' : 'md:left-[-2.2rem]'
+                    "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md",
+                     "left-4 -translate-x-1/2 md:left-auto",
+                    index % 2 === 0 ? 'md:right-[-2.5rem] md:translate-x-1/2' : 'md:left-[-2.5rem] md:-translate-x-1/2'
                   )}
                 >
                   <GraduationCap className="h-5 w-5" />
