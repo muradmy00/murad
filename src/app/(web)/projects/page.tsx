@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Code, ArrowRight } from 'lucide-react';
+import { Code, ArrowRight, Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,46 +29,55 @@ export default function ProjectsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects?.map((project) => (
-          <Card key={project.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-            <CardHeader className="p-0">
-              {project.imageUrl && (
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  width={600}
-                  height={400}
-                  className="w-full object-cover rounded-t-lg aspect-[3/2]"
-                  data-ai-hint={project.imageHint}
-                />
-              )}
-            </CardHeader>
-            <CardContent className="p-6 flex-grow">
+          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-accent border-2 border-transparent">
+            <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
+              <div className="relative">
+                {project.imageUrl && (
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    className="w-full object-cover aspect-[3/2] transition-transform duration-500 group-hover:scale-105"
+                    data-ai-hint={project.imageHint}
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                   <div className="text-center text-white">
+                      <Eye className="h-10 w-10 mx-auto" />
+                      <p className="mt-2 text-lg font-semibold">View Project</p>
+                   </div>
+                </div>
+              </div>
+            </Link>
+
+            <CardContent className="p-6 bg-card">
               <CardTitle className="font-headline text-2xl font-bold mb-2">{project.title}</CardTitle>
-              <CardDescription className="text-muted-foreground mb-4 h-24 overflow-hidden">
+              <CardDescription className="text-muted-foreground mb-4 h-20 overflow-hidden">
                 {project.description}
               </CardDescription>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {project.techStack?.map((tech: string) => (
                   <Badge key={tech} variant="secondary">{tech}</Badge>
                 ))}
               </div>
+              <div className="flex justify-between items-center">
+                  {project.repoUrl && (
+                    <Button asChild variant="ghost" size="sm">
+                        <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+                            <Code className="mr-2" /> Source Code
+                        </Link>
+                    </Button>
+                  )}
+                  {project.liveUrl && (
+                    <Button asChild size="sm">
+                        <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            Live Demo <ArrowRight className="ml-2" />
+                        </Link>
+                    </Button>
+                  )}
+              </div>
             </CardContent>
-            <div className="p-6 pt-0 mt-auto flex justify-between items-center">
-                {project.repoUrl && (
-                  <Button asChild variant="ghost">
-                      <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                          <Code className="mr-2" /> Code
-                      </Link>
-                  </Button>
-                )}
-                {project.liveUrl && (
-                  <Button asChild>
-                      <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          Live Demo <ArrowRight className="ml-2" />
-                      </Link>
-                  </Button>
-                )}
-            </div>
           </Card>
         ))}
       </div>
