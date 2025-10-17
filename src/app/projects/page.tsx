@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Eye } from 'lucide-react';
+import { Eye, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -28,38 +28,37 @@ export default function ProjectsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects?.map((project) => (
-          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary border-2 border-transparent flex flex-col">
-            <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
-              <div className="relative bg-card flex items-center justify-center aspect-[3/2] overflow-hidden">
-                {project.imageUrl && (
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className={cn(
-                      'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
-                      typeof project.imageUrl !== 'string' && 'object-contain p-8'
-                    )}
-                    data-ai-hint={project.imageHint}
-                  />
+          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-primary/20 hover:shadow-xl border-2 border-transparent hover:border-primary/30 flex flex-col bg-secondary/20">
+            <div className="relative aspect-[3/2] overflow-hidden">
+              {project.imageUrl && (
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  width={600}
+                  height={400}
+                  className={cn(
+                    'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
+                    typeof project.imageUrl !== 'string' && 'object-contain p-8'
+                  )}
+                  data-ai-hint={project.imageHint}
+                />
+              )}
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                {project.liveUrl && (
+                  <Button asChild className="w-fit self-end bg-primary/80 backdrop-blur-sm hover:bg-primary" >
+                    <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      View Project <ExternalLink className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 )}
               </div>
-            </Link>
+            </div>
 
             <CardContent className="p-6 bg-card flex-grow flex flex-col">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-headline text-2xl font-bold group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                {project.liveUrl && (
-                  <Button asChild size="sm" variant="ghost" className="h-8 w-8 p-0 text-muted-foreground hover:text-primary">
-                      <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          <Eye className="h-5 w-5" />
-                          <span className="sr-only">Live Demo</span>
-                      </Link>
-                  </Button>
-                )}
               </div>
 
               <div className="flex flex-wrap gap-2 mb-4">
