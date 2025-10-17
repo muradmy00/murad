@@ -6,7 +6,7 @@ import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Logo from '@/components/icons/logo';
 
 const navLinks = [
@@ -68,6 +68,9 @@ export default function Header() {
                       </Button>
                   </SheetTrigger>
                   <SheetContent side="left">
+                    <SheetHeader className="sr-only">
+                        <SheetTitle>Mobile Navigation Menu</SheetTitle>
+                    </SheetHeader>
                       <div className="p-4">
                           <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
                               <Logo className="h-8 w-8 text-primary" />
