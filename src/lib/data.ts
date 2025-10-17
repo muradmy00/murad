@@ -15,7 +15,7 @@ export const projects: Project[] = [
         techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
         imageUrl: assets.Bonnek,
         imageHint: "fashion e-commerce",
-        liveUrl: 'https://bonnek.netlify.app/',
+        liveUrl: 'https://51.stepupdesign.xyz/',
         repoUrl: 'https://github.com/muradmy00/bonnek',
     },
     {
@@ -25,7 +25,7 @@ export const projects: Project[] = [
         techStack: ['Next.js', 'TypeScript', 'ShadCN UI', 'Firebase'],
         imageUrl: assets.careshced,
         imageHint: "healthcare scheduling app",
-        liveUrl: 'https://caresched.web.app/',
+        liveUrl: 'https://care-sched-frontend.onrender.com/',
         repoUrl: 'https://github.com/muradmy00/caresched-hospital-management',
     },
     {
@@ -35,7 +35,7 @@ export const projects: Project[] = [
         techStack: ['React', 'Redux', 'Node.js', 'MongoDB'],
         imageUrl: assets.ecommerce,
         imageHint: "e-commerce platform",
-        liveUrl: 'https://full-stack-e-commerce-pi.vercel.app/',
+        liveUrl: 'https://ecommerce-website-using-re-git-8e9aed-mohiuddin-murads-projects.vercel.app/',
         repoUrl: 'https://github.com/muradmy00/Full-Stack-E-commerce',
     },
     {
@@ -45,7 +45,7 @@ export const projects: Project[] = [
         techStack: ['React', 'Context API', 'Stripe', 'Node.js'],
         imageUrl: assets.food_delivery,
         imageHint: "food delivery app",
-        liveUrl: 'https://food-delivery-app-frontend-one.vercel.app/',
+        liveUrl: 'https://food-delivery-app-git-main-mohiuddin-murads-projects.vercel.app/',
         repoUrl: 'https://github.com/muradmy00/Food-Delivery-App',
     },
     {
@@ -55,7 +55,7 @@ export const projects: Project[] = [
         techStack: ['React', 'Genkit', 'Tailwind CSS'],
         imageUrl: assets.gemini_clone,
         imageHint: "AI chat interface",
-        liveUrl: 'https://gemini-clone-kappa-three.vercel.app/',
+        liveUrl: 'https://gemini-clone-app-git-main-mohiuddin-murads-projects.vercel.app/',
         repoUrl: 'https://github.com/muradmy00/Gemini-Clone',
     },
     {
@@ -65,7 +65,7 @@ export const projects: Project[] = [
         techStack: ['React', 'React Router', 'CSS'],
         imageUrl: assets.university,
         imageHint: "university website",
-        liveUrl: 'https://university-website-pi.vercel.app/',
+        liveUrl: 'https://my-university-git-main-mohiuddin-murads-projects.vercel.app/',
         repoUrl: 'https://github.com/muradmy00/University-Website',
     },
 ];
