@@ -104,6 +104,15 @@ export const blogPosts: Blog[] = [
     imageHint: getPlaceholder('blog-3').imageHint,
     publishedAt: new Date('2023-08-30'),
   },
+  {
+    id: '4',
+    slug: 'how-react-dom-works',
+    title: 'React DOM এলিমেন্ট যেভাবে কাজ করে',
+    content: 'React DOM ব্রাউজারের আসল DOM (Document Object Model) এবং React কম্পোনেন্টগুলোর মধ্যে একটি সেতুর মতো কাজ করে। React-এ আমরা যা কিছু লিখি, তা সরাসরি ব্রাউজারে রেন্ডার হয় না। React প্রথমে একটি ভার্চুয়াল DOM (Virtual DOM) তৈরি করে, যা আসল DOM-এর একটি হালকা অনুলিপি। যখন কোনো ডেটা পরিবর্তন হয়, React ভার্চুয়াল DOM-এ পরিবর্তন আনে এবং আসল DOM-এর সাথে তুলনা করে। শুধুমাত্র যেখানে পরিবর্তন দরকার, সেখানেই React DOM আসল DOM আপডেট করে। যেমন: ReactDOM.render(<App />, document.getElementById(\'root\')); এই কোডটি \'App\' কম্পোনেন্টকে root id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।',
+    imageUrl: getPlaceholder('blog-4').imageUrl,
+    imageHint: getPlaceholder('blog-4').imageHint,
+    publishedAt: new Date('2023-11-05'),
+  },
 ];
 
 export const messages: Message[] = [];

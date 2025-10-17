@@ -37,6 +37,12 @@
       "imageHint": "web3 ecosystem"
     },
     {
+      "id": "blog-4",
+      "description": "An image showing React code on a screen.",
+      "imageUrl": "https://picsum.photos/seed/blog4/600/400",
+      "imageHint": "react code"
+    },
+    {
       "id": "about-me",
       "description": "A professional portrait of a developer.",
       "imageUrl": "https://picsum.photos/seed/aboutme/600/600",
