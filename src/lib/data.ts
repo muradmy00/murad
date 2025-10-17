@@ -22,7 +22,7 @@ export const projects: Project[] = [
         id: '2',
         title: 'CareSched',
         description: 'A healthcare scheduling application designed to streamline appointment booking and management for patients and doctors.',
-        techStack: ['Next.js', 'TypeScript', 'ShadCN UI', 'Firebase'],
+        techStack: ['Tailwind CSS', 'React.js', 'JavaScript', 'Node.js', 'Express Js', 'MongoDB'],
         imageUrl: assets.careshced,
         imageHint: "healthcare scheduling app",
         liveUrl: 'https://care-sched-frontend.onrender.com/',
@@ -492,4 +492,6 @@ export const resume = {
 };
 
     
+    
+
     
