@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Download, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { Download, ArrowRight, Github, Linkedin, Facebook } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -15,9 +15,9 @@ import { useState, useEffect } from 'react';
 
 export default function HomePage() {
   const socialLinks = [
-    { icon: Github, href: '#', 'aria-label': 'GitHub' },
-    { icon: Twitter, href: '#', 'aria-label': 'Twitter' },
-    { icon: Linkedin, href: '#', 'aria-label': 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/muradmy00', 'aria-label': 'GitHub' },
+    { icon: Facebook, href: 'https://www.facebook.com/mdmohiudden.murad/', 'aria-label': 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/murad00/', 'aria-label': 'LinkedIn' },
   ];
 
   const aboutImage = getPlaceholder('about-me');
@@ -65,7 +65,7 @@ export default function HomePage() {
       <main className="text-center">
         <div className="relative inline-block">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-          <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold h-24 md:h-28 lg:h-32">
+          <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl h-24 md:h-28 lg:h-32">
             I'm{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
               {text}

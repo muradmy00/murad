@@ -1,12 +1,13 @@
+
 import Link from 'next/link';
-import { Github, Twitter, Linkedin } from 'lucide-react';
+import { Github, Facebook, Linkedin } from 'lucide-react';
 import Logo from '@/components/icons/logo';
 
 export default function Footer() {
   const socialLinks = [
-    { icon: Github, href: '#', 'aria-label': 'GitHub' },
-    { icon: Twitter, href: '#', 'aria-label': 'Twitter' },
-    { icon: Linkedin, href: '#', 'aria-label': 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/muradmy00', 'aria-label': 'GitHub' },
+    { icon: Facebook, href: 'https://www.facebook.com/mdmohiudden.murad/', 'aria-label': 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/murad00/', 'aria-label': 'LinkedIn' },
   ];
 
   return (
