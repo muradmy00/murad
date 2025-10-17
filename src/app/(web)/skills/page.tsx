@@ -1,32 +1,6 @@
 
-import type { Skill } from '@/lib/types';
 import { skills } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
-import {
-  Smartphone,
-  Server,
-  Languages,
-  PenTool,
-  Puzzle,
-  GitBranch,
-} from 'lucide-react';
-import React from 'react';
-
-const skillCategories: Exclude<Skill['category'], 'Database' | 'Web3'>[] = [
-  'Frontend',
-  'Backend',
-  'Languages',
-  'Styling',
-  'Tools',
-];
-
-const categoryIcons: { [key in Exclude<Skill['category'], 'Database' | 'Web3'>]: React.ReactNode } = {
-  Frontend: <Smartphone className="h-6 w-6" />,
-  Backend: <Server className="h-6 w-6" />,
-  Languages: <Languages className="h-6 w-6" />,
-  Styling: <PenTool className="h-6 w-6" />,
-  Tools: <Puzzle className="h-6 w-6" />,
-};
+import { SkillIcon } from '@/components/icons/skill-icon';
 
 export default function SkillsPage() {
   return (
@@ -41,42 +15,23 @@ export default function SkillsPage() {
         </p>
       </div>
 
-      <div className="space-y-12">
-        {skillCategories.map((category) => {
-          const categorySkills = skills?.filter(
-            (skill) => skill.category === category
-          );
-
-          if (!categorySkills || categorySkills.length === 0) {
-            return null;
-          }
-
-          return (
-            <div key={category}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="text-primary">{categoryIcons[category]}</div>
-                <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary">
-                  {category}
-                </h2>
-                <div className="flex-grow h-px bg-border"></div>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                {categorySkills.map((skill) => (
-                  <div key={skill.id} className="group relative">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                    <Badge
-                      variant="secondary"
-                      className="relative px-5 py-3 text-base font-medium transition-all duration-200 transform group-hover:scale-110"
-                    >
-                      {skill.name}
-                    </Badge>
-                  </div>
-                ))}
-              </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {skills.map((skill) => (
+          <div
+            key={skill.id}
+            className="group relative flex flex-col items-center justify-center p-6 bg-secondary/30 rounded-lg border-2 border-transparent transition-all duration-300 hover:border-primary hover:bg-secondary/60 hover:shadow-2xl hover:shadow-primary/20"
+          >
+            <div className="h-16 w-16 mb-4 flex items-center justify-center">
+              <SkillIcon
+                skillName={skill.name}
+                className="h-full w-full transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
-          );
-        })}
+            <p className="text-lg font-semibold text-foreground text-center">
+              {skill.name}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
