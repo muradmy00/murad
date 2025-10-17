@@ -1,25 +1,15 @@
 
 'use client';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { skills } from '@/lib/data';
 import type { Skill } from '@/lib/types';
+import { skills } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
 import {
-  Code,
-  Database,
-  PenTool,
   Smartphone,
   Server,
   Languages,
+  PenTool,
+  Puzzle,
   GitBranch,
-  Star,
-  BrainCircuit,
-  Puzzle
 } from 'lucide-react';
 import React from 'react';
 
@@ -32,7 +22,7 @@ const skillCategories: Skill['category'][] = [
   'Web3',
 ];
 
-const categoryIcons: { [key in Skill['category']]: React.ReactNode } = {
+const categoryIcons: { [key in Exclude<Skill['category'], 'Database'>]: React.ReactNode } = {
   Frontend: <Smartphone className="h-6 w-6" />,
   Backend: <Server className="h-6 w-6" />,
   Languages: <Languages className="h-6 w-6" />,

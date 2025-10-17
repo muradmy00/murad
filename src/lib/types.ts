@@ -29,7 +29,7 @@ export type Education = {
 export type Skill = {
   id: string;
   name: string;
-  category: 'Frontend' | 'Backend' | 'Languages' | 'Tools' | 'Styling' | 'Web3' | 'Database';
+  category: 'Frontend' | 'Backend' | 'Languages' | 'Tools' | 'Styling' | 'Web3';
   proficiency: number;
 };
 
