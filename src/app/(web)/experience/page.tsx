@@ -29,7 +29,7 @@ export default function ExperiencePage() {
               key={item.id}
               className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
             >
-              <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-4 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md md:top-0 md:-translate-y-0">
+              <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
                 <Briefcase className="h-5 w-5" />
               </div>
               <div className="w-10 md:hidden"></div>
@@ -67,7 +67,7 @@ export default function ExperiencePage() {
               key={item.id}
               className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
             >
-              <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-4 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md md:top-0 md:-translate-y-0">
+              <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md">
                 <GraduationCap className="h-5 w-5" />
               </div>
               <div className="w-10 md:hidden"></div>
