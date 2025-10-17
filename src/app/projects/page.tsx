@@ -32,7 +32,7 @@ export default function ProjectsPage() {
         {projects?.map((project) => (
           <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary border-2 border-transparent flex flex-col">
             <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
-              <div className="relative bg-card flex items-center justify-center aspect-[3/2]">
+              <div className="relative bg-card flex items-center justify-center aspect-[3/2] overflow-hidden">
                 {project.imageUrl && (
                   <Image
                     src={project.imageUrl}
@@ -46,12 +46,6 @@ export default function ProjectsPage() {
                     data-ai-hint={project.imageHint}
                   />
                 )}
-                <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                   <div className="text-center text-white">
-                      <Eye className="h-10 w-10 mx-auto" />
-                      <p className="mt-2 text-lg font-semibold">View Project</p>
-                   </div>
-                </div>
               </div>
             </Link>
 
@@ -88,4 +82,3 @@ export default function ProjectsPage() {
     </div>
   );
 }
-
