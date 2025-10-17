@@ -16,7 +16,7 @@ export const projects: Project[] = [
         imageUrl: assets.Bonnek,
         imageHint: "fashion e-commerce",
         liveUrl: 'https://51.stepupdesign.xyz/',
-        repoUrl: 'https://github.com/muradmy00/bonnek',
+        repoUrl: 'https://github.com/muradmy00/murad',
     },
     {
         id: '2',
