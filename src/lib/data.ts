@@ -115,9 +115,9 @@ export const skills: Skill[] = [
     { id: '8', name: 'React Native', category: 'Frontend', proficiency: 85 },
     { id: '9', name: 'React Router DOM', category: 'Frontend', proficiency: 90 },
     { id: '10', name: 'React Hook Form', category: 'Frontend', proficiency: 85 },
-    { id: '13', name: 'Git', category: 'Tools', proficiency: 95 },
-    { id: '14', 'name': 'GitHub', category: 'Tools', proficiency: 95 },
-    { id: '15', name: 'NPM', category: 'Tools', proficiency: 90 },
+    { id: '13', name: 'Tanstack Query', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
+    { id: '14', name: 'Zustand', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
+    { id: '15', name: 'Yup', category: 'Tools', proficiency: 90 },
     { id: '16', name: 'Vite', category: 'Tools', proficiency: 85 },
     { id: '17', name: 'Axios', category: 'Tools', proficiency: 88 },
     { id: '18', name: 'Expo', category: 'Tools', proficiency: 85 },
@@ -495,6 +495,7 @@ export const resume = {
     
 
     
+
 
 
 
