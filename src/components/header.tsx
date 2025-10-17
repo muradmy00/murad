@@ -29,13 +29,16 @@ export default function Header() {
       <Link
         href={href}
         className={cn(
-          "text-sm font-medium transition-colors hover:text-primary",
+          "relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
           isActive ? "text-primary" : "text-muted-foreground",
           className
         )}
         onClick={() => setMobileMenuOpen(false)}
       >
         {label}
+        {isActive && (
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary rounded-full"></span>
+        )}
       </Link>
     );
   };
@@ -49,7 +52,7 @@ export default function Header() {
             Mohiuddin Murad
           </span>
         </Link>
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center space-x-2 text-sm font-medium">
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
