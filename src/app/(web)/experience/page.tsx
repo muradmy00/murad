@@ -27,7 +27,7 @@ export default function ExperiencePage() {
           {experience.map((item) => (
             <div
               key={item.id}
-              className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+              className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group"
             >
               <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
                 <Briefcase className="h-5 w-5" />
@@ -65,7 +65,7 @@ export default function ExperiencePage() {
           {education.map((item) => (
             <div
               key={item.id}
-              className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+              className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group"
             >
               <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md">
                 <GraduationCap className="h-5 w-5" />
