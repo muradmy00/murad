@@ -125,9 +125,9 @@ export const skills: Skill[] = [
     { id: '20', name: 'C', category: 'Languages', proficiency: 80 },
     { id: '21', name: 'C++', category: 'Languages', proficiency: 80 },
     { id: '22', name: 'Python', category: 'Languages', proficiency: 70 },
-    { id: '23', name: 'Java', category: 'Languages', proficiency: 75, imageUrl: 'https://img.icons8.com/color/48/java-coffee-cup-logo.png' },
-    { id: '24', name: 'Zustand', category: 'Frontend', proficiency: 80, imageUrl: 'https://img.icons8.com/color/48/bear.png' },
-    { id: '25', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: 'https://img.icons8.com/fluency/48/quill-pen.png' },
+    { id: '23', name: 'Java', category: 'Languages', proficiency: 75, imageUrl: assets.java },
+    { id: '24', name: 'Zustand', category: 'Frontend', proficiency: 80, imageUrl: assets.zustand },
+    { id: '25', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: assets.quill_icon },
 ];
 
 export const achievements: Achievement[] = [

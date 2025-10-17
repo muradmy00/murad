@@ -1,6 +1,8 @@
 
 import { skills } from '@/lib/data';
 import { SkillIcon } from '@/components/icons/skill-icon';
+import Image, { StaticImageData } from 'next/image';
+import { cn } from '@/lib/utils';
 
 export default function SkillsPage() {
   return (
@@ -22,10 +24,20 @@ export default function SkillsPage() {
             className="group relative flex flex-col items-center justify-center p-6 bg-secondary/30 rounded-lg border-2 border-transparent transition-all duration-300 hover:border-primary hover:bg-secondary/60 hover:shadow-2xl hover:shadow-primary/20"
           >
             <div className="h-16 w-16 mb-4 flex items-center justify-center">
-              <SkillIcon
-                skillName={skill.name}
-                className="h-full w-full transition-transform duration-300 group-hover:scale-110"
-              />
+              {skill.imageUrl ? (
+                 <Image
+                    src={skill.imageUrl as StaticImageData}
+                    alt={skill.name}
+                    width={64}
+                    height={64}
+                    className="object-contain h-full w-full transition-transform duration-300 group-hover:scale-110"
+                />
+              ) : (
+                <SkillIcon
+                  skillName={skill.name}
+                  className="h-full w-full transition-transform duration-300 group-hover:scale-110"
+                />
+              )}
             </div>
             <p className="text-lg font-semibold text-foreground text-center">
               {skill.name}

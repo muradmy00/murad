@@ -33,7 +33,7 @@ export type Skill = {
   name: string;
   category: 'Frontend' | 'Backend' | 'Languages' | 'Tools' | 'Styling' | 'Web3';
   proficiency: number;
-  imageUrl?: string;
+  imageUrl?: string | StaticImageData;
 };
 
 export type Achievement = {
