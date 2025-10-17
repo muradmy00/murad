@@ -14,9 +14,10 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and Name */}
-          <div className="flex items-center gap-1 text-xl">
-            <span className="font-headline text-3xl font-extrabold text-primary">M</span>
-            <span className="font-bold font-headline">ohiuddin Murad</span>
+          <div className="flex items-center">
+             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground">
+                Mohiuddin Murad
+            </span>
           </div>
 
           {/* Copyright */}
