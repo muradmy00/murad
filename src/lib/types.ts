@@ -32,6 +32,8 @@ export type Blog = {
   imageUrl: string;
   imageHint?: string;
   publishedAt: Date;
+  author: string;
+  tags: string[];
 };
 
 export type Message = {

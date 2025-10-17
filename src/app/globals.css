@@ -80,4 +80,13 @@
       radial-gradient(circle at 75px 75px, hsl(var(--accent) / 0.1), transparent 2%);
     background-size: 100px 100px;
   }
+  .prose pre {
+    @apply bg-card border border-border rounded-lg p-4;
+  }
+  .prose pre code {
+    @apply text-sm font-code text-foreground/80;
+  }
+  .prose code::before, .prose code::after {
+    content: '';
+  }
 }

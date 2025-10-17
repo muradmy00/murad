@@ -1,4 +1,3 @@
-
 import type { Project, Experience, Skill, Blog, Message } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -85,6 +84,8 @@ export const blogPosts: Blog[] = [
     imageUrl: getPlaceholder('blog-1').imageUrl,
     imageHint: getPlaceholder('blog-1').imageHint,
     publishedAt: new Date('2023-10-15'),
+    author: 'Mohiuddin Murad',
+    tags: ['React', 'Frontend', 'WebDevelopment'],
   },
   {
     id: '2',
@@ -94,6 +95,8 @@ export const blogPosts: Blog[] = [
     imageUrl: getPlaceholder('blog-2').imageUrl,
     imageHint: getPlaceholder('blog-2').imageHint,
     publishedAt: new Date('2023-09-22'),
+    author: 'Mohiuddin Murad',
+    tags: ['TailwindCSS', 'CSS', 'Frontend'],
   },
   {
     id: '3',
@@ -103,15 +106,28 @@ export const blogPosts: Blog[] = [
     imageUrl: getPlaceholder('blog-3').imageUrl,
     imageHint: getPlaceholder('blog-3').imageHint,
     publishedAt: new Date('2023-08-30'),
+    author: 'Mohiuddin Murad',
+    tags: ['Web3', 'Blockchain', 'Nextjs'],
   },
   {
     id: '4',
     slug: 'how-react-dom-works',
     title: 'React DOM এলিমেন্ট যেভাবে কাজ করে',
-    content: 'React DOM ব্রাউজারের আসল DOM (Document Object Model) এবং React কম্পোনেন্টগুলোর মধ্যে একটি সেতুর মতো কাজ করে। React-এ আমরা যা কিছু লিখি, তা সরাসরি ব্রাউজারে রেন্ডার হয় না। React প্রথমে একটি ভার্চুয়াল DOM (Virtual DOM) তৈরি করে, যা আসল DOM-এর একটি হালকা অনুলিপি। যখন কোনো ডেটা পরিবর্তন হয়, React ভার্চুয়াল DOM-এ পরিবর্তন আনে এবং আসল DOM-এর সাথে তুলনা করে। শুধুমাত্র যেখানে পরিবর্তন দরকার, সেখানেই React DOM আসল DOM আপডেট করে। যেমন: ReactDOM.render(<App />, document.getElementById(\'root\')); এই কোডটি \'App\' কম্পোনেন্টকে root id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।',
+    content: `<p>React DOM ব্রাউজারের আসল DOM (Document Object Model) এবং React কম্পোনেন্টগুলোর মধ্যে একটি সেতুর মতো কাজ করে। React-এ আমরা যা কিছু লিখি, তা সরাসরি ব্রাউজারে রেন্ডার হয় না।</p>
+    <p>React প্রথমে একটি ভার্চুয়াল DOM (Virtual DOM) তৈরি করে, যা আসল DOM-এর একটি হালকা অনুলিপি। যখন কোনো ডেটা পরিবর্তন হয়, React ভার্চুয়াল DOM-এ পরিবর্তন আনে এবং আসল DOM-এর সাথে তুলনা করে। শুধুমাত্র যেখানে পরিবর্তন দরকার, সেখানেই React DOM আসল DOM আপডেট করে।</p>
+    <p>যেমন:</p>
+    <pre><code>import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));</code></pre>
+    <p>এই কোডটি 'App' কম্পোনেন্টকে 'root' id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।</p>
+    <img src="${getPlaceholder('blog-4').imageUrl}" alt="React Code" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-4').imageHint}" />
+    <p>এভাবেই React DOM কার্যকরভাবে এবং দ্রুত UI আপডেট করে, যা বড় অ্যাপ্লিকেশনগুলোতে পারফরম্যান্সের জন্য খুবই গুরুত্বপূর্ণ।</p>`,
     imageUrl: getPlaceholder('blog-4').imageUrl,
     imageHint: getPlaceholder('blog-4').imageHint,
     publishedAt: new Date('2023-11-05'),
+    author: 'Mohiuddin Murad',
+    tags: ['React', 'BanglaBlog', 'DOM'],
   },
 ];
 
