@@ -80,7 +80,7 @@ export default function HomePage() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-white group">
+          <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-primary-foreground group hover:from-primary/90 hover:to-accent/90">
             <Link href="/projects">
               View My Work <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
