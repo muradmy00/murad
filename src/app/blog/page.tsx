@@ -12,13 +12,55 @@ import {
 } from '@/components/ui/card';
 import { format } from 'date-fns';
 import { blogPosts } from '@/lib/data';
+import { useState, useEffect } from 'react';
 
-function stripHtml(html: string) {
-  if (typeof window !== 'undefined') {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
-  }
-  return html.replace(/<[^>]*>?/gm, '');
+const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
+  const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    // stripHtml should only run on the client after hydration
+    function stripHtml(html: string) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    }
+    setDescription(stripHtml(post.content).substring(0, 150));
+  }, [post.content]);
+
+  return (
+    <Link href={`/blog/${post.slug}`} className="group">
+      <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
+        <CardHeader className="p-0">
+          {post.imageUrl && (
+            <Image
+              src={post.imageUrl}
+              alt={post.title}
+              width={600}
+              height={400}
+              className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
+              data-ai-hint={post.imageHint}
+            />
+          )}
+        </CardHeader>
+        <CardContent className="p-6 flex-grow">
+          <CardTitle className="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+            {post.title}
+          </CardTitle>
+          <p className="text-sm text-muted-foreground mb-4">
+            {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
+          </p>
+          <CardDescription className="text-muted-foreground line-clamp-3">
+            {description ? `${description}...` : <span className="animate-pulse">Loading...</span>}
+          </CardDescription>
+        </CardContent>
+        <div className="p-6 pt-0 mt-auto">
+           <div className="flex items-center text-primary font-semibold">
+              Read More
+              <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+           </div>
+        </div>
+      </Card>
+    </Link>
+  )
 }
 
 export default function BlogPage() {
@@ -36,39 +78,7 @@ export default function BlogPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts?.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`} className="group">
-            <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
-              <CardHeader className="p-0">
-                {post.imageUrl && (
-                  <Image
-                    src={post.imageUrl}
-                    alt={post.title}
-                    width={600}
-                    height={400}
-                    className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
-                    data-ai-hint={post.imageHint}
-                  />
-                )}
-              </CardHeader>
-              <CardContent className="p-6 flex-grow">
-                <CardTitle className="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                  {post.title}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
-                </p>
-                <CardDescription className="text-muted-foreground line-clamp-3">
-                  {stripHtml(post.content).substring(0, 150)}
-                </CardDescription>
-              </CardContent>
-              <div className="p-6 pt-0 mt-auto">
-                 <div className="flex items-center text-primary font-semibold">
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                 </div>
-              </div>
-            </Card>
-          </Link>
+          <BlogPostCard key={post.id} post={post} />
         ))}
       </div>
     </div>
