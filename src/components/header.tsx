@@ -68,7 +68,7 @@ export default function Header() {
         <Link href="/" className="flex items-center space-x-2">
           <Logo className="h-8 w-8 text-primary" />
           <span className="font-bold font-headline sm:inline-block">
-            Mohiuddin Murad
+            ohiuddin Murad
           </span>
         </Link>
         
@@ -93,7 +93,7 @@ export default function Header() {
                       <div className="p-4">
                           <Link href="/" className="mr-6 flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
                               <Logo className="h-8 w-8 text-primary" />
-                              <span className="font-bold font-headline">Mohiuddin Murad</span>
+                              <span className="font-bold font-headline">ohiuddin Murad</span>
                           </Link>
                           <nav className="flex flex-col space-y-2">
                           {navLinks.map((link) => (

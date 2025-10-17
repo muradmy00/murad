@@ -17,7 +17,7 @@ export default function Footer() {
           {/* Logo and Name */}
           <div className="flex items-center space-x-2">
             <Logo className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold font-headline">Mohiuddin Murad</span>
+            <span className="text-xl font-bold font-headline">ohiuddin Murad</span>
           </div>
 
           {/* Copyright */}
