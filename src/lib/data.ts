@@ -84,7 +84,6 @@ export const skills: Skill[] = [
     { id: '8', name: 'React Native', category: 'Frontend', proficiency: 85 },
     { id: '9', name: 'React Router DOM', category: 'Frontend', proficiency: 90 },
     { id: '10', name: 'React Hook Form', category: 'Frontend', proficiency: 85 },
-    { id: '11', name: 'Zustand', category: 'Frontend', proficiency: 80 },
     { id: '13', name: 'Git', category: 'Tools', proficiency: 95 },
     { id: '14', 'name': 'GitHub', category: 'Tools', proficiency: 95 },
     { id: '15', name: 'NPM', category: 'Tools', proficiency: 90 },

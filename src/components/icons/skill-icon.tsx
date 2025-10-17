@@ -21,7 +21,6 @@ import {
   SiCplusplus,
   SiPython,
   SiReacthookform,
-  SiZustand,
   SiExpo,
   SiAxios,
 } from '@icons-pack/react-simple-icons';
@@ -78,8 +77,6 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
         return <SiPython className={className} color="#3776AB" />;
     case 'React Hook Form':
         return <SiReacthookform className={className} color="#EC5990" />;
-    case 'Zustand':
-        return <SiZustand className={className} color="#000000" />;
     case 'Expo':
         return <SiExpo className={className} color="#000020" />;
     case 'Axios':
