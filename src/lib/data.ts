@@ -42,7 +42,7 @@ export const projects: Project[] = [
         id: '4',
         title: 'Food Delivery App',
         description: 'A vibrant and user-friendly food delivery application that allows users to order from local restaurants.',
-        techStack: ['React', 'Context API', 'Stripe', 'Node.js'],
+        techStack: ['HTML5', 'JavaScript', 'Postman API', 'React.js', 'Tailwind CSS'],
         imageUrl: assets.food_delivery,
         imageHint: "food delivery app",
         liveUrl: 'https://food-delivery-app-git-main-mohiuddin-murads-projects.vercel.app/',
@@ -495,3 +495,5 @@ export const resume = {
     
 
     
+
+
