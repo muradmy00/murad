@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "project-1",
+      "description": "Screenshot of a modern e-commerce website dashboard.",
+      "imageUrl": "https://picsum.photos/seed/project1/600/400",
+      "imageHint": "website dashboard"
+    },
+    {
+      "id": "project-2",
+      "description": "A mobile application for social networking shown on a smartphone.",
+      "imageUrl": "https://picsum.photos/seed/project2/600/400",
+      "imageHint": "mobile app"
+    },
+    {
+      "id": "project-3",
+      "description": "A data visualization dashboard with various charts and graphs.",
+      "imageUrl": "https://picsum.photos/seed/project3/600/400",
+      "imageHint": "data visualization"
+    },
+    {
+      "id": "blog-1",
+      "description": "Abstract image representing React components.",
+      "imageUrl": "https://picsum.photos/seed/blog1/600/400",
+      "imageHint": "react components"
+    },
+    {
+      "id": "blog-2",
+      "description": "An illustration of a developer working with Tailwind CSS.",
+      "imageUrl": "https://picsum.photos/seed/blog2/600/400",
+      "imageHint": "tailwind css"
+    },
+    {
+      "id": "blog-3",
+      "description": "A person connecting to the Web3 ecosystem.",
+      "imageUrl": "https://picsum.photos/seed/blog3/600/400",
+      "imageHint": "web3 ecosystem"
+    }
+  ]
 }
