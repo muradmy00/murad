@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Nazmul Hossain - Professional Portfolio',
+  title: 'Mohiuddin Murad - Professional Portfolio',
   description: 'A professional portfolio for a full-stack developer built with Next.js.',
 };
 
