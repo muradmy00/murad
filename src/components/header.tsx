@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import Logo from '@/components/icons/logo';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -65,11 +64,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <Logo className="h-8 w-8 text-primary" />
-          <span className="font-bold font-headline sm:inline-block">
-            ohiuddin Murad
-          </span>
+        <Link href="/" className="flex items-center gap-1 text-xl">
+          <span className="font-headline text-3xl font-extrabold text-primary">M</span>
+          <span className="font-bold font-headline sm:inline-block">ohiuddin Murad</span>
         </Link>
         
         <div className="flex items-center">
@@ -91,9 +88,9 @@ export default function Header() {
                         <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                     </SheetHeader>
                       <div className="p-4">
-                          <Link href="/" className="mr-6 flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
-                              <Logo className="h-8 w-8 text-primary" />
-                              <span className="font-bold font-headline">ohiuddin Murad</span>
+                          <Link href="/" className="mr-6 flex items-center gap-1 text-xl mb-8" onClick={() => setMobileMenuOpen(false)}>
+                            <span className="font-headline text-3xl font-extrabold text-primary">M</span>
+                            <span className="font-bold font-headline">ohiuddin Murad</span>
                           </Link>
                           <nav className="flex flex-col space-y-2">
                           {navLinks.map((link) => (

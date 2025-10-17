@@ -1,7 +1,6 @@
 
 import Link from 'next/link';
 import { Github, Facebook, Linkedin } from 'lucide-react';
-import Logo from '@/components/icons/logo';
 
 export default function Footer() {
   const socialLinks = [
@@ -15,9 +14,9 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and Name */}
-          <div className="flex items-center space-x-2">
-            <Logo className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold font-headline">ohiuddin Murad</span>
+          <div className="flex items-center gap-1 text-xl">
+            <span className="font-headline text-3xl font-extrabold text-primary">M</span>
+            <span className="font-bold font-headline">ohiuddin Murad</span>
           </div>
 
           {/* Copyright */}
