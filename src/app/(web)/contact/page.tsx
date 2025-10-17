@@ -22,7 +22,6 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="text-xl font-semibold">Email</h3>
-              <p className="text-muted-foreground">Drop me a line anytime.</p>
               <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline">
                mohiuddinmurad.my00@gmail.com
               </a>
@@ -34,7 +33,6 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="text-xl font-semibold">Phone</h3>
-              <p className="text-muted-foreground">Available during business hours.</p>
               <a href="tel:01755085174" className="text-accent hover:underline block">
                 01755085174
               </a>
