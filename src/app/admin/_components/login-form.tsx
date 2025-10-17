@@ -166,7 +166,7 @@ export function LoginForm() {
         <TabsContent value="signup">
             <CardHeader>
                 <CardTitle className="font-headline text-2xl">Create Admin Account</CardTitle>
-                <CardDescription>The first account created will be the administrator.</CardDescription>
+                <CardDescription>Sign up once to create the single administrator account. This can only be done once.</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -209,7 +209,7 @@ export function LoginForm() {
                     )}
                     />
                     <Button type="submit" className="w-full" disabled={isPending}>
-                    {isSignupPending ? 'Signing up...' : 'Sign Up'}
+                    {isSignupPending ? 'Creating Account...' : 'Sign Up and Create Admin'}
                     </Button>
                 </form>
                 </Form>

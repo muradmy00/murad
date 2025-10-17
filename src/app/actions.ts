@@ -48,13 +48,15 @@ export async function handleSignup(prevState: any, formData: FormData) {
     const adminRolesCollection = collection(firestore, 'roles_admin');
     const adminSnapshot = await getDocs(adminRolesCollection);
 
+    if (!adminSnapshot.empty) {
+        return { message: 'An admin account already exists. Signup is disabled.', success: false };
+    }
+
     const userCredential = await createUserWithEmailAndPassword(auth, parsed.email, parsed.password);
     const user = userCredential.user;
 
     // If no admin exists, make this new user an admin.
-    if (adminSnapshot.empty) {
-        await setDoc(doc(firestore, 'roles_admin', user.uid), { isAdmin: true });
-    }
+    await setDoc(doc(firestore, 'roles_admin', user.uid), { isAdmin: true });
     
     const token = await user.getIdToken();
     await setAuthCookie(token);
