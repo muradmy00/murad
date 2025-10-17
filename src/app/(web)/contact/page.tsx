@@ -35,10 +35,11 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold">Phone</h3>
               <p className="text-muted-foreground text-sm mt-1">Available for calls during business hours.</p>
-              <a href="tel:01755085174" className="text-accent hover:underline block">
+              <a href="tel:01755085174" className="text-accent hover:underline">
                 01755085174
               </a>
-              <a href="tel:01577264021" className="text-accent hover:underline block">
+              <span className="text-muted-foreground mx-2">/</span>
+              <a href="tel:01577264021" className="text-accent hover:underline">
                 01577264021
               </a>
             </div>
