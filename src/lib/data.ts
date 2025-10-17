@@ -12,7 +12,7 @@ export const projects: Project[] = [
         id: '1',
         title: 'Bonnek',
         description: 'A stylish and modern e-commerce platform for a fashion brand, featuring a clean UI and seamless shopping experience.',
-        techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+        techStack: ['React.js', 'TypeScript', 'REST APIs', 'axios', 'Tailwind CSS', 'Git', 'GitHub', 'JSON', 'Redux.js'],
         imageUrl: assets.Bonnek,
         imageHint: "fashion e-commerce",
         liveUrl: 'https://51.stepupdesign.xyz/',
