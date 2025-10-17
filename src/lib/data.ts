@@ -151,20 +151,20 @@ export const blogPosts: Blog[] = [
     slug: 'javascript-event-loop',
     title: 'How the JavaScript Event Loop Works',
     content: `
-      <p>JavaScript is a single-threaded language, which means it can only do one thing at a time. But we often use asynchronous operations like <code>setTimeout</code> or API calls. This is where the Event Loop plays a crucial role.</p>
-      <p>The Event Loop, along with the Call Stack, Web APIs, Callback Queue (Macrotask Queue), and Microtask Queue, makes asynchronous JavaScript possible.</p>
+      <p>JavaScript is a single-threaded language, meaning it can only perform one task at a time. However, it handles asynchronous operations like <code>setTimeout</code> or API calls through the Event Loop mechanism.</p>
+      <p>The Event Loop, in conjunction with the Call Stack, Web APIs, Callback Queue (Macrotask Queue), and Microtask Queue, enables non-blocking, asynchronous behavior in JavaScript.</p>
       
       <h4>Core Components:</h4>
       <ol>
-        <li><strong>Call Stack:</strong> When a function is called, it's added to the Call Stack. When the function finishes, it's removed from the stack. It follows a LIFO (Last-In, First-Out) structure.</li>
-        <li><strong>Web APIs:</strong> Asynchronous operations like <code>setTimeout</code>, DOM events, or <code>fetch</code> don't run directly in the JavaScript engine. The browser handles them through Web APIs. The Call Stack sends these tasks to the Web API and continues its own work.</li>
-        <li><strong>Callback Queue (Macrotask Queue):</strong> When an asynchronous operation in the Web API finishes (e.g., the time for <code>setTimeout</code> is up), its associated callback function waits in the Callback Queue.</li>
-        <li><strong>Microtask Queue:</strong> Callbacks from Promises (like <code>.then()</code>, <code>.catch()</code>, <code>.finally()</code>) and <code>async/await</code> go into the Microtask Queue. This queue has a higher priority than the Callback Queue.</li>
-        <li><strong>Event Loop:</strong> The Event Loop constantly checks if the Call Stack is empty. As soon as it's empty, the Event Loop first checks the Microtask Queue. If there are any tasks, it moves them one by one to the Call Stack until the Microtask Queue is empty. Only then does it take the first item from the Callback Queue (Macrotask) and move it to the Call Stack.</li>
+        <li><strong>Call Stack:</strong> When a function is invoked, it's pushed onto the Call Stack. When it completes, it's popped off. This follows a Last-In, First-Out (LIFO) principle.</li>
+        <li><strong>Web APIs:</strong> Asynchronous functions like <code>setTimeout</code>, DOM events, or <code>fetch</code> are not handled by the JavaScript engine directly. The browser manages them via Web APIs. The Call Stack offloads these tasks to the Web API and proceeds with other synchronous code.</li>
+        <li><strong>Callback Queue (Macrotask Queue):</strong> Once an asynchronous operation in the Web API is complete (e.g., the timer for <code>setTimeout</code> expires), its callback function is placed in the Callback Queue.</li>
+        <li><strong>Microtask Queue:</strong> Callbacks from Promises (<code>.then()</code>, <code>.catch()</code>, <code>.finally()</code>) and <code>async/await</code> are placed in the Microtask Queue. This queue has a higher priority than the Callback Queue.</li>
+        <li><strong>Event Loop:</strong> The Event Loop's primary job is to monitor the Call Stack. When the Call Stack is empty, it first processes all tasks in the Microtask Queue, moving them one by one to the Call Stack for execution. Only after the Microtask Queue is completely empty does it take the first task from the Callback Queue (Macrotask) and push it to the Call Stack.</li>
       </ol>
       
       <h4>Example:</h4>
-      <p>What will be the output of the following code?</p>
+      <p>Consider the output of the following code snippet:</p>
       <pre><code>console.log('Start');
 
 setTimeout(() => {
@@ -185,17 +185,17 @@ Timeout (Macrotask)</code></pre>
 
       <h4>Explanation:</h4>
       <ol>
-          <li><code>console.log('Start')</code> goes to the Call Stack and runs.</li>
-          <li><code>setTimeout</code> is sent to the Web API. After 0 milliseconds, its callback moves to the Callback Queue.</li>
-          <li>The callback from <code>Promise.resolve().then()</code> moves to the Microtask Queue.</li>
-          <li><code>console.log('End')</code> goes to the Call Stack and runs.</li>
-          <li>After the Call Stack becomes empty, the Event Loop first checks the Microtask Queue and runs 'Promise (Microtask)'.</li>
-          <li>Once the Microtask Queue is empty, the Event Loop runs 'Timeout (Macrotask)' from the Callback Queue.</li>
+          <li><code>console.log('Start')</code> is pushed to the Call Stack and executed immediately.</li>
+          <li><code>setTimeout</code> is sent to the Web API. Its callback is moved to the Callback Queue after 0 milliseconds.</li>
+          <li>The <code>.then()</code> callback from <code>Promise.resolve()</code> is moved to the Microtask Queue.</li>
+          <li><code>console.log('End')</code> is pushed to the Call Stack and executed.</li>
+          <li>Once the Call Stack is empty, the Event Loop processes the Microtask Queue, executing 'Promise (Microtask)'.</li>
+          <li>After the Microtask Queue is empty, the Event Loop processes the Callback Queue, executing 'Timeout (Macrotask)'.</li>
       </ol>
-      <p>This is how the Event Loop makes JavaScript non-blocking and efficient.</p>
+      <p>This mechanism allows JavaScript to handle asynchronous operations efficiently without blocking the main thread.</p>
     `,
-    imageUrl: getPlaceholder('blog-event-loop').imageUrl,
-    imageHint: getPlaceholder('blog-event-loop').imageHint,
+    imageUrl: assets.event_loop,
+    imageHint: 'event loop diagram',
     publishedAt: new Date('2023-10-18T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'Event Loop', 'Async', 'Microtask', 'Macrotask'],
@@ -205,23 +205,23 @@ Timeout (Macrotask)</code></pre>
     slug: 'javascript-execution-context',
     title: 'JavaScript Execution Context: How Code Runs',
     content: `
-      <p>The Execution Context is the environment where JavaScript code is executed. Each Execution Context has two main parts: the Variable Environment (where variables, functions, and arguments are stored) and the Thread of Execution (where code is executed line by line).</p>
+      <p>The Execution Context is the environment in which JavaScript code is evaluated and executed. Every Execution Context has two main components: the Variable Environment (which stores variables, function declarations, and arguments) and the Thread of Execution (which executes the code line by line).</p>
       
       <h4>Types of Execution Context:</h4>
       <ol>
-          <li><strong>Global Execution Context (GEC):</strong> When the JavaScript engine first runs the code, it creates a Global Execution Context. This is the default context. The GEC creates two things: a global object (<code>window</code> in browsers, <code>global</code> in Node.js) and <code>this</code>, which by default points to the global object.</li>
-          <li><strong>Function Execution Context (FEC):</strong> When a function is called, a new Function Execution Context is created and added to the top of the Call Stack. Each function has its own Execution Context.</li>
+          <li><strong>Global Execution Context (GEC):</strong> When the JavaScript engine starts running code, it creates a Global Execution Context. This is the default context. The GEC establishes two key things: a global object (<code>window</code> in browsers, <code>global</code> in Node.js) and the <code>this</code> keyword, which initially points to the global object.</li>
+          <li><strong>Function Execution Context (FEC):</strong> Whenever a function is called, a new Function Execution Context is created and placed on top of the Call Stack. Each function call gets its own separate context.</li>
       </ol>
       
       <h4>Phases of Execution Context Creation:</h4>
-      <p>An Execution Context is created in two phases:</p>
+      <p>An Execution Context is created in two distinct phases:</p>
       <ol>
-          <li><strong>Creation Phase (Memory Allocation):</strong> In this phase, the engine allocates memory for variables and function declarations without executing the code. Variables declared with <code>var</code> are initialized with <code>undefined</code>, and function declarations are stored completely in memory. This process is called Hoisting. <code>let</code> and <code>const</code> are also hoisted but remain uninitialized.</li>
-          <li><strong>Execution Phase (Code Execution):</strong> In this phase, the code is executed line by line, and variables are assigned their actual values. When a function is called, a new Execution Context is created and pushed onto the Call Stack.</li>
+          <li><strong>Creation Phase (Memory Allocation):</strong> In this phase, the engine allocates memory for variable and function declarations before executing any code. Variables declared with <code>var</code> are initialized with <code>undefined</code>, while function declarations are stored in memory in their entirety. This behavior is known as Hoisting. Variables declared with <code>let</code> and <code>const</code> are also hoisted but remain in a "temporal dead zone" and are not initialized.</li>
+          <li><strong>Execution Phase (Code Execution):</strong> During this phase, the code is executed sequentially. The engine assigns the actual values to variables. When a function is called, a new Execution Context is created and pushed onto the Call Stack, and this two-phase process repeats for the function's code.</li>
       </ol>
       
       <h4>How the Call Stack Works:</h4>
-      <p>The Call Stack is a LIFO (Last-In, First-Out) data structure that tracks Execution Contexts.</p>
+      <p>The Call Stack is a LIFO (Last-In, First-Out) data structure that manages and tracks Execution Contexts.</p>
       <pre><code>function third() {
   console.log("Inside third");
 }
@@ -240,17 +240,17 @@ first();</code></pre>
       
       <h4>State of the Call Stack:</h4>
       <ol>
-        <li>When <code>first()</code> is called, its FEC is pushed to the top of the stack.</li>
-        <li>From <code>first</code>, <code>second()</code> is called, and its FEC is pushed to the top.</li>
-        <li>From <code>second</code>, <code>third()</code> is called, and its FEC is pushed to the top.</li>
-        <li>When <code>third</code> finishes, it's popped off the stack.</li>
-        <li>Then, when <code>second</code> finishes, it's also popped off.</li>
-        <li>Finally, when <code>first</code> finishes, it's popped off the stack.</li>
+        <li>When <code>first()</code> is invoked, its FEC is pushed onto the stack.</li>
+        <li>Inside <code>first</code>, <code>second()</code> is called, and its FEC is pushed on top.</li>
+        <li>Inside <code>second</code>, <code>third()</code> is called, and its FEC is pushed on top.</li>
+        <li>Once <code>third</code> finishes, its context is popped off the stack.</li>
+        <li>Execution returns to <code>second</code>, which then finishes and is popped off.</li>
+        <li>Finally, <code>first</code> finishes and is popped off, leaving the stack empty.</li>
       </ol>
-      <p>This process controls the execution flow of JavaScript code.</p>
+      <p>This stack-based approach is fundamental to controlling the execution flow of all JavaScript code.</p>
     `,
-    imageUrl: getPlaceholder('blog-execution-context').imageUrl,
-    imageHint: getPlaceholder('blog-execution-context').imageHint,
+    imageUrl: assets.execution_context,
+    imageHint: 'javascript execution context diagram',
     publishedAt: new Date('2023-10-17T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'Execution Context', 'Hoisting', 'Call Stack'],
@@ -260,33 +260,33 @@ first();</code></pre>
     slug: 'javascript-vs-typescript',
     title: 'JavaScript vs. TypeScript: Which to Choose and Why?',
     content: `
-      <p>TypeScript is a superset of JavaScript, created and maintained by Microsoft. It adds static typing, classes, interfaces, and other modern features to JavaScript, which helps in building large-scale applications.</p>
+      <p>TypeScript is a statically typed superset of JavaScript, developed and maintained by Microsoft. It enhances JavaScript by adding optional static types, classes, interfaces, and other modern features, which are invaluable for building robust, large-scale applications.</p>
       
       <h4>Key Differences:</h4>
       <ol>
         <li>
           <strong>Typing System:</strong>
           <ul>
-              <li><strong>JavaScript:</strong> Uses dynamic typing, meaning a variable's type is determined at runtime. This can make coding faster but may lead to type-related bugs in large projects.</li>
-              <li><strong>TypeScript:</strong> Uses static typing, where you define a variable's type when you write the code. This helps catch many errors during development and makes the code more predictable.</li>
+              <li><strong>JavaScript:</strong> Employs dynamic typing, where a variable's type is determined at runtime. This allows for rapid development but can lead to elusive type-related bugs, especially in large codebases.</li>
+              <li><strong>TypeScript:</strong> Utilizes static typing, allowing you to explicitly define a variable's type during development. This enables the compiler to catch a wide range of errors before the code is ever run.</li>
           </ul>
           <pre><code>// TypeScript Example
 let framework: string = "React";
 let version: number = 18;
 
-// framework = 18; // Error: Type 'number' is not assignable to type 'string'.</code></pre>
+// framework = 18; // This would cause a compile-time error: Type 'number' is not assignable to type 'string'.</code></pre>
         </li>
         <li>
           <strong>Error Checking & Tooling:</strong>
           <ul>
-              <li><strong>TypeScript:</strong> Provides compile-time error checking, which finds errors before the code runs. IDEs (like VS Code) are deeply integrated with TypeScript, offering better IntelliSense, autocompletion, and refactoring support.</li>
-              <li><strong>JavaScript:</strong> Errors are only caught at runtime, which can make debugging time-consuming and difficult.</li>
+              <li><strong>TypeScript:</strong> Its primary advantage is compile-time error checking. This identifies bugs early in the development cycle. Modern IDEs like VS Code provide superior IntelliSense, autocompletion, and refactoring capabilities for TypeScript.</li>
+              <li><strong>JavaScript:</strong> Errors are typically discovered only at runtime, which can make debugging more complex and time-consuming.</li>
           </ul>
         </li>
         <li>
-          <strong>OOP Features (Interfaces, Enums, Generics):</strong>
+          <strong>Object-Oriented Programming (OOP) Features:</strong>
           <ul>
-            <li>TypeScript includes features like Interfaces, Enums, Generics, and Access Modifiers (public, private, protected) that are not in standard JavaScript (though ES6 introduced classes). These features make object-oriented programming easier.</li>
+            <li>TypeScript offers robust support for OOP concepts like Interfaces, Enums, Generics, and Access Modifiers (e.g., public, private, protected), which are not native to standard JavaScript (though ES6 did introduce classes).</li>
           </ul>
           <pre><code>// TypeScript Interface
 interface User {
@@ -303,29 +303,29 @@ let userRole: Role = Role.ADMIN;</code></pre>
         <li>
           <strong>Development Process:</strong>
           <ul>
-            <li>TypeScript code must first be compiled into JavaScript because browsers only understand JavaScript. This requires a build step.</li>
-            <li>JavaScript can run directly in the browser.</li>
+            <li>TypeScript code requires a compilation (or transpilation) step to convert it into standard JavaScript that browsers can execute.</li>
+            <li>JavaScript can be executed directly by browsers without any prior compilation.</li>
           </ul>
         </li>
       </ol>
 
       <h4>When to Use Which?</h4>
-      <p>Use <strong>JavaScript</strong> when:</p>
+      <p>Choose <strong>JavaScript</strong> for:</p>
       <ul>
-          <li>The project is small or medium-sized.</li>
-          <li>Rapid prototyping is needed.</li>
-          <li>Your team lacks experience with TypeScript.</li>
+          <li>Small to medium-sized projects or scripts.</li>
+          <li>Rapid prototyping and proof-of-concepts.</li>
+          <li>Teams that are not yet familiar with static typing.</li>
       </ul>
-      <p>Use <strong>TypeScript</strong> when:</p>
+      <p>Choose <strong>TypeScript</strong> for:</p>
       <ul>
-          <li>The project is large, complex, and long-term.</li>
-          <li>Multiple developers are working in a team.</li>
-          <li>Code safety, maintainability, and scalability are critical.</li>
+          <li>Large, complex, and long-term applications.</li>
+          <li>Collaborative projects with multiple developers.</li>
+          <li>When code safety, maintainability, and scalability are top priorities.</li>
       </ul>
-      <p>Overall, TypeScript is a powerful tool that helps improve code quality in modern web development.</p>
+      <p>In summary, TypeScript is a powerful tool that significantly improves code quality and developer experience in modern web development, making it an excellent choice for serious projects.</p>
     `,
-    imageUrl: getPlaceholder('blog-js-vs-ts').imageUrl,
-    imageHint: getPlaceholder('blog-js-vs-ts').imageHint,
+    imageUrl: assets.typescript_javascript,
+    imageHint: 'javascript vs typescript logos',
     publishedAt: new Date('2023-10-16T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'TypeScript', 'Programming', 'Web Development'],
@@ -335,18 +335,17 @@ let userRole: Role = Role.ADMIN;</code></pre>
     slug: 'react-custom-hooks',
     title: 'React Custom Hooks: The Best Way to Share Logic',
     content: `
-      <p>React Custom Hooks are JavaScript functions whose names start with "use" and that can call other Hooks (like <code>useState</code>, <code>useEffect</code>). Custom Hooks allow you to reuse stateful logic between components.</p>
-      <p>When multiple components need the same kind of logic (like fetching data, using local storage, or managing authentication state), we can extract that logic into a custom Hook.</p>
+      <p>React Custom Hooks are reusable JavaScript functions whose names begin with "use" and that can call other Hooks (such as <code>useState</code>, <code>useEffect</code>). They provide a powerful way to extract and share stateful logic between components without altering the component hierarchy.</p>
       
       <h4>Why Use Custom Hooks?</h4>
       <ul>
-          <li><strong>Reusability:</strong> The same logic can be used in multiple components without copy-pasting. This helps follow the DRY (Don't Repeat Yourself) principle.</li>
-          <li><strong>Clean Code & Separation of Concerns:</strong> Business logic can be separated from the component's UI logic. This makes the code cleaner and easier to understand.</li>
-          <li><strong>Maintainability:</strong> Since the logic is in one place, it's much easier to modify or debug.</li>
+          <li><strong>Reusability:</strong> They allow you to reuse logic across multiple components, adhering to the DRY (Don't Repeat Yourself) principle.</li>
+          <li><strong>Clean Code & Separation of Concerns:</strong> Custom Hooks help separate complex business logic from the UI rendering logic of a component, making the code cleaner, more readable, and easier to reason about.</li>
+          <li><strong>Maintainability:</strong> With the logic centralized in one place, it becomes much easier to update, debug, and maintain.</li>
       </ul>
       
-      <h4>Example 1: <code>useFetch</code></h4>
-      <p>Here is an example of a custom hook (<code>useFetch</code>) for fetching data:</p>
+      <h4>Example 1: <code>useFetch</code> for Data Fetching</h4>
+      <p>A common use case is creating a custom hook to handle data fetching, loading states, and errors.</p>
       <pre><code>import { useState, useEffect } from 'react';
 
 function useFetch(url) {
@@ -355,7 +354,9 @@ function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
+    if (!url) return;
+    
+    const fetchData = async () => {
       setLoading(true);
       try {
         const response = await fetch(url);
@@ -371,9 +372,10 @@ function useFetch(url) {
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     fetchData();
-  }, [url]); // Dependency array ensures it re-fetches if URL changes
+  }, [url]); // Reruns the effect if the URL changes
 
   return { data, loading, error };
 }
@@ -393,30 +395,38 @@ function UserProfile({ userId }) {
   );
 }</code></pre>
       
-      <h4>Example 2: <code>useLocalStorage</code></h4>
-      <p>This hook simplifies the task of saving and reading data from local storage.</p>
+      <h4>Example 2: <code>useLocalStorage</code> for Persistent State</h4>
+      <p>This hook simplifies the process of synchronizing component state with the browser's local storage.</p>
       <pre><code>import { useState, useEffect } from 'react';
 
 function useLocalStorage(key, initialValue) {
+  // Get from local storage then
+  // parse stored json or return initialValue
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return initialValue;
     }
   });
 
-  useEffect(() => {
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value) => {
     try {
-      window.localStorage.setItem(key, JSON.stringify(storedValue));
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }, [key, storedValue]);
+  };
 
-  return [storedValue, setStoredValue];
+  return [storedValue, setValue];
 }
 
 // How to use it in a component
@@ -424,7 +434,7 @@ function ThemeSwitcher() {
     const [theme, setTheme] = useLocalStorage('theme', 'light');
     
     const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
+        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
     return (
@@ -434,15 +444,16 @@ function ThemeSwitcher() {
     );
 }
 </code></pre>
-      <p>Custom Hooks are a powerful feature of React that make code more modular, readable, and maintainable.</p>
+      <p>Custom Hooks are a fundamental pattern in modern React development, promoting cleaner, more modular, and highly maintainable codebases.</p>
     `,
-    imageUrl: getPlaceholder('blog-custom-hooks').imageUrl,
-    imageHint: getPlaceholder('blog-custom-hooks').imageHint,
+    imageUrl: assets.React_custom_hook,
+    imageHint: 'react custom hooks code',
     publishedAt: new Date('2023-10-15T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['React', 'Hooks', 'Custom Hooks', 'State Management'],
   },
 ];
+
 
 export const messages: Message[] = [];
 

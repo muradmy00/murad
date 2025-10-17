@@ -13,6 +13,7 @@ import {
 import { format } from 'date-fns';
 import { blogPosts } from '@/lib/data';
 import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
 const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
   const [description, setDescription] = useState('');
@@ -20,6 +21,7 @@ const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
   useEffect(() => {
     // stripHtml should only run on the client after hydration
     function stripHtml(html: string) {
+      if (typeof window === 'undefined') return ''; // Don't run on server
       const doc = new DOMParser().parseFromString(html, 'text/html');
       return doc.body.textContent || "";
     }
@@ -31,14 +33,21 @@ const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
       <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
         <CardHeader className="p-0">
           {post.imageUrl && (
-            <Image
-              src={post.imageUrl}
-              alt={post.title}
-              width={600}
-              height={400}
-              className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
-              data-ai-hint={post.imageHint}
-            />
+            <div className={cn(
+              "relative w-full aspect-[3/2] rounded-t-lg overflow-hidden",
+              typeof post.imageUrl !== 'string' && 'bg-secondary/20 p-4'
+            )}>
+              <Image
+                src={post.imageUrl}
+                alt={post.title}
+                fill
+                className={cn(
+                  'object-cover group-hover:scale-105 transition-transform duration-300',
+                  typeof post.imageUrl !== 'string' && 'object-contain'
+                )}
+                data-ai-hint={post.imageHint}
+              />
+            </div>
           )}
         </CardHeader>
         <CardContent className="p-6 flex-grow">

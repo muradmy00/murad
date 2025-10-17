@@ -13,7 +13,7 @@ export type Project = {
 };
 
 export type Experience = {
-  id: string;
+  id:string;
   role: string;
   company: string;
   duration: string;
@@ -49,7 +49,7 @@ export type Blog = {
   slug: string;
   title: string;
   content: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   imageHint?: string;
   publishedAt: Date;
   author: string;

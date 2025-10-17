@@ -1,10 +1,11 @@
 
 import { blogPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { format } from 'date-fns';
-import { Calendar, User, Tag } from 'lucide-react';
+import { Calendar, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
@@ -46,7 +47,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 src={post.imageUrl}
                 alt={post.title}
                 fill
-                className="object-cover"
+                className={cn(
+                  'object-cover',
+                  typeof post.imageUrl !== 'string' && 'object-contain p-4 bg-secondary/20'
+                )}
                 data-ai-hint={post.imageHint}
                 priority
               />
