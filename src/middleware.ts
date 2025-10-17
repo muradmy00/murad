@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { initializeFirebase } from './firebase/server';
+import { initializeFirebase } from './firebase';
 import { getDocs, collection } from 'firebase/firestore';
 
 async function hasAdminAccount(): Promise<boolean> {
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
   }
   
   // If admin exists, enforce authentication for admin routes.
-  if (pathname.startsWith('/admin') && pathname !== '/admin' && !authToken) {
+  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/create-admin') && pathname !== '/admin' && !authToken) {
     return NextResponse.redirect(new URL('/admin', request.url));
   }
   
