@@ -61,18 +61,18 @@ export default function HomePage() {
         <Card className="mt-24 max-w-6xl mx-auto bg-transparent border-none shadow-none">
             <CardContent className="p-0">
                 <div className="grid md:grid-cols-5 items-center gap-8 md:gap-16">
-                    <div className="relative md:col-span-2 flex justify-center">
+                    <div className="relative md:col-span-2 flex justify-center items-center">
                       <div className="relative w-64 h-64 md:w-80 md:h-80">
+                         <div className="absolute inset-0 bg-primary/20 rounded-lg blur-3xl -z-10 animate-pulse transform -rotate-6"></div>
                          {aboutImage && (
                             <Image
                                 src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
-                                className="object-cover rounded-full shadow-2xl shadow-primary/40"
+                                className="object-cover rounded-lg shadow-2xl shadow-primary/40 border-4 border-card p-2 bg-card transform rotate-3 transition-transform duration-300 hover:rotate-0 hover:scale-105"
                                 data-ai-hint={aboutImage.imageHint}
                             />
                          )}
-                         <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
                       </div>
                     </div>
                     <div className="md:col-span-3 p-8 text-left">
