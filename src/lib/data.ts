@@ -42,24 +42,17 @@ export const projects: Project[] = [
 export const experience: Experience[] = [
   {
     id: '1',
-    role: 'Senior Frontend Developer',
-    company: 'Tech Solutions Inc.',
-    duration: 'Jan 2020 - Present',
-    description: 'Led the development of a new client-facing dashboard using React and TypeScript. Improved application performance by 30% and mentored junior developers.',
+    role: 'Junior Software Engineer',
+    company: 'StepUp',
+    duration: 'Jul 2025 - Present',
+    description: 'Transitioned to a full-time role, focusing on building and maintaining web applications using React.js and JavaScript. I am very happy that my job has become permanent.',
   },
   {
     id: '2',
-    role: 'Frontend Developer',
-    company: 'Creative Agency LLC',
-    duration: 'Jun 2017 - Dec 2019',
-    description: 'Developed and maintained websites for various clients using WordPress, and later transitioned to modern JavaScript frameworks like Vue.js.',
-  },
-  {
-    id: '3',
-    role: 'Junior Web Developer',
-    company: 'Web Starters Co.',
-    duration: 'May 2016 - May 2017',
-    description: 'Assisted in building and testing responsive websites using HTML, CSS, and jQuery. Gained foundational skills in version control with Git.',
+    role: 'Junior Software Engineer (Frontend)',
+    company: 'StepUp',
+    duration: 'Jan 2025 - Jul 2025',
+    description: 'Started my journey as an intern, where I gained hands-on experience with frontend technologies, including JavaScript and REST APIs, contributing to various projects.',
   },
 ];
 
@@ -136,7 +129,7 @@ export const blogPosts: Blog[] = [
 import App from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));</code></pre>
-    <p>এই কোডটি 'App' কম্পোনেন্টকে 'root' id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।</p>
+    <p>এই কোডটি 'App' কম্পונেন্টকে 'root' id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।</p>
     <img src="${getPlaceholder('blog-4').imageUrl}" alt="React Code" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-4').imageHint}" />
     <p>এভাবেই React DOM কার্যকরভাবে এবং দ্রুত UI আপডেট করে, যা বড় অ্যাপ্লিকেশনগুলোতে পারফরম্যান্সের জন্য খুবই গুরুত্বপূর্ণ।</p>
     <img src="${getPlaceholder('blog-2').imageUrl}" alt="Another descriptive image" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-2').imageHint}" />`,
