@@ -56,6 +56,7 @@ export default function HomePage() {
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
+      setTypingSpeed(150)
     }
   };
 
@@ -64,7 +65,7 @@ export default function HomePage() {
       <main className="text-center">
         <div className="relative inline-block">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-          <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold h-24 md:h-32 lg:h-36">
+          <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold h-24 md:h-28 lg:h-32">
             I'm{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
               {text}
@@ -74,7 +75,7 @@ export default function HomePage() {
         </div>
 
         <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
-          A passionate Full-Stack Developer creating modern, responsive, and
+          A passionate Frontend Developer creating modern, responsive, and
           performant web applications.
         </p>
 
