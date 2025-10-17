@@ -25,6 +25,7 @@ export default function ContactPage() {
               <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline">
                mohiuddinmurad.my00@gmail.com
               </a>
+              <p className="text-muted-foreground text-sm mt-1">I'll get back to you as soon as possible.</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
@@ -39,6 +40,7 @@ export default function ContactPage() {
               <a href="tel:01577264021" className="text-accent hover:underline block">
                 01577264021
               </a>
+              <p className="text-muted-foreground text-sm mt-1">Available for calls during business hours.</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
