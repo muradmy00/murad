@@ -6,9 +6,22 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { skills } from '@/lib/data';
 import type { Skill } from '@/lib/types';
+import { Badge } from '@/components/ui/badge';
+import {
+  Code,
+  Database,
+  PenTool,
+  Smartphone,
+  Server,
+  Languages,
+  GitBranch,
+  Star,
+  BrainCircuit,
+  Puzzle
+} from 'lucide-react';
+import React from 'react';
 
 const skillCategories: Skill['category'][] = [
   'Frontend',
@@ -20,20 +33,30 @@ const skillCategories: Skill['category'][] = [
   'Web3',
 ];
 
+const categoryIcons: { [key in Skill['category']]: React.ReactNode } = {
+  Frontend: <Smartphone className="h-6 w-6" />,
+  Backend: <Server className="h-6 w-6" />,
+  Languages: <Languages className="h-6 w-6" />,
+  Styling: <PenTool className="h-6 w-6" />,
+  Database: <Database className="h-6 w-6" />,
+  Tools: <Puzzle className="h-6 w-6" />,
+  Web3: <GitBranch className="h-6 w-6" />,
+};
+
 export default function SkillsPage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-12">
+      <div className="text-center mb-16">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           My Technical Skills
         </h1>
-        <p className="max-w-2xl mx-auto text-lg text-muted-foreground mt-4">
-          A summary of my technical capabilities and the tools I use to build
-          modern web applications.
+        <p className="max-w-3xl mx-auto text-lg text-muted-foreground mt-4">
+          A showcase of the technologies and tools I use to build modern,
+          performant, and scalable web applications.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="space-y-12">
         {skillCategories.map((category) => {
           const categorySkills = skills?.filter(
             (skill) => skill.category === category
@@ -41,24 +64,29 @@ export default function SkillsPage() {
           if (!categorySkills || categorySkills.length === 0) return null;
 
           return (
-            <Card key={category} className="shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="font-headline">{category}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <div key={category}>
+               <div className="flex items-center gap-4 mb-6">
+                <div className="text-primary">{categoryIcons[category]}</div>
+                <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary">
+                  {category}
+                </h2>
+                <div className="flex-grow h-px bg-border"></div>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
                 {categorySkills.map((skill) => (
-                  <div key={skill.id}>
-                    <div className="flex justify-between items-center mb-1">
-                      <p className="font-medium">{skill.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {skill.proficiency}%
-                      </p>
-                    </div>
-                    <Progress value={skill.proficiency} />
+                  <div key={skill.id} className="group relative">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                    <Badge
+                      variant="secondary"
+                      className="relative px-5 py-3 text-base font-medium transition-all duration-200 transform group-hover:scale-110"
+                    >
+                      {skill.name}
+                    </Badge>
                   </div>
                 ))}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           );
         })}
       </div>
