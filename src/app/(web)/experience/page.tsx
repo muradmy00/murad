@@ -23,30 +23,33 @@ export default function ExperiencePage() {
       </div>
 
       <div className="relative">
-        {/* Central timeline bar */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"></div>
+        {/* Central timeline bar - for md and up */}
+        <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2"></div>
         <div className="space-y-12">
           {experience.map((item, index) => (
             <div
               key={item.id}
               className={cn(
-                "relative flex items-start",
-                index % 2 === 0 ? "md:justify-start" : "md:justify-end"
+                "relative flex items-start md:justify-start",
+                index % 2 !== 0 && "md:justify-end"
               )}
             >
               <div
                 className={cn(
-                  "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md left-1/2 -translate-x-1/2",
-                  index % 2 === 0 ? "md:left-1/2" : "md:left-1/2"
+                  "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md left-5 -translate-x-1/2",
+                   "md:left-1/2"
                 )}
               >
                 <Briefcase className="h-5 w-5" />
               </div>
 
-              <div className="w-full md:w-[calc(50%-2.5rem)]">
+              <div className={cn(
+                  "w-full ml-12 md:ml-0",
+                  "md:w-[calc(50%-2.5rem)]",
+                  index % 2 === 0 ? "md:mr-10" : "md:ml-10"
+              )}>
                 <Card className={cn("shadow-md transition-shadow duration-300 hover:shadow-xl",
-                  index % 2 === 0 ? "md:ml-auto md:mr-10" : "md:mr-auto md:ml-10",
-                  "ml-10 md:ml-0"
+                  index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
                 )}>
                   <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
@@ -73,30 +76,33 @@ export default function ExperiencePage() {
       </div>
       
       <div className="relative">
-        {/* Central timeline bar */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"></div>
+        {/* Central timeline bar - for md and up */}
+        <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-1/2"></div>
         <div className="space-y-12">
           {education.map((item, index) => (
              <div
               key={item.id}
               className={cn(
-                "relative flex items-start",
-                index % 2 === 0 ? "md:justify-start" : "md:justify-end"
+                "relative flex items-start md:justify-start",
+                 index % 2 !== 0 && "md:justify-end"
               )}
             >
               <div
                 className={cn(
-                  "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md left-1/2 -translate-x-1/2",
-                  index % 2 === 0 ? "md:left-1/2" : "md:left-1/2"
+                  "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md left-5 -translate-x-1/2",
+                  "md:left-1/2"
                 )}
               >
                 <GraduationCap className="h-5 w-5" />
               </div>
                 
-              <div className="w-full md:w-[calc(50%-2.5rem)]">
+              <div className={cn(
+                  "w-full ml-12 md:ml-0",
+                  "md:w-[calc(50%-2.5rem)]",
+                  index % 2 === 0 ? "md:mr-10" : "md:ml-10"
+              )}>
                 <Card className={cn("shadow-md transition-shadow duration-300 hover:shadow-xl",
-                  index % 2 === 0 ? "md:ml-auto md:mr-10" : "md:mr-auto md:ml-10",
-                  "ml-10 md:ml-0"
+                  index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
                 )}>
                   <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
