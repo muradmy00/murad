@@ -6,7 +6,7 @@ export type Project = {
   title: string;
   description: string;
   techStack: string[];
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   liveUrl: string;
   repoUrl: string;
   imageHint?: string;
