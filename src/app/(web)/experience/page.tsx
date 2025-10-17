@@ -1,4 +1,5 @@
 
+'use client';
 import { Briefcase } from 'lucide-react';
 import {
   Card,
@@ -10,6 +11,11 @@ import {
 import { experience } from '@/lib/data';
 
 export default function ExperiencePage() {
+  // Ensure experience data is available before rendering
+  if (!experience) {
+    return null; // or a loading indicator
+  }
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
       
