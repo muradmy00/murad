@@ -7,10 +7,10 @@ import type { Metadata } from 'next';
 import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
-  title: 'Mohiuddin Murad - Professional Portfolio',
-  description: 'A professional portfolio for a full-stack developer built with Next.js.',
+  title: 'Mohiuddin Murad',
+  description: '',
   icons: {
-    icon: assets.favicon.src,
+    icon: assets.favicon,
   }
 };
 
