@@ -23,8 +23,25 @@ export default function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const NavLink = ({ href, label, className }: { href: string; label: string; className?: string; }) => {
+  const NavLink = ({ href, label, className, isMobile = false }: { href: string; label: string; className?: string; isMobile?: boolean}) => {
     const isActive = pathname === href;
+    
+    if (isMobile) {
+        return (
+            <Link
+                href={href}
+                className={cn(
+                "block w-full text-left p-3 rounded-lg text-lg font-medium transition-colors",
+                isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
+                className
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+            >
+                {label}
+            </Link>
+        )
+    }
+    
     return (
       <Link
         href={href}
@@ -68,17 +85,17 @@ export default function Header() {
                       </Button>
                   </SheetTrigger>
                   <SheetContent side="left">
-                    <SheetHeader className="sr-only">
-                        <SheetTitle>Mobile Navigation Menu</SheetTitle>
+                    <SheetHeader>
+                        <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
                     </SheetHeader>
                       <div className="p-4">
-                          <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
+                          <Link href="/" className="mr-6 flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
                               <Logo className="h-8 w-8 text-primary" />
                               <span className="font-bold font-headline">Mohiuddin Murad</span>
                           </Link>
-                          <nav className="flex flex-col space-y-4">
+                          <nav className="flex flex-col space-y-2">
                           {navLinks.map((link) => (
-                              <NavLink key={link.href} {...link} className="text-lg" />
+                              <NavLink key={link.href} {...link} isMobile={true} />
                           ))}
                           </nav>
                       </div>
