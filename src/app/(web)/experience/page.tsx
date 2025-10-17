@@ -22,19 +22,25 @@ export default function ExperiencePage() {
       </div>
 
       <div className="relative">
-        <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-border"></div>
+        {/* Central timeline bar */}
+        <div className="absolute left-4 md:left-1/2 w-0.5 h-full bg-border -translate-x-1/2"></div>
         <div className="space-y-12">
-          {experience.map((item) => (
+          {experience.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group"
+              className="relative flex items-start md:space-x-8 rtl:space-x-reverse md:justify-normal"
             >
-              <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
+              {/* Icon on the timeline */}
+              <div className="absolute left-4 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md md:left-1/2">
                 <Briefcase className="h-5 w-5" />
               </div>
-              <div className="w-10 md:hidden"></div>
-              <div className="w-full md:w-[calc(50%-2.5rem)]">
-                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl group-odd:md:text-right">
+              
+              {/* Spacer for desktop */}
+              <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
+
+              {/* Card content */}
+              <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:odd:-order-1 md:odd:pr-8 md:odd:text-right">
+                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
@@ -60,19 +66,25 @@ export default function ExperiencePage() {
       </div>
       
       <div className="relative">
-        <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-border"></div>
+        {/* Central timeline bar */}
+        <div className="absolute left-4 md:left-1/2 w-0.5 h-full bg-border -translate-x-1/2"></div>
         <div className="space-y-12">
-          {education.map((item) => (
+          {education.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group"
+              className="relative flex items-start md:space-x-8 rtl:space-x-reverse md:justify-normal"
             >
-              <div className="absolute left-1/2 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md">
+              {/* Icon on the timeline */}
+              <div className="absolute left-4 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md md:left-1/2">
                 <GraduationCap className="h-5 w-5" />
               </div>
-              <div className="w-10 md:hidden"></div>
-              <div className="w-full md:w-[calc(50%-2.5rem)]">
-                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl group-odd:md:text-right">
+
+              {/* Spacer for desktop */}
+              <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
+
+              {/* Card content */}
+               <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:odd:-order-1 md:odd:pr-8 md:odd:text-right">
+                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.degree}</CardTitle>
