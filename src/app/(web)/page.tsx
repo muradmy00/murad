@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Download, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
@@ -7,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import Image from 'next/image';
 import { getPlaceholder } from '@/lib/data';
+import { assets } from '@/assets/assets';
 
 export default function HomePage() {
   const socialLinks = [
@@ -62,13 +64,13 @@ export default function HomePage() {
                     <div className="p-8 text-left">
                         <h3 className="font-headline text-3xl font-bold text-primary mb-4">About Me</h3>
                         <p className="text-muted-foreground leading-relaxed">
-                            Hello! I'm Mohiuddin Murad, a dedicated Full-Stack Developer with a knack for building beautiful and functional web applications. With a strong foundation in both frontend and backend technologies, I specialize in bringing ideas to life from concept to deployment. I thrive on solving complex problems and am constantly learning to keep up with the fast-paced world of web development. My goal is to create seamless and engaging user experiences while writing clean, efficient, and maintainable code.
+                            As a frontend developer, I'm driven by a passion for creating pixel-perfect, intuitive user interfaces that people love to use. I specialize in turning complex problems into beautiful, functional web experiences using modern technologies like React, Next.js, and TypeScript. My focus is on writing clean, maintainable code and building responsive applications that perform flawlessly on any device.
                         </p>
                     </div>
                     <div className="relative h-64 md:h-full w-full">
                          {aboutImage && (
                             <Image
-                                src={aboutImage.imageUrl}
+                                src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
                                 className="object-cover"
