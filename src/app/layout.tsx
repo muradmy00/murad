@@ -9,8 +9,8 @@ import { assets } from '@/assets/assets';
 export const metadata: Metadata = {
   title: 'Mohiuddin Murad',
   description: '',
-  icons: {
-    icon: assets.favicon,
+    icons: {
+    icon: assets.favicon.src,
   }
 };
 
