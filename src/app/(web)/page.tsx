@@ -58,25 +58,28 @@ export default function HomePage() {
             ))}
         </div>
 
-        <Card className="mt-24 max-w-6xl mx-auto bg-card/50 border-2 border-primary/10 shadow-2xl shadow-primary/10 rounded-lg overflow-hidden backdrop-blur-sm">
+        <Card className="mt-24 max-w-6xl mx-auto bg-transparent border-none shadow-none">
             <CardContent className="p-0">
-                <div className="grid md:grid-cols-2 items-center">
-                    <div className="p-8 text-left">
-                        <h3 className="font-headline text-3xl font-bold text-primary mb-4">About Me</h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                            As a frontend developer, I'm driven by a passion for creating pixel-perfect, intuitive user interfaces that people love to use. I specialize in turning complex problems into beautiful, functional web experiences using modern technologies like React, Next.js, and TypeScript. My focus is on writing clean, maintainable code and building responsive applications that perform flawlessly on any device.
-                        </p>
-                    </div>
-                    <div className="relative h-64 md:h-full w-full">
+                <div className="grid md:grid-cols-5 items-center gap-8 md:gap-16">
+                    <div className="relative md:col-span-2 flex justify-center">
+                      <div className="relative w-64 h-64 md:w-80 md:h-80">
                          {aboutImage && (
                             <Image
                                 src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
-                                className="object-cover"
+                                className="object-contain rounded-lg shadow-2xl shadow-primary/40"
                                 data-ai-hint={aboutImage.imageHint}
                             />
                          )}
+                         <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                      </div>
+                    </div>
+                    <div className="md:col-span-3 p-8 text-left">
+                        <h3 className="font-headline text-3xl font-bold text-primary mb-4">About Me</h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                            As a frontend developer, I'm driven by a passion for creating pixel-perfect, intuitive user interfaces that people love to use. I specialize in turning complex problems into beautiful, functional web experiences using modern technologies like React, Next.js, and TypeScript. My focus is on writing clean, maintainable code and building responsive applications that perform flawlessly on any device.
+                        </p>
                     </div>
                 </div>
             </CardContent>
