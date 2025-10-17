@@ -20,7 +20,6 @@ import {
   SiReacthookform,
   SiExpo,
   SiAxios,
-  SiYup,
 } from '@icons-pack/react-simple-icons';
 
 type SkillIconProps = {
@@ -76,7 +75,7 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
     case 'Tanstack Query':
         return null;
     case 'Yup':
-        return <SiYup className={className} color="#5964E8" />;
+        return null;
     default:
       return null;
   }
