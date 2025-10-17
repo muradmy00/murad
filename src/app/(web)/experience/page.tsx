@@ -29,10 +29,7 @@ export default function ExperiencePage() {
           {experience.map((item, index) => (
             <div
               key={item.id}
-              className={cn(
-                "relative flex items-start md:justify-start",
-                index % 2 !== 0 && "md:justify-end"
-              )}
+              className="relative flex flex-col md:flex-row items-start md:items-center"
             >
               <div
                 className={cn(
@@ -42,15 +39,12 @@ export default function ExperiencePage() {
               >
                 <Briefcase className="h-5 w-5" />
               </div>
-
+              
               <div className={cn(
-                  "w-full ml-12 md:ml-0",
-                  "md:w-[calc(50%-2.5rem)]",
-                  index % 2 === 0 ? "md:mr-10" : "md:ml-10"
+                "w-full ml-12 md:ml-0 md:w-1/2",
+                index % 2 === 0 ? "md:pr-8" : "md:pl-8 md:order-1"
               )}>
-                <Card className={cn("shadow-md transition-shadow duration-300 hover:shadow-xl",
-                  index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
-                )}>
+                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
@@ -61,6 +55,8 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
+              <div className="md:w-1/2"></div>
+
             </div>
           ))}
         </div>
@@ -82,10 +78,7 @@ export default function ExperiencePage() {
           {education.map((item, index) => (
              <div
               key={item.id}
-              className={cn(
-                "relative flex items-start md:justify-start",
-                 index % 2 !== 0 && "md:justify-end"
-              )}
+              className="relative flex flex-col md:flex-row items-start md:items-center"
             >
               <div
                 className={cn(
@@ -97,13 +90,10 @@ export default function ExperiencePage() {
               </div>
                 
               <div className={cn(
-                  "w-full ml-12 md:ml-0",
-                  "md:w-[calc(50%-2.5rem)]",
-                  index % 2 === 0 ? "md:mr-10" : "md:ml-10"
+                  "w-full ml-12 md:ml-0 md:w-1/2",
+                  index % 2 === 0 ? "md:pr-8" : "md:pl-8 md:order-1"
               )}>
-                <Card className={cn("shadow-md transition-shadow duration-300 hover:shadow-xl",
-                  index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
-                )}>
+                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.degree}</CardTitle>
@@ -114,6 +104,7 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
+              <div className="md:w-1/2"></div>
             </div>
           ))}
         </div>
