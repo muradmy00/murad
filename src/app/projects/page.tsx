@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, ArrowRight, Eye } from 'lucide-react';
+import { Github, Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { projects } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 export default function ProjectsPage() {
   return (
@@ -31,14 +32,17 @@ export default function ProjectsPage() {
         {projects?.map((project) => (
           <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary border-2 border-transparent flex flex-col">
             <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
-              <div className="relative">
+              <div className="relative bg-card flex items-center justify-center aspect-[3/2]">
                 {project.imageUrl && (
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
                     width={600}
                     height={400}
-                    className="w-full object-cover aspect-[3/2] transition-transform duration-500 group-hover:scale-105"
+                    className={cn(
+                      'w-full h-full object-contain transition-transform duration-500 group-hover:scale-105',
+                      typeof project.imageUrl !== 'string' && 'p-8'
+                    )}
                     data-ai-hint={project.imageHint}
                   />
                 )}
@@ -72,7 +76,7 @@ export default function ProjectsPage() {
                   {project.liveUrl && (
                     <Button asChild size="sm">
                         <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                            Live Demo <ArrowRight className="ml-2" />
+                            Live Demo <Eye className="ml-2" />
                         </Link>
                     </Button>
                   )}
