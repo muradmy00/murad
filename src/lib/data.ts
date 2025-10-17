@@ -67,7 +67,7 @@ export const education: Education[] = [
   {
     id: '2',
     institution: 'Karatoa Multimedia School And College, Bogura',
-    degree: 'Higher Secondary School Certificate & Graphic Design',
+    degree: 'Higher Secondary School Certificate',
     duration: '2018 - 2019',
     description: 'College life is a transformative phase in a person\'s academic journey, marked by a unique blend of learning, personal growth, and social experiences. It typically involves pursuing higher education in a specialized field, living away from home, and engaging in a variety of activities.',
   },
