@@ -1,12 +1,23 @@
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { initializeFirebase } from './firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getApps, initializeApp, getApp } from 'firebase/app';
+import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import { firebaseConfig } from './firebase/config';
+
+// Server-side Firebase initialization
+function initializeFirebaseAdmin() {
+  if (!getApps().length) {
+    return initializeApp(firebaseConfig);
+  }
+  return getApp();
+}
+
+const app = initializeFirebaseAdmin();
+const firestore = getFirestore(app);
 
 async function hasAdminAccount(): Promise<boolean> {
     try {
-        const { firestore } = initializeFirebase();
         const adminRolesCollection = collection(firestore, 'roles_admin');
         const adminSnapshot = await getDocs(adminRolesCollection);
         return !adminSnapshot.empty;

@@ -4,17 +4,32 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
-import {
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  updatePassword,
-  updateEmail,
-  reauthenticateWithCredential,
-  EmailAuthProvider,
-  createUserWithEmailAndPassword,
+import { getApps, initializeApp, getApp } from 'firebase/app';
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    updatePassword,
+    updateEmail,
+    reauthenticateWithCredential,
+    EmailAuthProvider
 } from 'firebase/auth';
-import { initializeFirebase } from '@/firebase';
-import { collection, addDoc, serverTimestamp, doc, setDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc, getDocs } from 'firebase/firestore';
+import { firebaseConfig } from '@/firebase/config';
+
+// Server-side Firebase initialization
+function initializeFirebaseAdmin() {
+  if (!getApps().length) {
+    return initializeApp(firebaseConfig);
+  }
+  return getApp();
+}
+
+const app = initializeFirebaseAdmin();
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
 
 const authSchema = z.object({
   email: z.string().email(),
@@ -42,9 +57,6 @@ export async function handleSignup(prevState: any, formData: FormData) {
       password: formData.get('password'),
     });
 
-    const { auth, firestore } = initializeFirebase();
-
-    // Check if any admin user already exists.
     const adminRolesCollection = collection(firestore, 'roles_admin');
     const adminSnapshot = await getDocs(adminRolesCollection);
 
@@ -55,7 +67,6 @@ export async function handleSignup(prevState: any, formData: FormData) {
     const userCredential = await createUserWithEmailAndPassword(auth, parsed.email, parsed.password);
     const user = userCredential.user;
 
-    // If no admin exists, make this new user an admin.
     await setDoc(doc(firestore, 'roles_admin', user.uid), { isAdmin: true });
     
     const token = await user.getIdToken();
@@ -91,7 +102,6 @@ export async function handleLogin(prevState: any, formData: FormData) {
       password: formData.get('password'),
     });
 
-    const { auth } = initializeFirebase();
     const userCredential = await signInWithEmailAndPassword(
       auth,
       parsed.email,
@@ -127,7 +137,6 @@ export async function handlePasswordReset(prevState: any, formData: FormData) {
             email: formData.get('email'),
         });
 
-        const { auth } = initializeFirebase();
         await sendPasswordResetEmail(auth, parsed.email);
 
         return { message: 'If an account exists for this email, a password reset link has been sent.', success: true };
@@ -136,7 +145,6 @@ export async function handlePasswordReset(prevState: any, formData: FormData) {
             return { message: 'Please enter a valid email address.', success: false };
         }
         console.error('Password reset error:', e);
-        // Avoid disclosing whether an email exists or not
         return { message: 'If an account exists for this email, a password reset link has been sent.', success: true };
     }
 }
@@ -165,7 +173,6 @@ export async function handleContactForm(prevState: any, formData: FormData) {
             signature: formData.get('signature'),
         });
         
-        const { firestore } = initializeFirebase();
         await addDoc(collection(firestore, 'contact_messages'), {
             ...parsed,
             sentDate: serverTimestamp(),
@@ -198,7 +205,6 @@ const updatePasswordSchema = z
   });
 
 async function reauthenticate(password: string) {
-    const { auth } = initializeFirebase();
     const user = auth.currentUser;
     if (!user || !user.email) throw new Error('User not authenticated');
 
@@ -213,7 +219,6 @@ export async function handleUpdateEmail(prevState: any, formData: FormData) {
             currentPassword: formData.get('currentPassword'),
         });
         
-        const { auth } = initializeFirebase();
         const user = auth.currentUser;
         if (!user) throw new Error('User not authenticated');
 
@@ -250,7 +255,6 @@ export async function handleUpdatePassword(prevState: any, formData: FormData) {
             confirmPassword: formData.get('confirmPassword'),
         });
         
-        const { auth } = initializeFirebase();
         const user = auth.currentUser;
         if (!user) throw new Error('User not authenticated');
 

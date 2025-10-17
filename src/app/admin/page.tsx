@@ -1,11 +1,22 @@
 import { LoginForm } from './_components/login-form';
 import Logo from '@/components/icons/logo';
-import { initializeFirebase } from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { getApps, initializeApp, getApp } from 'firebase/app';
+import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import { firebaseConfig } from '@/firebase/config';
+
+// Server-side Firebase initialization
+function initializeFirebaseAdmin() {
+  if (!getApps().length) {
+    return initializeApp(firebaseConfig);
+  }
+  return getApp();
+}
+
+const app = initializeFirebaseAdmin();
+const firestore = getFirestore(app);
 
 async function hasAdminAccount(): Promise<boolean> {
     try {
-        const { firestore } = initializeFirebase();
         const adminRolesCollection = collection(firestore, 'roles_admin');
         const adminSnapshot = await getDocs(adminRolesCollection);
         return !adminSnapshot.empty;
