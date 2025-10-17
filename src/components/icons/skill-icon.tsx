@@ -7,14 +7,11 @@ import {
   SiTailwindcss,
   SiNodedotjs,
   SiSolidity,
-  SiGit,
   SiFigma,
   SiHtml5,
   SiCss3,
   SiRedux,
   SiReactrouter,
-  SiGithub,
-  SiNpm,
   SiVite,
   SiYarn,
   SiC,
@@ -23,6 +20,8 @@ import {
   SiReacthookform,
   SiExpo,
   SiAxios,
+  SiTanstackquery,
+  SiYup,
 } from '@icons-pack/react-simple-icons';
 
 type SkillIconProps = {
@@ -47,8 +46,6 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
       return <SiNodedotjs className={className} color="#339933" />;
     case 'Solidity':
         return <SiSolidity className={className} color="#363636" />;
-    case 'Git':
-      return <SiGit className={className} color="#F05032" />;
     case 'Figma':
       return <SiFigma className={className} color="#F24E1E" />;
     case 'HTML':
@@ -61,10 +58,6 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
         return <SiReact className={className} color="#61DAFB" />;
     case 'React Router DOM':
         return <SiReactrouter className={className} color="#CA4245" />;
-    case 'GitHub':
-        return <SiGithub className={className} color="#FFFFFF" />;
-    case 'NPM':
-        return <SiNpm className={className} color="#CB3837" />;
     case 'Vite':
         return <SiVite className={className} color="#646CFF" />;
     case 'Yarn':
@@ -81,6 +74,10 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
         return <SiExpo className={className} color="#000020" />;
     case 'Axios':
         return <SiAxios className={className} color="#5A29E4" />;
+    case 'Tanstack Query':
+        return <SiTanstackquery className={className} color="#FF4154" />;
+    case 'Yup':
+        return <SiYup className={className} color="#5964E8" />;
     default:
       return null;
   }

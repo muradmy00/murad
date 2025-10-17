@@ -115,19 +115,21 @@ export const skills: Skill[] = [
     { id: '8', name: 'React Native', category: 'Frontend', proficiency: 85 },
     { id: '9', name: 'React Router DOM', category: 'Frontend', proficiency: 90 },
     { id: '10', name: 'React Hook Form', category: 'Frontend', proficiency: 85 },
-    { id: '13', name: 'Tanstack Query', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
-    { id: '14', name: 'Zustand', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
-    { id: '15', name: 'Yup', category: 'Tools', proficiency: 90 },
-    { id: '16', name: 'Vite', category: 'Tools', proficiency: 85 },
-    { id: '17', name: 'Axios', category: 'Tools', proficiency: 88 },
-    { id: '18', name: 'Expo', category: 'Tools', proficiency: 85 },
-    { id: '19', name: 'Yarn', category: 'Tools', proficiency: 90 },
-    { id: '20', name: 'C', category: 'Languages', proficiency: 80 },
-    { id: '21', name: 'C++', category: 'Languages', proficiency: 80 },
-    { id: '22', name: 'Python', category: 'Languages', proficiency: 70 },
-    { id: '23', name: 'Java', category: 'Languages', proficiency: 75, imageUrl: assets.java },
-    { id: '24', name: 'Zustand', category: 'Frontend', proficiency: 80, imageUrl: assets.zustand },
-    { id: '25', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: assets.quill_icon },
+    { id: '11', name: 'Tanstack Query', category: 'Tools', proficiency: 95 },
+    { id: '12', name: 'Zustand', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
+    { id: '13', name: 'Yup', category: 'Tools', proficiency: 90 },
+    { id: '14', name: 'Vite', category: 'Tools', proficiency: 85 },
+    { id: '15', name: 'Axios', category: 'Tools', proficiency: 88 },
+    { id: '16', name: 'Expo', category: 'Tools', proficiency: 85 },
+    { id: '17', name: 'Yarn', category: 'Tools', proficiency: 90 },
+    { id: '18', name: 'C', category: 'Languages', proficiency: 80 },
+    { id: '19', name: 'C++', category: 'Languages', proficiency: 80 },
+    { id: '20', name: 'Python', category: 'Languages', proficiency: 70 },
+    { id: '21', name: 'Java', category: 'Languages', proficiency: 75, imageUrl: assets.java },
+    { id: '22', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: assets.quill_icon },
+    { id: '23', name: 'Figma', category: 'Tools', proficiency: 80 },
+    { id: '24', name: 'Node.js', category: 'Backend', proficiency: 70 },
+    { id: '25', name: 'Solidity', category: 'Web3', proficiency: 60 },
 ];
 
 export const achievements: Achievement[] = [
@@ -495,6 +497,7 @@ export const resume = {
     
 
     
+
 
 
 
