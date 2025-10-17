@@ -15,7 +15,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="text-center py-16 md:py-24">
         <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-4 text-primary">
-          DevFolio Pro
+          Mohiuddin Murad
         </h1>
         <p className="max-w-2xl mx-auto text-lg sm:text-xl text-muted-foreground mb-8">
           A professional frontend developer crafting modern, responsive, and user-friendly web experiences.

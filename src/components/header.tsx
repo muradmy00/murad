@@ -46,7 +46,7 @@ export default function Header() {
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Logo className="h-6 w-6 text-primary" />
           <span className="font-bold font-headline sm:inline-block">
-            DevFolio Pro
+            Mohiuddin Murad
           </span>
         </Link>
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -66,7 +66,7 @@ export default function Header() {
                     <div className="p-4">
                         <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
                             <Logo className="h-6 w-6 text-primary" />
-                            <span className="font-bold font-headline">DevFolio Pro</span>
+                            <span className="font-bold font-headline">Mohiuddin Murad</span>
                         </Link>
                         <nav className="flex flex-col space-y-4">
                         {navLinks.map((link) => (

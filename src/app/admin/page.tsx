@@ -8,7 +8,7 @@ export default function AdminLoginPage() {
         <div className="mb-8 flex justify-center">
             <div className="flex items-center space-x-2 text-primary">
                 <Logo className="h-8 w-8" />
-                <span className="text-2xl font-bold font-headline">DevFolio Pro Admin</span>
+                <span className="text-2xl font-bold font-headline">Mohiuddin Murad Admin</span>
             </div>
         </div>
         <LoginForm />

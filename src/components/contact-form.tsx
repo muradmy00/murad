@@ -94,7 +94,7 @@ export function ContactForm() {
 
     setIsSigning(true);
     try {
-      const messageToSign = `I am sending a message from DevFolio Pro.\n\nName: ${data.name}\nEmail: ${data.email}`;
+      const messageToSign = `I am sending a message from Mohiuddin Murad.\n\nName: ${data.name}\nEmail: ${data.email}`;
       const signature = await window.ethereum.request({
         method: 'personal_sign',
         params: [messageToSign, walletAddress],
