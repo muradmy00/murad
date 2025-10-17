@@ -49,22 +49,40 @@
       "imageHint": "professional portrait"
     },
     {
-      "id": "achievement-1",
-      "description": "A certificate of achievement.",
-      "imageUrl": "https://picsum.photos/seed/achieve1/600/400",
-      "imageHint": "certificate achievement"
+      "id": "achievement-npm",
+      "description": "NPM logo on a screen.",
+      "imageUrl": "https://picsum.photos/seed/achieve4/600/400",
+      "imageHint": "npm logo"
     },
     {
-      "id": "achievement-2",
-      "description": "A trophy for a competition.",
-      "imageUrl": "https://picsum.photos/seed/achieve2/600/400",
-      "imageHint": "trophy competition"
+      "id": "achievement-bubt-soft",
+      "description": "A trophy for a software competition.",
+      "imageUrl": "https://picsum.photos/seed/achieve5/600/400",
+      "imageHint": "competition trophy"
     },
     {
-      "id": "achievement-3",
-      "description": "A badge for open source contribution.",
-      "imageUrl": "https://picsum.photos/seed/achieve3/600/400",
-      "imageHint": "badge contribution"
+      "id": "achievement-bubt-iupc",
+      "description": "Students collaborating at a programming contest.",
+      "imageUrl": "https://picsum.photos/seed/achieve6/600/400",
+      "imageHint": "programming contest"
+    },
+    {
+      "id": "achievement-ph",
+      "description": "A certificate for a web development bootcamp.",
+      "imageUrl": "https://picsum.photos/seed/achieve7/600/400",
+      "imageHint": "bootcamp certificate"
+    },
+    {
+      "id": "achievement-camp",
+      "description": "A group of people at a programming camp.",
+      "imageUrl": "https://picsum.photos/seed/achieve8/600/400",
+      "imageHint": "programming camp"
+    },
+    {
+      "id": "achievement-icpc",
+      "description": "The ICPC logo for a programming competition.",
+      "imageUrl": "https://picsum.photos/seed/achieve9/600/400",
+      "imageHint": "ICPC logo"
     }
   ]
 }
