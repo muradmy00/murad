@@ -20,6 +20,9 @@ import {
   SiReacthookform,
   SiExpo,
   SiAxios,
+  SiGit,
+  SiGithub,
+  SiJson,
 } from '@icons-pack/react-simple-icons';
 
 type SkillIconProps = {
@@ -76,6 +79,12 @@ export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
         return null;
     case 'Yup':
         return null;
+    case 'Git':
+        return <SiGit className={className} color="#F05032" />;
+    case 'GitHub':
+        return <SiGithub className={className} color="#181717" />;
+    case 'JSON':
+        return <SiJson className={className} color="#000000" />;
     default:
       return null;
   }

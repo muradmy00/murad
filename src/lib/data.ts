@@ -130,6 +130,9 @@ export const skills: Skill[] = [
     { id: '23', name: 'Figma', category: 'Tools', proficiency: 80 },
     { id: '24', name: 'Node.js', category: 'Backend', proficiency: 70 },
     { id: '25', name: 'Solidity', category: 'Web3', proficiency: 60 },
+    { id: '26', name: 'Git', category: 'Tools', proficiency: 90 },
+    { id: '27', name: 'GitHub', category: 'Tools', proficiency: 90 },
+    { id: '28', name: 'JSON', category: 'Tools', proficiency: 90 },
 ];
 
 export const achievements: Achievement[] = [
@@ -497,6 +500,7 @@ export const resume = {
     
 
     
+
 
 
 
