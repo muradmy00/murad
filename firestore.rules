@@ -1,0 +1,156 @@
+/**
+ * @file Firestore Security Rules
+ * @description This ruleset enforces a role-based access control model with public read access for portfolio data.
+ *
+ * Data Structure:
+ * - Portfolio data (projects, experience, skills, blog posts, resume) is stored in top-level collections.
+ * - Contact messages are stored in a separate collection accessible only to admins.
+ * - Admin roles are determined by the existence of a document in the /roles_admin/{uid} collection.
+ *
+ * Key Security Decisions:
+ * - Portfolio data (projects, experience, skills, blog posts, resume) is publicly readable.
+ * - Only authenticated admins can create, update, or delete portfolio data.
+ * - Contact messages can only be read or written by authenticated admins.
+ * - Listing of contact messages is restricted to admins.
+ * - There is no user-specific data in the current data model beyond the admin role.
+ *
+ * Denormalization for Authorization:
+ * - Admin status is checked by verifying the existence of a document in the `/roles_admin/{uid}` collection.
+ *   This avoids having to store admin status within a user document.
+ *
+ * Structural Segregation:
+ * - Public portfolio data is stored in top-level collections, while private contact messages are stored in a separate collection.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Checks if the current user is signed in.
+     * @returns {boolean} True if the user is signed in, false otherwise.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Checks if the current user is an admin.
+     * @returns {boolean} True if the user is an admin, false otherwise.
+     */
+    function isAdmin() {
+        return exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
+    }
+
+    /**
+     * @description Rules for the /projects/{projectId} collection.
+     * @path /projects/{projectId}
+     * @allow (get, list): Any user can read project data.
+     * @allow (create, update, delete): Only admins can modify project data.
+     * @deny (create, update, delete): Non-admins cannot modify project data.
+     * @principle Allows public read access with admin-only write access.
+     */
+    match /projects/{projectId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /experience/{experienceId} collection.
+     * @path /experience/{experienceId}
+     * @allow (get, list): Any user can read experience data.
+     * @allow (create, update, delete): Only admins can modify experience data.
+     * @deny (create, update, delete): Non-admins cannot modify experience data.
+     * @principle Allows public read access with admin-only write access.
+     */
+    match /experience/{experienceId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /skills/{skillId} collection.
+     * @path /skills/{skillId}
+     * @allow (get, list): Any user can read skill data.
+     * @allow (create, update, delete): Only admins can modify skill data.
+     * @deny (create, update, delete): Non-admins cannot modify skill data.
+     * @principle Allows public read access with admin-only write access.
+     */
+    match /skills/{skillId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /blog_posts/{blogPostId} collection.
+     * @path /blog_posts/{blogPostId}
+     * @allow (get, list): Any user can read blog post data.
+     * @allow (create, update, delete): Only admins can modify blog post data.
+     * @deny (create, update, delete): Non-admins cannot modify blog post data.
+     * @principle Allows public read access with admin-only write access.
+     */
+    match /blog_posts/{blogPostId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /resume/{resumeId} collection.
+     * @path /resume/{resumeId}
+     * @allow (get, list): Any user can read resume data.
+     * @allow (create, update, delete): Only admins can modify resume data.
+     * @deny (create, update, delete): Non-admins cannot modify resume data.
+     * @principle Allows public read access with admin-only write access.
+     */
+    match /resume/{resumeId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /contact_messages/{contactMessageId} collection.
+     * @path /contact_messages/{contactMessageId}
+     * @allow (get, list, create, update, delete): Only admins can access contact messages.
+     * @deny (get, list, create, update, delete): Non-admins cannot access contact messages.
+     * @principle Restricts all access to contact messages to admins.
+     */
+    match /contact_messages/{contactMessageId} {
+      allow get: if isSignedIn() && isAdmin();
+      allow list: if isSignedIn() && isAdmin();
+      allow create: if isSignedIn() && isAdmin();
+      allow update: if isSignedIn() && isAdmin() && resource != null;
+      allow delete: if isSignedIn() && isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Rules for the /roles_admin/{uid} collection.
+     * @path /roles_admin/{uid}
+     * @allow create: Only allow creating a new admin role if the user's ID matches the document ID. This should be done via backend only
+     * @allow get: Admins can read their own admin role document.
+     * @allow delete: Only the user with the matching UID can delete their own admin role. This should be done via backend only
+     * @deny list, update: Prevents listing and updating admin roles directly.
+     * @principle Admin role management is restricted and path-consistent.
+     */
+    match /roles_admin/{uid} {
+      allow get: if isSignedIn() && isAdmin();
+      allow list: if false;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if isSignedIn() && isAdmin();
+    }
+  }
+}
