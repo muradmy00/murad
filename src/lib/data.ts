@@ -59,17 +59,17 @@ export const experience: Experience[] = [
 export const education: Education[] = [
   {
     id: '1',
-    institution: 'University of Technology',
-    degree: 'Bachelor of Science in Computer Science',
-    duration: '2012 - 2016',
-    description: 'Graduated with honors, specializing in software engineering and web development. Active member of the coding club.',
+    institution: 'Bangladesh University of Business and Technology, Dhaka, Bangladesh',
+    degree: 'Bachelor of Science in Computer Science and Engineering & Problem Solving & Front-end Development',
+    duration: '2022 - 2026',
+    description: 'Varsity life refers to the experiences and lifestyle of college or university students. It encompasses a wide range of activities, challenges, and opportunities that students encounter during their time in higher education.',
   },
   {
     id: '2',
-    institution: 'Online Learning Platform',
-    degree: 'Advanced Web Development Certification',
-    duration: '2019',
-    description: 'Completed an intensive certification program covering modern frontend and backend technologies, including React, Node.js, and advanced CSS.',
+    institution: 'Karatoa Multimedia School And College, Bogura',
+    degree: 'Higher Secondary School Certificate & Graphic Design',
+    duration: '2018 - 2019',
+    description: 'College life is a transformative phase in a person\'s academic journey, marked by a unique blend of learning, personal growth, and social experiences. It typically involves pursuing higher education in a specialized field, living away from home, and engaging in a variety of activities.',
   },
 ];
 
