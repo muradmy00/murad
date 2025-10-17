@@ -1,6 +1,6 @@
 import { LoginForm } from './_components/login-form';
 import Logo from '@/components/icons/logo';
-import { initializeFirebase } from '@/firebase/server';
+import { initializeFirebase } from '@/firebase/index';
 import { collection, getDocs } from 'firebase/firestore';
 
 async function hasAdminAccount(): Promise<boolean> {
