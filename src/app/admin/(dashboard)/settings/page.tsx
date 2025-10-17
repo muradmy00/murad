@@ -83,9 +83,17 @@ export default function SettingsPage() {
         title: emailState.success ? 'Success' : 'Error',
         description: emailState.message,
       });
+      if (emailState.success) {
+        emailForm.reset({ ...emailForm.getValues(), currentPassword: '' });
+      }
     }
-    if (emailState.success) {
-      emailForm.reset({ ...emailForm.getValues(), currentPassword: '' });
+    if (emailState.errors) {
+      Object.entries(emailState.errors).forEach(([field, errors]) => {
+          emailForm.setError(field as keyof UpdateEmailFormValues, {
+              type: 'manual',
+              message: (errors as string[]).join(', '),
+          });
+      });
     }
   }, [emailState, emailForm, toast]);
 
@@ -99,6 +107,14 @@ export default function SettingsPage() {
     }
     if (passwordState.success) {
       passwordForm.reset();
+    }
+    if (passwordState.errors) {
+      Object.entries(passwordState.errors).forEach(([field, errors]) => {
+          passwordForm.setError(field as keyof UpdatePasswordFormValues, {
+              type: 'manual',
+              message: (errors as string[]).join(', '),
+          });
+      });
     }
   }, [passwordState, passwordForm, toast]);
 

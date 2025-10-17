@@ -13,7 +13,7 @@ import {
   EmailAuthProvider,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
-import { initializeFirebase } from '@/firebase';
+import { initializeFirebase } from '@/firebase/server';
 import { collection, addDoc, serverTimestamp, doc, setDoc, getDocs } from 'firebase/firestore';
 
 const authSchema = z.object({
