@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { experience, education } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 export default function ExperiencePage() {
   return (
@@ -28,20 +29,27 @@ export default function ExperiencePage() {
           {experience.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex items-start md:space-x-8 rtl:space-x-reverse md:justify-normal"
+              className="relative flex items-start md:space-x-8"
             >
-              {/* Icon on the timeline */}
-              <div className="absolute left-4 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md md:left-1/2">
-                <Briefcase className="h-5 w-5" />
-              </div>
-              
-              {/* Spacer for desktop */}
-              <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
-
-              {/* Card content - Force to left */}
-              <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:-order-1 md:pr-8 md:text-right">
+              <div
+                className={cn(
+                  'relative w-full pl-12 md:pl-0 md:w-1/2',
+                  index % 2 === 0 ? 'md:order-1 md:pr-8' : 'md:order-3 md:pl-8'
+                )}
+              >
+                {/* Icon on the timeline */}
+                <div
+                  className={cn(
+                    "absolute top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md",
+                    "left-[-22px] md:left-auto",
+                    index % 2 === 0 ? 'md:right-[-2.2rem]' : 'md:left-[-2.2rem]'
+                  )}
+                >
+                  <Briefcase className="h-5 w-5" />
+                </div>
+                
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
-                  <CardHeader>
+                  <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
                     <p className="text-accent font-semibold">{item.company}</p>
@@ -51,6 +59,7 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
+              <div className={cn("hidden md:block w-1/2", index % 2 === 0 ? 'order-2' : 'order-2')}></div>
             </div>
           ))}
         </div>
@@ -70,22 +79,29 @@ export default function ExperiencePage() {
         <div className="absolute left-4 md:left-1/2 w-0.5 h-full bg-border -translate-x-1/2"></div>
         <div className="space-y-12">
           {education.map((item, index) => (
-            <div
+             <div
               key={item.id}
-              className="relative flex items-start md:space-x-8 rtl:space-x-reverse md:justify-normal"
+              className="relative flex items-start md:space-x-8"
             >
-              {/* Icon on the timeline */}
-              <div className="absolute left-4 top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md md:left-1/2">
-                <GraduationCap className="h-5 w-5" />
-              </div>
-
-              {/* Spacer for desktop */}
-              <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
-
-              {/* Card content - Force to right */}
-               <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)]">
+              <div
+                className={cn(
+                  'relative w-full pl-12 md:pl-0 md:w-1/2',
+                  index % 2 === 0 ? 'md:order-1 md:pr-8' : 'md:order-3 md:pl-8'
+                )}
+              >
+                {/* Icon on the timeline */}
+                <div
+                  className={cn(
+                    "absolute top-0 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md",
+                     "left-[-22px] md:left-auto",
+                    index % 2 === 0 ? 'md:right-[-2.2rem]' : 'md:left-[-2.2rem]'
+                  )}
+                >
+                  <GraduationCap className="h-5 w-5" />
+                </div>
+                
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
-                  <CardHeader>
+                  <CardHeader className={cn(index % 2 !== 0 && 'md:text-right')}>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
                     <CardTitle className="font-headline text-xl mt-1">{item.degree}</CardTitle>
                     <p className="text-primary font-semibold">{item.institution}</p>
@@ -95,6 +111,7 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
+              <div className={cn("hidden md:block w-1/2", index % 2 === 0 ? 'order-2' : 'order-2')}></div>
             </div>
           ))}
         </div>
