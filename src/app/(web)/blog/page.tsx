@@ -13,6 +13,14 @@ import {
 import { format } from 'date-fns';
 import { blogPosts } from '@/lib/data';
 
+function stripHtml(html: string) {
+  if (typeof window !== 'undefined') {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  }
+  return html.replace(/<[^>]*>?/gm, '');
+}
+
 export default function BlogPage() {
 
   return (
@@ -50,7 +58,7 @@ export default function BlogPage() {
                   {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
                 </p>
                 <CardDescription className="text-muted-foreground line-clamp-3">
-                  {post.content}
+                  {stripHtml(post.content).substring(0, 150)}
                 </CardDescription>
               </CardContent>
               <div className="p-6 pt-0 mt-auto">
