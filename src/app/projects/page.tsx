@@ -40,7 +40,7 @@ export default function ProjectsPage() {
                     width={600}
                     height={400}
                     className={cn(
-                      'w-full h-full object-contain transition-transform duration-500 group-hover:scale-105',
+                      'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
                       typeof project.imageUrl !== 'string' && 'p-8'
                     )}
                     data-ai-hint={project.imageHint}
@@ -88,3 +88,4 @@ export default function ProjectsPage() {
     </div>
   );
 }
+
