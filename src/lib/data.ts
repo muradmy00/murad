@@ -1,3 +1,4 @@
+
 import type { Project, Experience, Skill, Blog, Message } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -122,7 +123,8 @@ import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));</code></pre>
     <p>এই কোডটি 'App' কম্পোনেন্টকে 'root' id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।</p>
     <img src="${getPlaceholder('blog-4').imageUrl}" alt="React Code" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-4').imageHint}" />
-    <p>এভাবেই React DOM কার্যকরভাবে এবং দ্রুত UI আপডেট করে, যা বড় অ্যাপ্লিকেশনগুলোতে পারফরম্যান্সের জন্য খুবই গুরুত্বপূর্ণ।</p>`,
+    <p>এভাবেই React DOM কার্যকরভাবে এবং দ্রুত UI আপডেট করে, যা বড় অ্যাপ্লিকেশনগুলোতে পারফরম্যান্সের জন্য খুবই গুরুত্বপূর্ণ।</p>
+    <img src="${getPlaceholder('blog-2').imageUrl}" alt="Another descriptive image" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-2').imageHint}" />`,
     imageUrl: getPlaceholder('blog-4').imageUrl,
     imageHint: getPlaceholder('blog-4').imageHint,
     publishedAt: new Date('2023-11-05'),
