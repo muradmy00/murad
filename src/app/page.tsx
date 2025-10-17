@@ -111,7 +111,7 @@ export default function HomePage() {
                                 src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
-                                className="object-cover rounded-lg border-4 border-card p-2 bg-card transform rotate-3 transition-all duration-500 ease-in-out shadow-[0_0_15px_rgba(var(--primary),0.4),0_0_30px_rgba(var(--accent),0.3)] group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6),0_0_45px_hsl(var(--accent)/0.5)]"
+                                className="object-cover rounded-lg border-4 border-card p-2 bg-card transition-all duration-500 ease-in-out shadow-[0_0_15px_rgba(var(--primary),0.4),0_0_30px_rgba(var(--accent),0.3)] group-hover:scale-105 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6),0_0_45px_hsl(var(--accent)/0.5)]"
                                 data-ai-hint={aboutImage.imageHint}
                             />
                          )}
