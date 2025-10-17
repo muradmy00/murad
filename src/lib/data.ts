@@ -150,12 +150,12 @@ export const blogPosts: Blog[] = [
     id: '1',
     slug: 'javascript-event-loop',
     title: 'JavaScript Event Loop: যেভাবে কাজ করে',
-    content: `<p>জাভাস্ক্রিপ্ট একটি সিঙ্গেল-থ্রেডেড ল্যাঙ্গুয়েজ, যার মানে এটি একবারে শুধুমাত্র একটি কাজ করতে পারে। কিন্তু আমরা প্রায়ই setTimeout বা API কলের মতো অ্যাсинক্রোনাস অপারেশন ব্যবহার করি। Event Loop এখানেই关键 भूमिका পালন করে।</p>
+    content: `<p>জাভাস্ক্রিপ্ট একটি সিঙ্গেল-থ্রেডেড ল্যাঙ্গুয়েজ, যার মানে এটি একবারে শুধুমাত্র একটি কাজ করতে পারে। কিন্তু আমরা প্রায়ই setTimeout বা API কলের মতো অ্যাসিনক্রোনাস অপারেশন ব্যবহার করি। Event Loop এখানেই关键 भूमिका পালন করে।</p>
     <p>Event Loop, Call Stack, Web API, এবং Callback Queue—এই চারটি অংশ मिलकर অ্যাсинক্রোনাস জাভাস্ক্রিপ্টকে সম্ভব করে তোলে।</p>
     <ol>
       <li><strong>Call Stack:</strong> যখন কোনো ফাংশن কল করা হয়, তখন সেটি Call Stack-এ যুক্ত হয়। ফাংশনটির কাজ শেষ হলে এটি Stack থেকে বেরিয়ে যায়।</li>
-      <li><strong>Web APIs:</strong> <code>setTimeout</code>, DOM events, বা <code>fetch</code> এর মতো অ্যাсинക്ронাস অপারেশনগুলো Web API দ্বারা হ্যান্ডেল করা হয়। Call Stack এই কাজগুলোকে Web API-তে পাঠিয়ে দেয় এবং নিজের কাজ চালিয়ে যায়।</li>
-      <li><strong>Callback Queue:</strong> Web API-তে অ্যাсинক্রোনাস অপারেশনের কাজ শেষ হলে, তার সাথে যুক্ত কলব্যাক ফাংশنটি Callback Queue-তে অপেক্ষা করে।</li>
+      <li><strong>Web APIs:</strong> <code>setTimeout</code>, DOM events, বা <code>fetch</code> এর মতো অ্যাসিনക്ронাস অপারেশনগুলো Web API দ্বারা হ্যান্ডেল করা হয়। Call Stack এই কাজগুলোকে Web API-তে পাঠিয়ে দেয় এবং নিজের কাজ চালিয়ে যায়।</li>
+      <li><strong>Callback Queue:</strong> Web API-তে অ্যাসিনক্রোনাস অপারেশনের কাজ শেষ হলে, তার সাথে যুক্ত কলব্যাক ফাংশنটি Callback Queue-তে অপেক্ষা করে।</li>
       <li><strong>Event Loop:</strong> Event Loop sürekli Call Stack খালি আছে কিনা তা तपास করে। Call Stack খালি হলেই, Event Loop Callback Queue থেকে প্রথম আইটেমটিকে Call Stack-এ পাঠিয়ে দেয়, যাতে সেটি রান হতে পারে।</li>
     </ol>
     <p>নিচের উদাহরণটি দেখুন:</p>
@@ -173,7 +173,7 @@ Timeout Callback</code></pre>
     <p>কারণ <code>setTimeout</code> Web API-তে চলে যায় এবং Call Stack তার কাজ চালিয়ে 'End' প্রিন্ট করে। দুই সেকেন্ড পর কলব্যাক ফাংশনটি Queue থেকে Stack-এ গিয়ে রান হয়।</p>`,
     imageUrl: getPlaceholder('blog-event-loop').imageUrl,
     imageHint: getPlaceholder('blog-event-loop').imageHint,
-    publishedAt: new Date(),
+    publishedAt: new Date('2023-10-18T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'Event Loop', 'Async'],
   },
@@ -205,7 +205,7 @@ function myFunction() {
     <p>Creation Phase-এ <code>myVar</code>-কে <code>undefined</code> এবং <code>myFunction</code>-কে মেমরিতে রাখা হয়। তাই প্রথম <code>console.log</code> undefined দেখায়, কিন্তু ফাংশনটি সঠিকভাবে কল হয়।</p>`,
     imageUrl: getPlaceholder('blog-execution-context').imageUrl,
     imageHint: getPlaceholder('blog-execution-context').imageHint,
-    publishedAt: new Date(),
+    publishedAt: new Date('2023-10-17T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'Execution Context', 'Hoisting'],
   },
@@ -240,7 +240,7 @@ const user: User = { name: "John", id: 1 };</code></pre>
 <p><b>কখন কোনটি ব্যবহার করবেন?</b> ছোট প্রজেক্ট বা স্ক্রিপ্টের জন্য জাভাস্ক্রিপ্ট যথেষ্ট। কিন্তু বড়, জটিল এবং টিমে কাজ করার জন্য TypeScript খুবই কার্যকরী, কারণ এটি কোডকে আরও নিরাপদ এবং রক্ষণাবেক্ষণযোগ্য করে তোলে।</p>`,
     imageUrl: getPlaceholder('blog-js-vs-ts').imageUrl,
     imageHint: getPlaceholder('blog-js-vs-ts').imageHint,
-    publishedAt: new Date(),
+    publishedAt: new Date('2023-10-16T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['JavaScript', 'TypeScript', 'Programming'],
   },
@@ -294,7 +294,7 @@ function MyComponent() {
 <p>এই <code>useFetch</code> হুকটি এখন যেকোনো কম্পোনেন্টে ডেটা ফেচ করার জন্য ব্যবহার করা যাবে, যা কোডকে DRY (Don't Repeat Yourself) নীতি মেনে চলতে সাহায্য করে।</p>`,
     imageUrl: getPlaceholder('blog-custom-hooks').imageUrl,
     imageHint: getPlaceholder('blog-custom-hooks').imageHint,
-    publishedAt: new Date(),
+    publishedAt: new Date('2023-10-15T10:00:00Z'),
     author: 'Mohiuddin Murad',
     tags: ['React', 'Hooks', 'Custom Hooks'],
   },
@@ -305,3 +305,5 @@ export const messages: Message[] = [];
 export const resume = {
   url: 'https://drive.google.com/file/d/1OxXkJIPi13NBX3EhLkrjbKrdeMgxSYpw/view?usp=drive_link'
 };
+
+    
