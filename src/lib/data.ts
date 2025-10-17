@@ -113,6 +113,7 @@ export const skills: Skill[] = [
     { id: '6', name: 'TypeScript', category: 'Languages', proficiency: 90 },
     { id: '7', name: 'React.js', category: 'Frontend', proficiency: 95 },
     { id: '8', name: 'React Native', category: 'Frontend', proficiency: 85 },
+    { id: '29', name: 'Next.js', category: 'Frontend', proficiency: 92 },
     { id: '9', name: 'React Router DOM', category: 'Frontend', proficiency: 90 },
     { id: '10', name: 'React Hook Form', category: 'Frontend', proficiency: 85 },
     { id: '11', name: 'Tanstack Query', category: 'Tools', proficiency: 95 },
@@ -129,7 +130,6 @@ export const skills: Skill[] = [
     { id: '22', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: assets.quill_icon },
     { id: '23', name: 'Figma', category: 'Tools', proficiency: 80 },
     { id: '24', name: 'Node.js', category: 'Backend', proficiency: 70 },
-    { id: '25', name: 'Solidity', category: 'Web3', proficiency: 60 },
     { id: '26', name: 'Git', category: 'Tools', proficiency: 90 },
     { id: '27', name: 'GitHub', category: 'Tools', proficiency: 90 },
     { id: '28', name: 'JSON', category: 'Tools', proficiency: 90 },
@@ -500,6 +500,7 @@ export const resume = {
     
 
     
+
 
 
 
