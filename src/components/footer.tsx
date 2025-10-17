@@ -10,12 +10,12 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t">
+    <footer className="border-t border-border/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <Logo className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline">Mohiuddin Murad</span>
+            <span className="font-bold font-headline">Nazmul Hossain</span>
           </div>
           <div className="flex space-x-4">
             {socialLinks.map((link, index) => (
@@ -25,8 +25,8 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="text-center text-muted-foreground text-sm mt-8 pt-8 border-t">
-          © {new Date().getFullYear()} Mohiuddin Murad. All Rights Reserved.
+        <div className="text-center text-muted-foreground text-sm mt-8 pt-8 border-t border-border/40">
+          © {new Date().getFullYear()} Nazmul Hossain. All Rights Reserved.
         </div>
       </div>
     </footer>

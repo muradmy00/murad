@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -41,12 +41,12 @@ export default function Header() {
   };
   
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Logo className="h-6 w-6 text-primary" />
           <span className="font-bold font-headline sm:inline-block">
-            Mohiuddin Murad
+            Nazmul Hossain
           </span>
         </Link>
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -66,7 +66,7 @@ export default function Header() {
                     <div className="p-4">
                         <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
                             <Logo className="h-6 w-6 text-primary" />
-                            <span className="font-bold font-headline">Mohiuddin Murad</span>
+                            <span className="font-bold font-headline">Nazmul Hossain</span>
                         </Link>
                         <nav className="flex flex-col space-y-4">
                         {navLinks.map((link) => (
