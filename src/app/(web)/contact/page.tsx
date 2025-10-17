@@ -1,3 +1,4 @@
+
 import { ContactForm } from '@/components/contact-form';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
@@ -22,8 +23,8 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold">Email</h3>
               <p className="text-muted-foreground">Drop me a line anytime.</p>
-              <a href="mailto:contact@devfolio.pro" className="text-accent hover:underline">
-                contact@devfolio.pro
+              <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline">
+               mohiuddinmurad.my00@gmail.com
               </a>
             </div>
           </div>
@@ -34,8 +35,11 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold">Phone</h3>
               <p className="text-muted-foreground">Available during business hours.</p>
-              <a href="tel:+1234567890" className="text-accent hover:underline">
-                +1 (234) 567-890
+              <a href="tel:01755085174" className="text-accent hover:underline block">
+                01755085174
+              </a>
+              <a href="tel:01577264021" className="text-accent hover:underline block">
+                01577264021
               </a>
             </div>
           </div>
@@ -45,7 +49,7 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="text-xl font-semibold">Location</h3>
-              <p className="text-muted-foreground">Based in the beautiful city of San Francisco, CA.</p>
+              <p className="text-muted-foreground">Mirpur, Dhaka, Bangladesh</p>
             </div>
           </div>
         </div>
