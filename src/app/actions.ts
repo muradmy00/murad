@@ -11,11 +11,12 @@ import {
   updateEmail,
   reauthenticateWithCredential,
   EmailAuthProvider,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { initializeFirebase } from '@/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, setDoc, getDocs } from 'firebase/firestore';
 
-const loginSchema = z.object({
+const authSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
@@ -34,10 +35,56 @@ async function setAuthCookie(token: string) {
     });
 }
 
+export async function handleSignup(prevState: any, formData: FormData) {
+  try {
+    const parsed = authSchema.parse({
+      email: formData.get('email'),
+      password: formData.get('password'),
+    });
+
+    const { auth, firestore } = initializeFirebase();
+
+    // Check if any admin user already exists.
+    const adminRolesCollection = collection(firestore, 'roles_admin');
+    const adminSnapshot = await getDocs(adminRolesCollection);
+
+    const userCredential = await createUserWithEmailAndPassword(auth, parsed.email, parsed.password);
+    const user = userCredential.user;
+
+    // If no admin exists, make this new user an admin.
+    if (adminSnapshot.empty) {
+        await setDoc(doc(firestore, 'roles_admin', user.uid), { isAdmin: true });
+    }
+    
+    const token = await user.getIdToken();
+    await setAuthCookie(token);
+
+  } catch (e: any) {
+    let message = 'An unexpected error occurred.';
+    if (e instanceof z.ZodError) {
+        message = 'Invalid form data.';
+    } else if (e.code) {
+        switch (e.code) {
+            case 'auth/email-already-in-use':
+                message = 'This email is already registered.';
+                break;
+            case 'auth/weak-password':
+                message = 'The password is too weak.';
+                break;
+            default:
+                message = 'An unknown error occurred during signup.';
+        }
+    }
+    return { message, success: false };
+  }
+
+  redirect('/admin/dashboard');
+}
+
 
 export async function handleLogin(prevState: any, formData: FormData) {
   try {
-    const parsed = loginSchema.parse({
+    const parsed = authSchema.parse({
       email: formData.get('email'),
       password: formData.get('password'),
     });
