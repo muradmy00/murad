@@ -12,7 +12,7 @@ export const projects: Project[] = [
         id: '1',
         title: 'Bonnek',
         description: 'A comprehensive inventory management system for a modern fashion brand, designed to streamline stock tracking and order fulfillment with a clean, intuitive UI.',
-        techStack: ['React.js', 'TypeScript', 'REST APIs', 'Tailwind CSS', 'Redux.js', 'Tanstack Query', 'Yup', 'Zustand', 'Axios'],
+        techStack: ['React.js', 'TypeScript', 'REST APIs', 'Tailwind CSS', 'Tanstack Query', 'Yup', 'Zustand', 'Axios'],
         imageUrl: assets.Bonnek,
         imageHint: "fashion e-commerce",
         liveUrl: 'https://51.stepupdesign.xyz/',
