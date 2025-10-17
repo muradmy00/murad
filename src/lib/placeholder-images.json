@@ -35,6 +35,12 @@
       "description": "A person connecting to the Web3 ecosystem.",
       "imageUrl": "https://picsum.photos/seed/blog3/600/400",
       "imageHint": "web3 ecosystem"
+    },
+    {
+      "id": "about-me",
+      "description": "A professional portrait of a developer.",
+      "imageUrl": "https://picsum.photos/seed/aboutme/600/600",
+      "imageHint": "professional portrait"
     }
   ]
 }

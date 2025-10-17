@@ -2,7 +2,7 @@
 import type { Project, Experience, Skill, Blog, Message } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
-const getPlaceholder = (id: string) => {
+export const getPlaceholder = (id: string) => {
     return PlaceHolderImages.find((p) => p.id === id) || { imageUrl: 'https://placehold.co/600x400', imageHint: 'placeholder' };
 }
 

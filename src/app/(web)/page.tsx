@@ -5,6 +5,8 @@ import {
   Card,
   CardContent,
 } from '@/components/ui/card';
+import Image from 'next/image';
+import { getPlaceholder } from '@/lib/data';
 
 export default function HomePage() {
   const socialLinks = [
@@ -12,6 +14,8 @@ export default function HomePage() {
     { icon: Twitter, href: '#', 'aria-label': 'Twitter' },
     { icon: Linkedin, href: '#', 'aria-label': 'LinkedIn' },
   ];
+
+  const aboutImage = getPlaceholder('about-me');
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
@@ -52,12 +56,27 @@ export default function HomePage() {
             ))}
         </div>
 
-        <Card className="mt-24 max-w-4xl mx-auto bg-card/50 border-2 border-primary/10 shadow-2xl shadow-primary/10 rounded-lg overflow-hidden backdrop-blur-sm">
-            <CardContent className="p-8 text-left">
-                <h3 className="font-headline text-2xl font-bold text-primary mb-4">About Me</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                    Hello! I'm Mohiuddin Murad, a dedicated Full-Stack Developer with a knack for building beautiful and functional web applications. With a strong foundation in both frontend and backend technologies, I specialize in bringing ideas to life from concept to deployment. I thrive on solving complex problems and am constantly learning to keep up with the fast-paced world of web development. My goal is to create seamless and engaging user experiences while writing clean, efficient, and maintainable code.
-                </p>
+        <Card className="mt-24 max-w-6xl mx-auto bg-card/50 border-2 border-primary/10 shadow-2xl shadow-primary/10 rounded-lg overflow-hidden backdrop-blur-sm">
+            <CardContent className="p-0">
+                <div className="grid md:grid-cols-2 items-center">
+                    <div className="p-8 text-left">
+                        <h3 className="font-headline text-3xl font-bold text-primary mb-4">About Me</h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                            Hello! I'm Mohiuddin Murad, a dedicated Full-Stack Developer with a knack for building beautiful and functional web applications. With a strong foundation in both frontend and backend technologies, I specialize in bringing ideas to life from concept to deployment. I thrive on solving complex problems and am constantly learning to keep up with the fast-paced world of web development. My goal is to create seamless and engaging user experiences while writing clean, efficient, and maintainable code.
+                        </p>
+                    </div>
+                    <div className="relative h-64 md:h-full w-full">
+                         {aboutImage && (
+                            <Image
+                                src={aboutImage.imageUrl}
+                                alt="About Mohiuddin Murad"
+                                fill
+                                className="object-cover"
+                                data-ai-hint={aboutImage.imageHint}
+                            />
+                         )}
+                    </div>
+                </div>
             </CardContent>
         </Card>
 
