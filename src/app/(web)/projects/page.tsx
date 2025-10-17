@@ -29,7 +29,7 @@ export default function ProjectsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects?.map((project) => (
-          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-accent border-2 border-transparent flex flex-col">
+          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary border-2 border-transparent flex flex-col">
             <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
               <div className="relative">
                 {project.imageUrl && (

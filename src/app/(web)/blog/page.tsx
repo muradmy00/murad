@@ -37,7 +37,7 @@ export default function BlogPage() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts?.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`} className="group">
-            <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-xl transition-shadow duration-300">
+            <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
               <CardHeader className="p-0">
                 {post.imageUrl && (
                   <Image
