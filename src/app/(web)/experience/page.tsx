@@ -21,40 +21,34 @@ export default function ExperiencePage() {
         </p>
       </div>
 
-      {(!experience || experience.length === 0) ? (
-        <p className="text-center text-muted-foreground">
-          No work experience information is available at the moment.
-        </p>
-      ) : (
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-border"></div>
-          <div className="space-y-12">
-            {experience.map((item) => (
-              <div
-                key={item.id}
-                className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
-              >
-                <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-4 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md md:top-0 md:-translate-y-0">
-                  <Briefcase className="h-5 w-5" />
-                </div>
-                <div className="w-10 md:hidden"></div>
-                <div className="w-full md:w-[calc(50%-2.5rem)]">
-                  <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl group-odd:md:text-right">
-                    <CardHeader>
-                      <p className="text-sm text-muted-foreground">{item.duration}</p>
-                      <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
-                      <p className="text-accent font-semibold">{item.company}</p>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription>{item.description}</CardDescription>
-                    </CardContent>
-                  </Card>
-                </div>
+      <div className="relative">
+        <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-border"></div>
+        <div className="space-y-12">
+          {experience.map((item) => (
+            <div
+              key={item.id}
+              className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+            >
+              <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-4 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md md:top-0 md:-translate-y-0">
+                <Briefcase className="h-5 w-5" />
               </div>
-            ))}
-          </div>
+              <div className="w-10 md:hidden"></div>
+              <div className="w-full md:w-[calc(50%-2.5rem)]">
+                <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl group-odd:md:text-right">
+                  <CardHeader>
+                    <p className="text-sm text-muted-foreground">{item.duration}</p>
+                    <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
+                    <p className="text-accent font-semibold">{item.company}</p>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription>{item.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
