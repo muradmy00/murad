@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useActionState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useFormState } from 'react-dom';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -45,7 +44,7 @@ declare global {
 }
 
 export function ContactForm() {
-  const [state, formAction] = useFormState(handleContactForm, initialState);
+  const [state, formAction] = useActionState(handleContactForm, initialState);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [isSigning, setIsSigning] = useState(false);
   
