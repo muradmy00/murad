@@ -1,3 +1,4 @@
+
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,16 +11,9 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { format } from 'date-fns';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query } from 'firebase/firestore';
+import { blogPosts } from '@/lib/data';
 
 export default function BlogPage() {
-  const firestore = useFirestore();
-  const blogPostsQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(collection(firestore, 'blog_posts'));
-  }, [firestore]);
-  const { data: blogPosts, isLoading } = useCollection(blogPostsQuery);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -32,11 +26,9 @@ export default function BlogPage() {
         </p>
       </div>
 
-      {isLoading && <div className="text-center">Loading posts...</div>}
-
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts?.map((post) => (
-          <Link key={post.id} href={`/blog/${post.id}`} className="group">
+          <Link key={post.id} href={`/blog/${post.slug}`} className="group">
             <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="p-0">
                 {post.imageUrl && (
@@ -46,6 +38,7 @@ export default function BlogPage() {
                     width={600}
                     height={400}
                     className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
+                    data-ai-hint={post.imageHint}
                   />
                 )}
               </CardHeader>
@@ -54,7 +47,7 @@ export default function BlogPage() {
                   {post.title}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {post.publishedDate ? format(new Date(post.publishedDate), 'MMMM d, yyyy') : ''}
+                  {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
                 </p>
                 <CardDescription className="text-muted-foreground line-clamp-3">
                   {post.content}

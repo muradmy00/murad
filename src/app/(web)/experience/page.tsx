@@ -1,3 +1,4 @@
+
 'use client';
 import { Briefcase } from 'lucide-react';
 import {
@@ -8,18 +9,9 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, orderBy } from 'firebase/firestore';
-import { format } from 'date-fns';
+import { experience } from '@/lib/data';
 
 export default function ExperiencePage() {
-  const firestore = useFirestore();
-  const experienceQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(collection(firestore, 'experience'), orderBy('startDate', 'desc'));
-  }, [firestore]);
-  const { data: experience, isLoading } = useCollection(experienceQuery);
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-20">
@@ -30,8 +22,6 @@ export default function ExperiencePage() {
           A timeline of my professional journey, highlighting key roles, responsibilities, and accomplishments in the tech industry.
         </p>
       </div>
-
-      {isLoading && <div className="text-center">Loading experience...</div>}
 
       <div className="relative">
         {/* Timeline line */}
@@ -60,9 +50,9 @@ export default function ExperiencePage() {
                   <CardHeader>
                     <div className="flex flex-col">
                       <p className="text-sm text-muted-foreground">
-                        {item.startDate ? format(new Date(item.startDate), 'MMM yyyy') : ''} - {item.endDate ? format(new Date(item.endDate), 'MMM yyyy') : 'Present'}
+                        {item.duration}
                       </p>
-                      <CardTitle className="font-headline text-xl mt-1">{item.title}</CardTitle>
+                      <CardTitle className="font-headline text-xl mt-1">{item.role}</CardTitle>
                       <p className="text-accent font-semibold">{item.company}</p>
                     </div>
                   </CardHeader>

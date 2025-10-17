@@ -1,3 +1,4 @@
+
 'use client';
 import {
   Card,
@@ -6,8 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query } from 'firebase/firestore';
+import { skills } from '@/lib/data';
 import type { Skill } from '@/lib/types';
 
 const skillCategories: Skill['category'][] = [
@@ -21,13 +21,6 @@ const skillCategories: Skill['category'][] = [
 ];
 
 export default function SkillsPage() {
-  const firestore = useFirestore();
-  const skillsQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(collection(firestore, 'skills'));
-  }, [firestore]);
-  const { data: skills, isLoading } = useCollection(skillsQuery);
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-12">
@@ -39,8 +32,6 @@ export default function SkillsPage() {
           modern web applications.
         </p>
       </div>
-
-      {isLoading && <div className="text-center">Loading skills...</div>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {skillCategories.map((category) => {
@@ -60,10 +51,10 @@ export default function SkillsPage() {
                     <div className="flex justify-between items-center mb-1">
                       <p className="font-medium">{skill.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {skill.level}%
+                        {skill.proficiency}%
                       </p>
                     </div>
-                    <Progress value={skill.level} />
+                    <Progress value={skill.proficiency} />
                   </div>
                 ))}
               </CardContent>

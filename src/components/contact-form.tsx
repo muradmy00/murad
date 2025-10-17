@@ -1,11 +1,9 @@
 
 'use client';
 
-import { useState, useEffect, useActionState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -18,37 +16,18 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { handleContactForm } from '@/app/actions';
-import { Wallet } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email.' }),
   message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
-  walletAddress: z.string().optional(),
-  signature: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-const initialState = {
-    message: '',
-    success: false,
-    errors: null,
-};
-
-declare global {
-    interface Window {
-        ethereum?: any;
-    }
-}
-
 export function ContactForm() {
   const { toast } = useToast();
-  const [state, formAction, isPending] = useActionState(handleContactForm, initialState);
-  const [walletAddress, setWalletAddress] = useState<string | null>(null);
-  const [isSigning, setIsSigning] = useState(false);
   
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -56,85 +35,26 @@ export function ContactForm() {
       name: '',
       email: '',
       message: '',
-      walletAddress: '',
-      signature: '',
     },
   });
 
-  useEffect(() => {
-    if (state.message) {
-      toast({
-        variant: state.success ? 'default' : 'destructive',
-        title: state.success ? 'Success!' : 'Error',
-        description: state.message,
-      });
-    }
-    if (state.success) {
-      form.reset();
-      setWalletAddress(null);
-    }
-  }, [state, form, toast]);
-
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setWalletAddress(accounts[0]);
-        form.setValue('walletAddress', accounts[0]);
-      } catch (error) {
-        console.error("Wallet connection failed:", error);
-        form.setError('walletAddress', { type: 'manual', message: 'Failed to connect wallet.' });
-      }
-    } else {
-      form.setError('walletAddress', { type: 'manual', message: 'MetaMask not found. Please install it.' });
-    }
-  };
-
-  const signAndSubmit = async (data: ContactFormValues) => {
-    if (!walletAddress) {
-      // Standard form submission if wallet not connected
-      const formData = new FormData();
-      Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value as string);
-      });
-      formAction(formData);
-      return;
-    }
-
-    setIsSigning(true);
-    try {
-      const messageToSign = `I am sending a message from Mohiuddin Murad.\n\nName: ${data.name}\nEmail: ${data.email}`;
-      const signature = await window.ethereum.request({
-        method: 'personal_sign',
-        params: [messageToSign, walletAddress],
-      });
-      form.setValue('signature', signature);
-      
-      const formData = new FormData();
-      Object.entries({...data, signature, walletAddress}).forEach(([key, value]) => {
-        if (value) formData.append(key, value as string);
-      });
-      formAction(formData);
-
-    } catch (error) {
-      console.error('Signing failed:', error);
-      form.setError('signature', { type: 'manual', message: 'Message signing failed.' });
-    } finally {
-        setIsSigning(false);
-    }
-  };
-
-  const isSubmitDisabled = isSigning || isPending;
+  function onSubmit(data: ContactFormValues) {
+    toast({
+        title: 'Form Submitted',
+        description: 'This is a demo. Form submissions are not active.',
+    });
+    console.log(data);
+  }
 
   return (
     <Card className="shadow-lg">
       <CardHeader>
         <CardTitle className="font-headline text-2xl">Send a Message</CardTitle>
-        <CardDescription>Fill out the form below or connect your wallet to send a signed message.</CardDescription>
+        <CardDescription>Fill out the form below to get in touch.</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(signAndSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="name" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
@@ -159,23 +79,8 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
-            
-            {!walletAddress ? (
-                <Button type="button" variant="secondary" className="w-full" onClick={connectWallet}>
-                    <Wallet className="mr-2 h-4 w-4" /> Connect Wallet for Web3 Contact
-                </Button>
-            ) : (
-                <div className="p-3 bg-muted rounded-md text-sm text-center">
-                    <p>Wallet Connected:</p>
-                    <p className="font-mono text-xs truncate">{walletAddress}</p>
-                </div>
-            )}
-            
-            {form.formState.errors.walletAddress && <FormMessage>{form.formState.errors.walletAddress.message}</FormMessage>}
-            {form.formState.errors.signature && <FormMessage>{form.formState.errors.signature.message}</FormMessage>}
-
-            <Button type="submit" className="w-full" disabled={isSubmitDisabled}>
-              {walletAddress ? (isSigning ? 'Signing...' : (isPending ? 'Sending...' : 'Sign & Send Message')) : (isPending ? 'Sending...' : 'Send Message')}
+            <Button type="submit" className="w-full">
+              Send Message
             </Button>
           </form>
         </Form>
