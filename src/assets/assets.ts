@@ -7,6 +7,7 @@ import icpc from './icpc.png'
 import npm_package from './package.png'
 import software from './software.png'
 
+
 export const assets = {
     my_image,
     bootcamp,
