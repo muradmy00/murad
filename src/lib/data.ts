@@ -144,5 +144,5 @@ ReactDOM.render(<App />, document.getElementById('root'));</code></pre>
 export const messages: Message[] = [];
 
 export const resume = {
-  url: '/resume.pdf'
+  url: 'https://drive.google.com/file/d/1OxXkJIPi13NBX3EhLkrjbKrdeMgxSYpw/view?usp=drive_link'
 };
