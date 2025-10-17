@@ -29,7 +29,7 @@ export default function ProjectsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects?.map((project) => (
-          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-accent border-2 border-transparent">
+          <Card key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-accent border-2 border-transparent flex flex-col">
             <Link href={project.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
               <div className="relative">
                 {project.imageUrl && (
@@ -51,9 +51,9 @@ export default function ProjectsPage() {
               </div>
             </Link>
 
-            <CardContent className="p-6 bg-card">
+            <CardContent className="p-6 bg-card flex-grow flex flex-col">
               <CardTitle className="font-headline text-2xl font-bold mb-2">{project.title}</CardTitle>
-              <CardDescription className="text-muted-foreground mb-4 h-20 overflow-hidden">
+              <CardDescription className="text-muted-foreground mb-4 flex-grow">
                 {project.description}
               </CardDescription>
               <div className="flex flex-wrap gap-2 mb-6">
@@ -61,7 +61,7 @@ export default function ProjectsPage() {
                   <Badge key={tech} variant="secondary">{tech}</Badge>
                 ))}
               </div>
-              <div className="flex justify-between items-center">
+              <div className="mt-auto flex justify-between items-center">
                   {project.repoUrl && (
                     <Button asChild variant="ghost" size="sm">
                         <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
