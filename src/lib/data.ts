@@ -1,6 +1,7 @@
 
 import type { Project, Experience, Skill, Blog, Message, Education, Achievement } from './types';
 import { PlaceHolderImages } from './placeholder-images';
+import { assets } from '@/assets/assets';
 
 export const getPlaceholder = (id: string) => {
     return PlaceHolderImages.find((p) => p.id === id) || { imageUrl: 'https://placehold.co/600x400', imageHint: 'placeholder' };
@@ -94,6 +95,9 @@ export const skills: Skill[] = [
     { id: '20', name: 'C', category: 'Languages', proficiency: 80 },
     { id: '21', name: 'C++', category: 'Languages', proficiency: 80 },
     { id: '22', name: 'Python', category: 'Languages', proficiency: 70 },
+    { id: '23', name: 'Java', category: 'Languages', proficiency: 75, imageUrl: 'https://img.icons8.com/color/48/java-coffee-cup-logo.png' },
+    { id: '24', name: 'Zustand', category: 'Frontend', proficiency: 80, imageUrl: 'https://img.icons8.com/color/48/bear.png' },
+    { id: '25', name: 'Quill', category: 'Frontend', proficiency: 82, imageUrl: 'https://img.icons8.com/fluency/48/quill-pen.png' },
 ];
 
 export const achievements: Achievement[] = [
@@ -101,43 +105,43 @@ export const achievements: Achievement[] = [
     id: '1',
     title: 'Published Two NPM Packages',
     description: 'Successfully built and published two npm packages using React and TypeScript: currency-converter-lite and copy-text-to-clipboard-lite.',
-    imageUrl: getPlaceholder('achievement-npm').imageUrl,
-    imageHint: getPlaceholder('achievement-npm').imageHint,
+    imageUrl: assets.npm_package,
+    imageHint: 'npm logo',
   },
   {
     id: '2',
     title: 'Software Development Competition 2024',
     description: 'Participated in the Software Development Competition organized by BUBT, showcasing problem-solving and development skills.',
-    imageUrl: getPlaceholder('achievement-bubt-soft').imageUrl,
-    imageHint: getPlaceholder('achievement-bubt-soft').imageHint,
+    imageUrl: assets.software,
+    imageHint: 'competition trophy',
   },
   {
     id: '3',
     title: 'Inter University Programming Contest 2024',
     description: 'Competed in the Inter University Programming Contest organized by BUBT, honing algorithmic and competitive programming abilities.',
-    imageUrl: getPlaceholder('achievement-bubt-iupc').imageUrl,
-    imageHint: getPlaceholder('achievement-bubt-iupc').imageHint,
+    imageUrl: assets.contest,
+    imageHint: 'programming contest',
   },
   {
     id: '4',
     title: 'Web Development Bootcamp Graduate',
     description: 'Completed an intensive Web Development Bootcamp by Programming Hero, mastering modern web technologies and best practices.',
-    imageUrl: getPlaceholder('achievement-ph').imageUrl,
-    imageHint: getPlaceholder('achievement-ph').imageHint,
+    imageUrl: assets.bootcamp,
+    imageHint: 'bootcamp certificate',
   },
   {
     id: '5',
     title: 'Programming Camp 2023 Participant',
     description: 'Attended the Programming Camp 2023, organized by BUBT IT Club, to enhance programming skills and collaborate with peers.',
-    imageUrl: getPlaceholder('achievement-camp').imageUrl,
-    imageHint: getPlaceholder('achievement-camp').imageHint,
+    imageUrl: assets.camp,
+    imageHint: 'programming camp',
   },
   {
     id: '6',
     title: 'ICPC 2021 Contestant',
     description: 'Participated in the prestigious International Collegiate Programming Contest (ICPC) in 2021, representing BUBT.',
-    imageUrl: getPlaceholder('achievement-icpc').imageUrl,
-    imageHint: getPlaceholder('achievement-icpc').imageHint,
+    imageUrl: assets.icpc,
+    imageHint: 'ICPC logo',
   },
 ];
 

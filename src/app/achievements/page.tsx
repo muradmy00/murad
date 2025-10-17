@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { achievements } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 export default function AchievementsPage() {
   return (
@@ -32,7 +33,10 @@ export default function AchievementsPage() {
                   alt={achievement.title}
                   width={600}
                   height={400}
-                  className="w-full object-cover aspect-[3/2] transition-transform duration-500 group-hover:scale-105"
+                  className={cn(
+                    'w-full object-cover aspect-[3/2] transition-transform duration-500 group-hover:scale-105',
+                    typeof achievement.imageUrl !== 'string' && 'p-8'
+                  )}
                   data-ai-hint={achievement.imageHint}
                 />
               </div>

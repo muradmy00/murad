@@ -1,4 +1,6 @@
 
+import { StaticImageData } from 'next/image';
+
 export type Project = {
   id: string;
   title: string;
@@ -31,13 +33,14 @@ export type Skill = {
   name: string;
   category: 'Frontend' | 'Backend' | 'Languages' | 'Tools' | 'Styling' | 'Web3';
   proficiency: number;
+  imageUrl?: string;
 };
 
 export type Achievement = {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   imageHint?: string;
 };
 
