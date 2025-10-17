@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Code, ArrowRight, Eye } from 'lucide-react';
+import { Github, ArrowRight, Eye } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -63,9 +63,9 @@ export default function ProjectsPage() {
               </div>
               <div className="mt-auto flex flex-wrap gap-2 justify-between items-center">
                   {project.repoUrl && (
-                    <Button asChild variant="ghost" size="sm">
+                    <Button asChild variant="ghost" size="sm" className="hover:text-primary">
                         <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                            <Code className="mr-2" /> Source Code
+                            <Github className="mr-2" /> Source Code
                         </Link>
                     </Button>
                   )}
