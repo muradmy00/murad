@@ -1,3 +1,4 @@
+
 import { blogPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -69,7 +70,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 }
 
 export async function generateStaticParams() {
-    return blogPosts.map((post) => ({
+    return blogPosts?.map((post) => ({
         slug: post.slug,
-    }));
+    })) || [];
 }
