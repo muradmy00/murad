@@ -148,57 +148,155 @@ export const achievements: Achievement[] = [
 export const blogPosts: Blog[] = [
   {
     id: '1',
-    slug: 'mastering-react-hooks',
-    title: 'Mastering React Hooks',
-    content: 'A deep dive into React Hooks, exploring useState, useEffect, and custom hooks to build more efficient and readable components.',
-    imageUrl: getPlaceholder('blog-1').imageUrl,
-    imageHint: getPlaceholder('blog-1').imageHint,
-    publishedAt: new Date('2023-10-15'),
+    slug: 'javascript-event-loop',
+    title: 'JavaScript Event Loop: যেভাবে কাজ করে',
+    content: `<p>জাভাস্ক্রিপ্ট একটি সিঙ্গেল-থ্রেডেড ল্যাঙ্গুয়েজ, যার মানে এটি একবারে শুধুমাত্র একটি কাজ করতে পারে। কিন্তু আমরা প্রায়ই setTimeout বা API কলের মতো অ্যাсинক্রোনাস অপারেশন ব্যবহার করি। Event Loop এখানেই关键 भूमिका পালন করে।</p>
+    <p>Event Loop, Call Stack, Web API, এবং Callback Queue—এই চারটি অংশ मिलकर অ্যাсинক্রোনাস জাভাস্ক্রিপ্টকে সম্ভব করে তোলে।</p>
+    <ol>
+      <li><strong>Call Stack:</strong> যখন কোনো ফাংশن কল করা হয়, তখন সেটি Call Stack-এ যুক্ত হয়। ফাংশনটির কাজ শেষ হলে এটি Stack থেকে বেরিয়ে যায়।</li>
+      <li><strong>Web APIs:</strong> <code>setTimeout</code>, DOM events, বা <code>fetch</code> এর মতো অ্যাсинക്ронাস অপারেশনগুলো Web API দ্বারা হ্যান্ডেল করা হয়। Call Stack এই কাজগুলোকে Web API-তে পাঠিয়ে দেয় এবং নিজের কাজ চালিয়ে যায়।</li>
+      <li><strong>Callback Queue:</strong> Web API-তে অ্যাсинক্রোনাস অপারেশনের কাজ শেষ হলে, তার সাথে যুক্ত কলব্যাক ফাংশنটি Callback Queue-তে অপেক্ষা করে।</li>
+      <li><strong>Event Loop:</strong> Event Loop sürekli Call Stack খালি আছে কিনা তা तपास করে। Call Stack খালি হলেই, Event Loop Callback Queue থেকে প্রথম আইটেমটিকে Call Stack-এ পাঠিয়ে দেয়, যাতে সেটি রান হতে পারে।</li>
+    </ol>
+    <p>নিচের উদাহরণটি দেখুন:</p>
+    <pre><code>console.log('Start');
+
+setTimeout(() => {
+  console.log('Timeout Callback');
+}, 2000);
+
+console.log('End');</code></pre>
+    <p>এখানে আউটপুট হবে:</p>
+    <pre><code>Start
+End
+Timeout Callback</code></pre>
+    <p>কারণ <code>setTimeout</code> Web API-তে চলে যায় এবং Call Stack তার কাজ চালিয়ে 'End' প্রিন্ট করে। দুই সেকেন্ড পর কলব্যাক ফাংশনটি Queue থেকে Stack-এ গিয়ে রান হয়।</p>`,
+    imageUrl: getPlaceholder('blog-event-loop').imageUrl,
+    imageHint: getPlaceholder('blog-event-loop').imageHint,
+    publishedAt: new Date(),
     author: 'Mohiuddin Murad',
-    tags: ['React', 'Frontend', 'WebDevelopment'],
+    tags: ['JavaScript', 'Event Loop', 'Async'],
   },
   {
     id: '2',
-    slug: 'styling-with-tailwind-css',
-    title: 'Modern Styling with Tailwind CSS',
-    content: 'Discover how utility-first CSS with Tailwind can revolutionize your development workflow and help you build beautiful designs faster.',
-    imageUrl: getPlaceholder('blog-2').imageUrl,
-    imageHint: getPlaceholder('blog-2').imageHint,
-    publishedAt: new Date('2023-09-22'),
+    slug: 'javascript-execution-context',
+    title: 'JavaScript Execution Context: কোড যেভাবে রান হয়',
+    content: `<p>Execution Context হলো সেই পরিবেশ যেখানে জাভাস্ক্রিপ্ট কোড এক্সিকিউট বা রান হয়। প্রতিটি Execution Context-এর দুটি প্রধান অংশ থাকে: ভেরিয়েবল এনভায়রনমেন্ট এবং থ্রেড অফ এক্সিকিউশন।</p>
+    <p>জাভাস্ক্রিপ্টে দুই ধরনের Execution Context রয়েছে:</p>
+    <ol>
+        <li><strong>Global Execution Context (GEC):</strong> যখন জাভাস্ক্রিপ্ট ইঞ্জিন প্রথমবার কোড রান করে, তখন এটি Global Execution Context তৈরি করে। GEC-তে দুটি জিনিস তৈরি হয়: একটি গ্লোবাল অবজেক্ট (ব্রাউজারে <code>window</code>, Node.js-এ <code>global</code>) এবং <code>this</code>, যা গ্লোবাল অবজেক্টকে নির্দেশ করে।</li>
+        <li><strong>Function Execution Context (FEC):</strong> যখন কোনো ফাংশন কল করা হয়, তখন একটি নতুন Function Execution Context তৈরি হয়। প্রতিটি ফাংশনের জন্য নিজস্ব Execution Context থাকে।</li>
+    </ol>
+    <p>Execution Context তৈরির দুটি ধাপ রয়েছে:</p>
+    <ol>
+        <li><strong>Creation Phase:</strong> এই ধাপে ইঞ্জিন কোড রান না করে ভেরিয়েবল এবং ফাংশন ডিক্লারেশনের জন্য মেমরি বরাদ্দ করে। ভেরিয়েবলগুলোকে <code>undefined</code> দিয়ে مقدار দেওয়া হয়, যাকে Hoisting বলা হয়।</li>
+        <li><strong>Execution Phase:</strong> এই ধাপে কোড লাইন বাই লাইন এক্সিকিউট হয় এবং ভেরিয়েবলে আসল মান असाइन করা হয়।</li>
+    </ol>
+    <p>নিচের উদাহরণটি দেখুন:</p>
+    <pre><code>console.log(myVar); // undefined
+var myVar = 10;
+console.log(myVar); // 10
+
+myFunction(); // "Hello from function"
+
+function myFunction() {
+  console.log("Hello from function");
+}</code></pre>
+    <p>Creation Phase-এ <code>myVar</code>-কে <code>undefined</code> এবং <code>myFunction</code>-কে মেমরিতে রাখা হয়। তাই প্রথম <code>console.log</code> undefined দেখায়, কিন্তু ফাংশনটি সঠিকভাবে কল হয়।</p>`,
+    imageUrl: getPlaceholder('blog-execution-context').imageUrl,
+    imageHint: getPlaceholder('blog-execution-context').imageHint,
+    publishedAt: new Date(),
     author: 'Mohiuddin Murad',
-    tags: ['TailwindCSS', 'CSS', 'Frontend'],
+    tags: ['JavaScript', 'Execution Context', 'Hoisting'],
   },
   {
     id: '3',
-    slug: 'introduction-to-web3',
-    title: 'An Introduction to the World of Web3',
-    content: 'Explore the fundamental concepts of Web3, including blockchain, smart contracts, and decentralized applications (dApps).',
-    imageUrl: getPlaceholder('blog-3').imageUrl,
-    imageHint: getPlaceholder('blog-3').imageHint,
-    publishedAt: new Date('2023-08-30'),
+    slug: 'javascript-vs-typescript',
+    title: 'JavaScript vs. TypeScript: কোনটি এবং কেন?',
+    content: `<p>TypeScript হলো জাভাস্ക്രിপ্টের একটি সুপারসেট, যা জাভাস্ക്രിপ্টে স্ট্যাটিক টাইপিং এবং অন্যান্য কিছু ফিচার যুক্ত করে। প্রধান পার্থক্যগুলো নিচে দেওয়া হলো:</p>
+    <h4>Typing</h4>
+    <ul>
+        <li><strong>JavaScript:</strong> ডাইনামিক টাইপিং ব্যবহার করে, যার মানে ভেরিয়েবলের টাইপ রানটাইমে নির্ধারিত হয়। এটি কোড লেখাকে দ্রুত করলেও বড় প্রজেক্টে বাগ তৈরি করতে পারে।</li>
+        <li><strong>TypeScript:</strong> স্ট্যাটিক টাইপিং ব্যবহার করে, যেখানে কোড লেখার সময়ই ভেরিয়েবলের টাইপ নির্ধারণ করে দিতে হয়। এটি ডেভেলপমেন্ট পর্যায়েই অনেক ভুল ধরতে সাহায্য করে।</li>
+    </ul>
+    <pre><code>// TypeScript
+let name: string = "Murad";
+let age: number = 25;
+// age = "twenty-five"; // Error: Type 'string' is not assignable to type 'number'.</code></pre>
+    <h4>Tooling and Error Checking</h4>
+    <ul>
+        <li><strong>TypeScript:</strong> কম্পাইল-টাইম error checking প্রদান করে, যা কোড রান করার আগেই ভুল খুঁজে বের করে। এর ফলে কোডের গুণগত মান বাড়ে।</li>
+        <li><strong>JavaScript:</strong> ভুলগুলো শুধুমাত্র রানটাইমে ধরা পড়ে, যা ডিবাগিংকে কঠিন করে তুলতে পারে।</li>
+    </ul>
+<h4>Interfaces and Enums</h4>
+<p>TypeScript-এ Interface, Enum-এর মতো ফিচার আছে যা JavaScript-এ নেই। এগুলো জটিল ডেটা স্ট্রাকচারকে সংজ্ঞায়িত করতে সাহায্য করে।</p>
+<pre><code>// TypeScript Interface
+interface User {
+  name: string;
+  id: number;
+}
+
+const user: User = { name: "John", id: 1 };</code></pre>
+<p><b>কখন কোনটি ব্যবহার করবেন?</b> ছোট প্রজেক্ট বা স্ক্রিপ্টের জন্য জাভাস্ক্রিপ্ট যথেষ্ট। কিন্তু বড়, জটিল এবং টিমে কাজ করার জন্য TypeScript খুবই কার্যকরী, কারণ এটি কোডকে আরও নিরাপদ এবং রক্ষণাবেক্ষণযোগ্য করে তোলে।</p>`,
+    imageUrl: getPlaceholder('blog-js-vs-ts').imageUrl,
+    imageHint: getPlaceholder('blog-js-vs-ts').imageHint,
+    publishedAt: new Date(),
     author: 'Mohiuddin Murad',
-    tags: ['Web3', 'Blockchain', 'Nextjs'],
+    tags: ['JavaScript', 'TypeScript', 'Programming'],
   },
   {
     id: '4',
-    slug: 'how-react-dom-works',
-    title: 'React DOM এলিমেন্ট যেভাবে কাজ করে',
-    content: `<p>React DOM ব্রাউজারের আসল DOM (Document Object Model) এবং React কম্পোনেন্টগুলোর মধ্যে একটি সেতুর মতো কাজ করে। React-এ আমরা যা কিছু লিখি, তা সরাসরি ব্রাউজারে রেন্ডার হয় না।</p>
-    <p>React প্রথমে একটি ভার্চুয়াল DOM (Virtual DOM) তৈরি করে, যা আসল DOM-এর একটি হালকা অনুলিপি। যখন কোনো ডেটা পরিবর্তন হয়, React ভার্চুয়াল DOM-এ পরিবর্তন আনে এবং আসল DOM-এর সাথে তুলনা করে। শুধুমাত্র যেখানে পরিবর্তন দরকার, সেখানেই React DOM আসল DOM আপডেট করে।</p>
-    <p>যেমন:</p>
-    <pre><code>import ReactDOM from 'react-dom';
-import App from './App';
+    slug: 'react-custom-hooks',
+    title: 'React Custom Hooks: লজিক শেয়ারের সেরা উপায়',
+    content: `<p>React Custom Hooks হলো এমন জাভাস্ক্রিপ্ট ফাংশন যার নাম "use" দিয়ে শুরু হয় এবং যা অন্য হুক কল করতে পারে। কাস্টম হুক आपल्याला কম্পোনেন্টের মধ্যে stateful লজিক পুনরায় ব্যবহার করার সুযোগ দেয়।</p>
+<p>যখন একাধিক কম্পোনেন্টে একই ধরনের লজিক (যেমন ডেটা ফেচ করা, লোকাল স্টোরেজ ব্যবহার করা, বা উইন্ডো সাইজ ট্র্যাক করা) প্রয়োজন হয়, তখন আমরা সেই লজিককে একটি কাস্টম হুকে আলাদা করে ফেলতে পারি।</p>
+<h4>কেন কাস্টম হুক ব্যবহার করবেন?</h4>
+<ul>
+    <li><strong>Reusability:</strong> একই লজিক কপি-পেস্ট না করে একাধিক কম্পোনেন্টে ব্যবহার করা যায়।</li>
+    <li><strong>Clean Code:</strong> কম্পোনেন্টের লজিককে বাইরে বের করে আনায় কোড পরিষ্কার ও বোঝা সহজ হয়।</li>
+    <li><strong>Maintainability:</strong> লজিক এক জায়গায় থাকায় পরিবর্তন বা ডিবাগ করা সহজ হয়।</li>
+</ul>
+<p>নিচে একটি ডেটা ফেচ করার জন্য কাস্টম হুক (<code>useFetch</code>) এর উদাহরণ দেওয়া হলো:</p>
+<pre><code>import { useState, useEffect } from 'react';
 
-ReactDOM.render(<App />, document.getElementById('root'));</code></pre>
-    <p>এই কোডটি 'App' কম্পונেন্টকে 'root' id ಹೊಂದಿರುವ HTML এলিমেন্টে রেন্ডার করে।</p>
-    <img src="${getPlaceholder('blog-4').imageUrl}" alt="React Code" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-4').imageHint}" />
-    <p>এভাবেই React DOM কার্যকরভাবে এবং দ্রুত UI আপডেট করে, যা বড় অ্যাপ্লিকেশনগুলোতে পারফরম্যান্সের জন্য খুবই গুরুত্বপূর্ণ।</p>
-    <img src="${getPlaceholder('blog-2').imageUrl}" alt="Another descriptive image" class="w-full rounded-lg my-4" data-ai-hint="${getPlaceholder('blog-2').imageHint}" />`,
-    imageUrl: getPlaceholder('blog-4').imageUrl,
-    imageHint: getPlaceholder('blog-4').imageHint,
-    publishedAt: new Date('2023-11-05'),
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// How to use it in a component
+function MyComponent() {
+  const { data, loading, error } = useFetch('https://api.example.com/data');
+
+  if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+  if (error) return &lt;p&gt;Error!&lt;/p&gt;;
+
+  return &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;;
+}</code></pre>
+<p>এই <code>useFetch</code> হুকটি এখন যেকোনো কম্পোনেন্টে ডেটা ফেচ করার জন্য ব্যবহার করা যাবে, যা কোডকে DRY (Don't Repeat Yourself) নীতি মেনে চলতে সাহায্য করে।</p>`,
+    imageUrl: getPlaceholder('blog-custom-hooks').imageUrl,
+    imageHint: getPlaceholder('blog-custom-hooks').imageHint,
+    publishedAt: new Date(),
     author: 'Mohiuddin Murad',
-    tags: ['React', 'BanglaBlog', 'DOM'],
+    tags: ['React', 'Hooks', 'Custom Hooks'],
   },
 ];
 

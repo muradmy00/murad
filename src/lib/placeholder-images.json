@@ -19,28 +19,28 @@
       "imageHint": "data visualization"
     },
     {
-      "id": "blog-1",
-      "description": "Abstract image representing React components.",
-      "imageUrl": "https://picsum.photos/seed/blog1/600/400",
-      "imageHint": "react components"
+      "id": "blog-event-loop",
+      "description": "Abstract visualization of a javascript event loop.",
+      "imageUrl": "https://picsum.photos/seed/blog-el/600/400",
+      "imageHint": "event loop"
     },
     {
-      "id": "blog-2",
-      "description": "An illustration of a developer working with Tailwind CSS.",
-      "imageUrl": "https://picsum.photos/seed/blog2/600/400",
-      "imageHint": "tailwind css"
+      "id": "blog-execution-context",
+      "description": "Diagram of javascript execution context, showing call stack and memory.",
+      "imageUrl": "https://picsum.photos/seed/blog-ec/600/400",
+      "imageHint": "call stack"
     },
     {
-      "id": "blog-3",
-      "description": "A person connecting to the Web3 ecosystem.",
-      "imageUrl": "https://picsum.photos/seed/blog3/600/400",
-      "imageHint": "web3 ecosystem"
+      "id": "blog-js-vs-ts",
+      "description": "Logos of Javascript and Typescript side by side.",
+      "imageUrl": "https://picsum.photos/seed/blog-jsts/600/400",
+      "imageHint": "javascript typescript"
     },
     {
-      "id": "blog-4",
-      "description": "An image showing React code on a screen.",
-      "imageUrl": "https://picsum.photos/seed/blog4/600/400",
-      "imageHint": "react code"
+      "id": "blog-custom-hooks",
+      "description": "A developer thinking about react custom hooks logic.",
+      "imageUrl": "https://picsum.photos/seed/blog-hooks/600/400",
+      "imageHint": "react hooks"
     },
     {
       "id": "about-me",
