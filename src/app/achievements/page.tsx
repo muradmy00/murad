@@ -27,14 +27,14 @@ export default function AchievementsPage() {
         {achievements?.map((achievement) => (
           <Card key={achievement.id} className="group overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-primary border-2 border-transparent flex flex-col">
             {achievement.imageUrl && (
-              <div className="relative">
+              <div className="relative bg-card flex items-center justify-center aspect-[3/2]">
                 <Image
                   src={achievement.imageUrl}
                   alt={achievement.title}
                   width={600}
                   height={400}
                   className={cn(
-                    'w-full object-cover aspect-[3/2] transition-transform duration-500 group-hover:scale-105',
+                    'w-full h-full object-contain transition-transform duration-500 group-hover:scale-105',
                     typeof achievement.imageUrl !== 'string' && 'p-8'
                   )}
                   data-ai-hint={achievement.imageHint}
