@@ -39,7 +39,6 @@ const categoryIcons: { [key in Skill['category']]: React.ReactNode } = {
   Styling: <PenTool className="h-6 w-6" />,
   Tools: <Puzzle className="h-6 w-6" />,
   Web3: <GitBranch className="h-6 w-6" />,
-  Database: <Database className="h-6 w-6" />,
 };
 
 export default function SkillsPage() {
