@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import React from 'react';
 
-const skillCategories: Skill['category'][] = [
+const skillCategories: Exclude<Skill['category'], 'Database'>[] = [
   'Frontend',
   'Backend',
   'Languages',
