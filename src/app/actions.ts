@@ -4,11 +4,11 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
 import {
-  getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { initializeFirebase } from '@/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -58,7 +58,7 @@ export async function handleLogin(prevState: any, formData: FormData) {
                 message = 'Invalid email or password.';
                 break;
             default:
-                message = e.message;
+                message = 'An unknown error occurred during login.';
         }
     }
     return { message, success: false };
@@ -74,7 +74,7 @@ export async function handleSignup(prevState: any, formData: FormData) {
         password: formData.get('password'),
       });
   
-      const { auth, firestore } = initializeFirebase();
+      const { auth } = initializeFirebase();
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         parsed.email,
@@ -89,6 +89,8 @@ export async function handleSignup(prevState: any, formData: FormData) {
           message = 'Invalid form data.';
       } else if (e.code === 'auth/email-already-in-use') {
           message = 'This email is already registered. Please login instead.';
+      } else {
+        message = 'An unknown error occurred during sign-up.';
       }
       return { message, success: false };
     }
@@ -119,20 +121,18 @@ export async function handleContactForm(prevState: any, formData: FormData) {
             signature: formData.get('signature'),
         });
         
-        console.log('New contact message received:');
-        console.log(parsed);
-
-        // Here you would typically:
-        // 1. If walletAddress and signature are present, verify the signature.
-        //    const signerAddr = ethers.verifyMessage(message, signature);
-        //    if (signerAddr.toLowerCase() !== walletAddress.toLowerCase()) { ... }
-        // 2. Save the message to your database.
+        const { firestore } = initializeFirebase();
+        await addDoc(collection(firestore, 'contact_messages'), {
+            ...parsed,
+            sentDate: serverTimestamp(),
+        });
         
         return { message: 'Thank you! Your message has been sent successfully.', success: true };
     } catch (e) {
         if (e instanceof z.ZodError) {
             return { message: 'Invalid form data. Please check your entries.', success: false, errors: e.flatten().fieldErrors };
         }
-        return { message: 'An unexpected error occurred.', success: false };
+        console.error('Contact form submission error:', e);
+        return { message: 'An unexpected error occurred while sending your message.', success: false };
     }
 }

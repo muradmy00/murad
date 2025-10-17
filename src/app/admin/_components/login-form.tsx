@@ -101,13 +101,13 @@ export function LoginForm() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="text-sm">
-        <p>
+      <CardFooter className="flex-col items-start text-sm">
+        <div>
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="p-1">
                 {isLogin ? 'Sign up' : 'Login'}
             </Button>
-        </p>
+        </div>
       </CardFooter>
     </Card>
   );
