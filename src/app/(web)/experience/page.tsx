@@ -10,6 +10,20 @@ import {
 import { experience } from '@/lib/data';
 
 export default function ExperiencePage() {
+  if (!experience || experience.length === 0) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center">
+          <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
+            Work Experience
+          </h1>
+          <p className="max-w-3xl mx-auto text-lg text-muted-foreground mt-4">
+            No work experience information is available at the moment.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -27,7 +41,7 @@ export default function ExperiencePage() {
       <div className="relative mb-20">
         <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-border"></div>
         <div className="space-y-12">
-          {experience?.map((item) => (
+          {experience.map((item) => (
             <div
               key={item.id}
               className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
