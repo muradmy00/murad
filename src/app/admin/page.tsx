@@ -1,5 +1,7 @@
 import { LoginForm } from './_components/login-form';
 import Logo from '@/components/icons/logo';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Terminal } from 'lucide-react';
 
 export default function AdminLoginPage() {
   return (
@@ -12,6 +14,14 @@ export default function AdminLoginPage() {
             </div>
         </div>
         <LoginForm />
+        <Alert className="mt-4">
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Development Login</AlertTitle>
+            <AlertDescription>
+                <p>Email: <span className="font-mono">admin@example.com</span></p>
+                <p>Password: <span className="font-mono">password</span></p>
+            </AlertDescription>
+        </Alert>
       </div>
     </div>
   );
