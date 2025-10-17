@@ -60,7 +60,7 @@ export const education: Education[] = [
   {
     id: '1',
     institution: 'Bangladesh University of Business and Technology, Dhaka, Bangladesh',
-    degree: 'Bachelor of Science in Computer Science and Engineering & Problem Solving & Front-end Development',
+    degree: 'Bachelor of Science in Computer Science and Engineering',
     duration: '2022 - 2026',
     description: 'Varsity life refers to the experiences and lifestyle of college or university students. It encompasses a wide range of activities, challenges, and opportunities that students encounter during their time in higher education.',
   },
