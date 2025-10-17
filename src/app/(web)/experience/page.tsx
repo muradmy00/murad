@@ -38,8 +38,8 @@ export default function ExperiencePage() {
               {/* Spacer for desktop */}
               <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
 
-              {/* Card content */}
-              <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:odd:-order-1 md:odd:pr-8 md:odd:text-right">
+              {/* Card content - Force to left */}
+              <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:-order-1 md:pr-8 md:text-right">
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
@@ -82,8 +82,8 @@ export default function ExperiencePage() {
               {/* Spacer for desktop */}
               <div className="hidden md:block w-[calc(50%-1.25rem)]"></div>
 
-              {/* Card content */}
-               <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)] md:odd:-order-1 md:odd:pr-8 md:odd:text-right">
+              {/* Card content - Force to right */}
+               <div className="w-full pl-12 md:pl-0 md:w-[calc(50%-1.25rem)]">
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader>
                     <p className="text-sm text-muted-foreground">{item.duration}</p>
