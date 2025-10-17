@@ -19,6 +19,8 @@ import university from './university.png'
 import java from './java.png'
 import quill_icon from './quill.png'
 import zustand from './zustand.png'
+import tanstack_query from './tanstack_query.png'
+import yap from './yap.png'
 
 export const assets = {
     my_image,
@@ -40,5 +42,7 @@ export const assets = {
     university,
     java,
     quill_icon,
-    zustand
+    zustand,
+    tanstack_query,
+    yap
 }

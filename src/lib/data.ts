@@ -116,9 +116,9 @@ export const skills: Skill[] = [
     { id: '29', name: 'Next.js', category: 'Frontend', proficiency: 92 },
     { id: '9', name: 'React Router DOM', category: 'Frontend', proficiency: 90 },
     { id: '10', name: 'React Hook Form', category: 'Frontend', proficiency: 85 },
-    { id: '11', name: 'Tanstack Query', category: 'Tools', proficiency: 95 },
+    { id: '11', name: 'Tanstack Query', category: 'Tools', proficiency: 95, imageUrl: assets.tanstack_query },
     { id: '12', name: 'Zustand', category: 'Tools', proficiency: 95, imageUrl: assets.zustand },
-    { id: '13', name: 'Yup', category: 'Tools', proficiency: 90 },
+    { id: '13', name: 'Yup', category: 'Tools', proficiency: 90, imageUrl: assets.yap },
     { id: '14', name: 'Vite', category: 'Tools', proficiency: 85 },
     { id: '15', name: 'Axios', category: 'Tools', proficiency: 88 },
     { id: '16', name: 'Expo', category: 'Tools', proficiency: 85 },
@@ -500,6 +500,7 @@ export const resume = {
     
 
     
+
 
 
 
