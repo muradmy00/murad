@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -103,14 +104,14 @@ export default function HomePage() {
             <CardContent className="p-0">
                 <div className="grid md:grid-cols-5 items-center gap-8 md:gap-16">
                     <div className="relative md:col-span-2 flex justify-center items-center">
-                      <div className="relative w-64 h-64 md:w-80 md-h-80">
+                      <div className="relative w-64 h-64 md:w-80 md:h-80 group">
                          <div className="absolute inset-0 bg-primary/20 rounded-lg blur-3xl -z-10 animate-pulse transform -rotate-6"></div>
                          {aboutImage && (
                             <Image
                                 src={assets.my_image}
                                 alt="About Mohiuddin Murad"
                                 fill
-                                className="object-cover rounded-lg shadow-2xl shadow-primary/40 border-4 border-card p-2 bg-card transform rotate-3 transition-transform duration-300 hover:rotate-0 hover:scale-105"
+                                className="object-cover rounded-lg border-4 border-card p-2 bg-card transform rotate-3 transition-all duration-500 ease-in-out shadow-[0_0_15px_rgba(var(--primary),0.4),0_0_30px_rgba(var(--accent),0.3)] group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6),0_0_45px_hsl(var(--accent)/0.5)]"
                                 data-ai-hint={aboutImage.imageHint}
                             />
                          )}
