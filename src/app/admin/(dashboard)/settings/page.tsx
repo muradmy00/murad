@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -5,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useActionState, useEffect } from 'react';
 import { useUser } from '@/firebase';
+import { useToast } from '@/hooks/use-toast';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,8 +21,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { handleUpdateEmail, handleUpdatePassword } from '@/app/actions';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Terminal, CheckCircle2 } from 'lucide-react';
 
 const updateEmailSchema = z.object({
   newEmail: z.string().email(),
@@ -49,8 +49,9 @@ const initialFormState = {
 
 export default function SettingsPage() {
   const { user } = useUser();
-  const [emailState, emailFormAction] = useActionState(handleUpdateEmail, initialFormState);
-  const [passwordState, passwordFormAction] = useActionState(handleUpdatePassword, initialFormState);
+  const { toast } = useToast();
+  const [emailState, emailFormAction, isEmailPending] = useActionState(handleUpdateEmail, initialFormState);
+  const [passwordState, passwordFormAction, isPasswordPending] = useActionState(handleUpdatePassword, initialFormState);
 
   const emailForm = useForm<UpdateEmailFormValues>({
     resolver: zodResolver(updateEmailSchema),
@@ -76,16 +77,30 @@ export default function SettingsPage() {
   }, [user, emailForm]);
 
   useEffect(() => {
+    if (emailState.message) {
+      toast({
+        variant: emailState.success ? 'default' : 'destructive',
+        title: emailState.success ? 'Success' : 'Error',
+        description: emailState.message,
+      });
+    }
     if (emailState.success) {
       emailForm.reset({ ...emailForm.getValues(), currentPassword: '' });
     }
-  }, [emailState, emailForm]);
+  }, [emailState, emailForm, toast]);
 
   useEffect(() => {
+    if (passwordState.message) {
+      toast({
+        variant: passwordState.success ? 'default' : 'destructive',
+        title: passwordState.success ? 'Success' : 'Error',
+        description: passwordState.message,
+      });
+    }
     if (passwordState.success) {
       passwordForm.reset();
     }
-  }, [passwordState, passwordForm]);
+  }, [passwordState, passwordForm, toast]);
 
   return (
     <div className="grid gap-6">
@@ -125,14 +140,9 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-              {emailState?.message && (
-                <Alert variant={emailState.success ? 'default' : 'destructive'} className={emailState.success ? 'bg-green-50 border-green-200' : ''}>
-                  {emailState.success ? <CheckCircle2 className="h-4 w-4" /> : <Terminal className="h-4 w-4" />}
-                  <AlertTitle>{emailState.success ? 'Success' : 'Error'}</AlertTitle>
-                  <AlertDescription>{emailState.message}</AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit">Update Email</Button>
+              <Button type="submit" disabled={isEmailPending}>
+                {isEmailPending ? 'Updating...' : 'Update Email'}
+              </Button>
             </form>
           </Form>
         </CardContent>
@@ -185,14 +195,9 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-              {passwordState?.message && (
-                <Alert variant={passwordState.success ? 'default' : 'destructive'} className={passwordState.success ? 'bg-green-50 border-green-200' : ''}>
-                  {passwordState.success ? <CheckCircle2 className="h-4 w-4" /> : <Terminal className="h-4 w-4" />}
-                  <AlertTitle>{passwordState.success ? 'Success' : 'Error'}</AlertTitle>
-                  <AlertDescription>{passwordState.message}</AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit">Update Password</Button>
+              <Button type="submit" disabled={isPasswordPending}>
+                {isPasswordPending ? 'Updating...' : 'Update Password'}
+              </Button>
             </form>
           </Form>
         </CardContent>

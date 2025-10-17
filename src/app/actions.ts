@@ -179,6 +179,7 @@ export async function handleUpdateEmail(prevState: any, formData: FormData) {
         } else if (e.code) {
             switch (e.code) {
                 case 'auth/invalid-credential':
+                case 'auth/wrong-password':
                     message = 'The password you entered is incorrect.';
                     break;
                 case 'auth/email-already-in-use':
@@ -212,7 +213,7 @@ export async function handleUpdatePassword(prevState: any, formData: FormData) {
         let message = 'An unexpected error occurred.';
         if (e instanceof z.ZodError) {
             return { message: 'Invalid data provided.', success: false, errors: e.flatten().fieldErrors };
-        } else if (e.code === 'auth/invalid-credential') {
+        } else if (e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password') {
              message = 'The password you entered is incorrect.';
         } else {
              message = e.message || message;

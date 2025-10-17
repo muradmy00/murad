@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useActionState } from 'react';
@@ -18,8 +19,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { handleContactForm } from '@/app/actions';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Terminal, CheckCircle2, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -44,7 +45,8 @@ declare global {
 }
 
 export function ContactForm() {
-  const [state, formAction] = useActionState(handleContactForm, initialState);
+  const { toast } = useToast();
+  const [state, formAction, isPending] = useActionState(handleContactForm, initialState);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [isSigning, setIsSigning] = useState(false);
   
@@ -60,11 +62,18 @@ export function ContactForm() {
   });
 
   useEffect(() => {
+    if (state.message) {
+      toast({
+        variant: state.success ? 'default' : 'destructive',
+        title: state.success ? 'Success!' : 'Error',
+        description: state.message,
+      });
+    }
     if (state.success) {
       form.reset();
       setWalletAddress(null);
     }
-  }, [state.success, form]);
+  }, [state, form, toast]);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -115,6 +124,8 @@ export function ContactForm() {
     }
   };
 
+  const isSubmitDisabled = isSigning || isPending;
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
@@ -163,16 +174,8 @@ export function ContactForm() {
             {form.formState.errors.walletAddress && <FormMessage>{form.formState.errors.walletAddress.message}</FormMessage>}
             {form.formState.errors.signature && <FormMessage>{form.formState.errors.signature.message}</FormMessage>}
 
-            {state?.message && (
-                <Alert variant={state.success ? 'default' : 'destructive'} className={state.success ? 'bg-green-50 border-green-200' : ''}>
-                    {state.success ? <CheckCircle2 className="h-4 w-4" /> : <Terminal className="h-4 w-4" />}
-                    <AlertTitle>{state.success ? 'Success!' : 'Error'}</AlertTitle>
-                    <AlertDescription>{state.message}</AlertDescription>
-                </Alert>
-            )}
-
-            <Button type="submit" className="w-full" disabled={isSigning}>
-              {walletAddress ? (isSigning ? 'Signing...' : 'Sign & Send Message') : 'Send Message'}
+            <Button type="submit" className="w-full" disabled={isSubmitDisabled}>
+              {walletAddress ? (isSigning ? 'Signing...' : (isPending ? 'Sending...' : 'Sign & Send Message')) : (isPending ? 'Sending...' : 'Send Message')}
             </Button>
           </form>
         </Form>

@@ -4,7 +4,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,9 +18,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { handleLogin, handlePasswordReset } from '@/app/actions';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Terminal, CheckCircle2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -46,8 +45,9 @@ const initialResetState = {
 
 
 export function LoginForm() {
-  const [loginState, loginAction] = useActionState(handleLogin, initialLoginState);
-  const [resetState, resetAction] = useActionState(handlePasswordReset, initialResetState);
+  const { toast } = useToast();
+  const [loginState, loginAction, isLoginPending] = useActionState(handleLogin, initialLoginState);
+  const [resetState, resetAction, isResetPending] = useActionState(handlePasswordReset, initialResetState);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
 
   const loginForm = useForm<LoginFormValues>({
@@ -62,6 +62,30 @@ export function LoginForm() {
       resolver: zodResolver(passwordResetSchema),
       defaultValues: { email: '' },
   });
+
+  useEffect(() => {
+    if (loginState?.message && !loginState.success) {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: loginState.message,
+      });
+    }
+  }, [loginState, toast]);
+
+  useEffect(() => {
+    if (resetState?.message) {
+      toast({
+        variant: resetState.success ? "default" : "destructive",
+        title: resetState.success ? "Check your inbox" : "Error",
+        description: resetState.message,
+      });
+      if (resetState.success) {
+        setIsForgotPassword(false);
+      }
+    }
+  }, [resetState, toast]);
+
 
   return (
     <>
@@ -100,18 +124,8 @@ export function LoginForm() {
               )}
             />
             
-            {loginState?.message && !loginState.success && (
-                <Alert variant="destructive">
-                    <Terminal className="h-4 w-4" />
-                    <AlertTitle>Login Failed</AlertTitle>
-                    <AlertDescription>
-                        {loginState.message}
-                    </AlertDescription>
-                </Alert>
-            )}
-
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={isLoginPending}>
+              {isLoginPending ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </Form>
@@ -147,16 +161,10 @@ export function LoginForm() {
                         )}
                     />
                     
-                    {resetState?.message && (
-                        <Alert variant={resetState.success ? 'default' : 'destructive'} className={resetState.success ? 'bg-green-50 border-green-200' : ''}>
-                            {resetState.success ? <CheckCircle2 className="h-4 w-4" /> : <Terminal className="h-4 w-4" />}
-                            <AlertTitle>{resetState.success ? 'Check your inbox' : 'Error'}</AlertTitle>
-                            <AlertDescription>{resetState.message}</AlertDescription>
-                        </Alert>
-                    )}
-                    
                     <DialogFooter>
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" disabled={isResetPending}>
+                          {isResetPending ? 'Sending...' : 'Submit'}
+                        </Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary">Close</Button>
                         </DialogClose>
