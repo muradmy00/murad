@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,8 +15,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { handleLogin } from '@/app/actions';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { handleLogin, handleSignup } from '@/app/actions';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
 
@@ -34,7 +34,12 @@ const initialState = {
 
 
 export function LoginForm() {
-  const [state, formAction] = useActionState(handleLogin, initialState);
+  const [isLogin, setIsLogin] = useState(true);
+  const [loginState, loginAction] = useActionState(handleLogin, initialState);
+  const [signupState, signupAction] = useActionState(handleSignup, initialState);
+
+  const state = isLogin ? loginState : signupState;
+  const formAction = isLogin ? loginAction : signupAction;
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -47,8 +52,8 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline text-2xl">Admin Login</CardTitle>
-        <CardDescription>Enter your credentials to access the dashboard.</CardDescription>
+        <CardTitle className="font-headline text-2xl">{isLogin ? 'Admin Login' : 'Admin Signup'}</CardTitle>
+        <CardDescription>{isLogin ? 'Enter your credentials to access the dashboard.' : 'Create an admin account to get started.'}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -91,11 +96,19 @@ export function LoginForm() {
             )}
 
             <Button type="submit" className="w-full">
-              Login
+              {isLogin ? 'Login' : 'Sign Up'}
             </Button>
           </form>
         </Form>
       </CardContent>
+      <CardFooter className="text-sm">
+        <p>
+            {isLogin ? "Don't have an account?" : "Already have an account?"}
+            <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="p-1">
+                {isLogin ? 'Sign up' : 'Login'}
+            </Button>
+        </p>
+      </CardFooter>
     </Card>
   );
 }

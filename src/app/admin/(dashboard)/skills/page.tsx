@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { PlusCircle, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,11 +25,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { skills } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, doc, deleteDoc } from 'firebase/firestore';
 
 export default function AdminSkillsPage() {
+  const firestore = useFirestore();
+  const skillsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'skills'));
+  }, [firestore]);
+  const { data: skills, isLoading } = useCollection(skillsQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    if (confirm('Are you sure you want to delete this skill?')) {
+      await deleteDoc(doc(firestore, 'skills', id));
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center">
@@ -64,7 +80,8 @@ export default function AdminSkillsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {skills.map((skill) => (
+              {isLoading && <TableRow><TableCell colSpan={4}>Loading...</TableCell></TableRow>}
+              {skills?.map((skill) => (
                 <TableRow key={skill.id}>
                   <TableCell className="font-medium">{skill.name}</TableCell>
                   <TableCell>
@@ -72,8 +89,8 @@ export default function AdminSkillsPage() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Progress value={skill.proficiency} className="h-2" />
-                      <span>{skill.proficiency}%</span>
+                      <Progress value={skill.level} className="h-2" />
+                      <span>{skill.level}%</span>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -86,8 +103,10 @@ export default function AdminSkillsPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/admin/skills/edit/${skill.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(skill.id)}>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -98,7 +117,7 @@ export default function AdminSkillsPage() {
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-{skills.length}</strong> of <strong>{skills.length}</strong> skills
+            Showing <strong>1-{skills?.length ?? 0}</strong> of <strong>{skills?.length ?? 0}</strong> skills
           </div>
         </CardFooter>
       </Card>

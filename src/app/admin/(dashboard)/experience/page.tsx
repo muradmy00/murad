@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { PlusCircle, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,9 +25,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { experience } from '@/lib/data';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, doc, deleteDoc, orderBy } from 'firebase/firestore';
+import { format } from 'date-fns';
 
 export default function AdminExperiencePage() {
+  const firestore = useFirestore();
+  const experienceQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'experience'), orderBy('startDate', 'desc'));
+  }, [firestore]);
+  const { data: experience, isLoading } = useCollection(experienceQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    if (confirm('Are you sure you want to delete this experience entry?')) {
+      await deleteDoc(doc(firestore, 'experience', id));
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center">
@@ -62,11 +79,14 @@ export default function AdminExperiencePage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {experience.map((item) => (
+              {isLoading && <TableRow><TableCell colSpan={4}>Loading...</TableCell></TableRow>}
+              {experience?.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.role}</TableCell>
+                  <TableCell className="font-medium">{item.title}</TableCell>
                   <TableCell>{item.company}</TableCell>
-                  <TableCell className="hidden md:table-cell">{item.duration}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {item.startDate ? format(new Date(item.startDate), 'MMM yyyy') : ''} - {item.endDate ? format(new Date(item.endDate), 'MMM yyyy') : 'Present'}
+                  </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -77,8 +97,10 @@ export default function AdminExperiencePage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/admin/experience/edit/${item.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -89,7 +111,7 @@ export default function AdminExperiencePage() {
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-{experience.length}</strong> of <strong>{experience.length}</strong> entries
+            Showing <strong>1-{experience?.length ?? 0}</strong> of <strong>{experience?.length ?? 0}</strong> entries
           </div>
         </CardFooter>
       </Card>

@@ -1,35 +1,51 @@
+'use client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, FileText, Lightbulb, MessageSquare } from 'lucide-react';
-import { projects, blogPosts, skills, messages } from '@/lib/data';
-
-const stats = [
-  {
-    title: "Projects",
-    count: projects.length,
-    icon: Briefcase,
-    color: "text-blue-500",
-  },
-  {
-    title: "Blog Posts",
-    count: blogPosts.length,
-    icon: FileText,
-    color: "text-green-500",
-  },
-  {
-    title: "Skills",
-    count: skills.length,
-    icon: Lightbulb,
-    color: "text-yellow-500",
-  },
-  {
-    title: "Messages",
-    count: messages.length,
-    icon: MessageSquare,
-    color: "text-purple-500",
-  },
-];
+import { useCollection, useFirestore, useMemoFirebase } from "@/firebase";
+import { collection, query } from "firebase/firestore";
 
 export default function DashboardPage() {
+  const firestore = useFirestore();
+
+  const projectsQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'projects')) : null, [firestore]);
+  const { data: projects } = useCollection(projectsQuery);
+
+  const blogPostsQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'blog_posts')) : null, [firestore]);
+  const { data: blogPosts } = useCollection(blogPostsQuery);
+
+  const skillsQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'skills')) : null, [firestore]);
+  const { data: skills } = useCollection(skillsQuery);
+  
+  const messagesQuery = useMemoFirebase(() => firestore ? query(collection(firestore, 'contact_messages')) : null, [firestore]);
+  const { data: messages } = useCollection(messagesQuery);
+
+  const stats = [
+    {
+      title: "Projects",
+      count: projects?.length ?? 0,
+      icon: Briefcase,
+      color: "text-blue-500",
+    },
+    {
+      title: "Blog Posts",
+      count: blogPosts?.length ?? 0,
+      icon: FileText,
+      color: "text-green-500",
+    },
+    {
+      title: "Skills",
+      count: skills?.length ?? 0,
+      icon: Lightbulb,
+      color: "text-yellow-500",
+    },
+    {
+      title: "Messages",
+      count: messages?.length ?? 0,
+      icon: MessageSquare,
+      color: "text-purple-500",
+    },
+  ];
+
   return (
     <div>
       <h1 className="font-headline text-3xl font-bold mb-8">Dashboard</h1>

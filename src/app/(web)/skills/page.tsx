@@ -1,13 +1,13 @@
-import { Badge } from '@/components/ui/badge';
+'use client';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { skills } from '@/lib/data';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query } from 'firebase/firestore';
 import type { Skill } from '@/lib/types';
 
 const skillCategories: Skill['category'][] = [
@@ -21,6 +21,13 @@ const skillCategories: Skill['category'][] = [
 ];
 
 export default function SkillsPage() {
+  const firestore = useFirestore();
+  const skillsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'skills'));
+  }, [firestore]);
+  const { data: skills, isLoading } = useCollection(skillsQuery);
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-12">
@@ -33,12 +40,14 @@ export default function SkillsPage() {
         </p>
       </div>
 
+      {isLoading && <div className="text-center">Loading skills...</div>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {skillCategories.map((category) => {
-          const categorySkills = skills.filter(
+          const categorySkills = skills?.filter(
             (skill) => skill.category === category
           );
-          if (categorySkills.length === 0) return null;
+          if (!categorySkills || categorySkills.length === 0) return null;
 
           return (
             <Card key={category} className="shadow-md hover:shadow-lg transition-shadow">
@@ -51,10 +60,10 @@ export default function SkillsPage() {
                     <div className="flex justify-between items-center mb-1">
                       <p className="font-medium">{skill.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {skill.proficiency}%
+                        {skill.level}%
                       </p>
                     </div>
-                    <Progress value={skill.proficiency} />
+                    <Progress value={skill.level} />
                   </div>
                 ))}
               </CardContent>

@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { PlusCircle, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,9 +26,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
-import { projects } from '@/lib/data';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, doc, deleteDoc } from 'firebase/firestore';
 
 export default function AdminProjectsPage() {
+  const firestore = useFirestore();
+  const projectsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'projects'));
+  }, [firestore]);
+  const { data: projects, isLoading } = useCollection(projectsQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    if (confirm('Are you sure you want to delete this project?')) {
+      await deleteDoc(doc(firestore, 'projects', id));
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center">
@@ -63,15 +79,16 @@ export default function AdminProjectsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {projects.map((project) => (
+              {isLoading && <TableRow><TableCell colSpan={4}>Loading...</TableCell></TableRow>}
+              {projects?.map((project) => (
                 <TableRow key={project.id}>
                   <TableCell className="font-medium">{project.title}</TableCell>
                   <TableCell>
                     <div className="flex flex-wrap gap-1">
-                      {project.techStack.slice(0, 3).map((tech) => (
+                      {project.tags?.slice(0, 3).map((tech: string) => (
                         <Badge key={tech} variant="secondary">{tech}</Badge>
                       ))}
-                      {project.techStack.length > 3 && <Badge variant="outline">...</Badge>}
+                      {project.tags?.length > 3 && <Badge variant="outline">...</Badge>}
                     </div>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">{project.liveUrl}</TableCell>
@@ -85,8 +102,10 @@ export default function AdminProjectsPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/admin/projects/edit/${project.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(project.id)}>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -97,7 +116,7 @@ export default function AdminProjectsPage() {
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-{projects.length}</strong> of <strong>{projects.length}</strong> projects
+            Showing <strong>1-{projects?.length ?? 0}</strong> of <strong>{projects?.length ?? 0}</strong> projects
           </div>
         </CardFooter>
       </Card>

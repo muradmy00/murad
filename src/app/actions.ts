@@ -3,11 +3,32 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { z } from 'zod';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
+import { initializeFirebase } from '@/firebase';
 
 const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().min(6),
 });
+
+const signupSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+});
+
+async function setAuthCookie(token: string) {
+    cookies().set('devfolio-auth-token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24, // 1 day
+        path: '/',
+    });
+}
+
 
 export async function handleLogin(prevState: any, formData: FormData) {
   try {
@@ -16,22 +37,63 @@ export async function handleLogin(prevState: any, formData: FormData) {
       password: formData.get('password'),
     });
 
-    // Mock authentication logic
-    if (parsed.email === 'admin@example.com' && parsed.password === 'password') {
-      cookies().set('devfolio-auth-token', 'mock-token', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24, // 1 day
-        path: '/',
-      });
-    } else {
-        return { message: 'Invalid email or password.', success: false };
+    const { auth } = initializeFirebase();
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      parsed.email,
+      parsed.password
+    );
+    const token = await userCredential.user.getIdToken();
+    await setAuthCookie(token);
+
+  } catch (e: any) {
+    let message = 'An unexpected error occurred.';
+    if (e instanceof z.ZodError) {
+        message = 'Invalid form data.';
+    } else if (e.code) {
+        switch (e.code) {
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+            case 'auth/invalid-credential':
+                message = 'Invalid email or password.';
+                break;
+            default:
+                message = e.message;
+        }
     }
-  } catch (e) {
-    return { message: 'Invalid form data.', success: false };
+    return { message, success: false };
   }
 
   redirect('/admin/dashboard');
+}
+
+export async function handleSignup(prevState: any, formData: FormData) {
+    try {
+      const parsed = signupSchema.parse({
+        email: formData.get('email'),
+        password: formData.get('password'),
+      });
+  
+      const { auth, firestore } = initializeFirebase();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        parsed.email,
+        parsed.password
+      );
+      const token = await userCredential.user.getIdToken();
+      await setAuthCookie(token);
+      
+    } catch (e: any) {
+      let message = 'An unexpected error occurred.';
+      if (e instanceof z.ZodError) {
+          message = 'Invalid form data.';
+      } else if (e.code === 'auth/email-already-in-use') {
+          message = 'This email is already registered. Please login instead.';
+      }
+      return { message, success: false };
+    }
+  
+    redirect('/admin/dashboard');
 }
 
 export async function logout() {

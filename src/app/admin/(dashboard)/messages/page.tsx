@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -15,11 +16,19 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { messages } from '@/lib/data';
 import { format } from 'date-fns';
 import { Wallet } from 'lucide-react';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query } from 'firebase/firestore';
 
 export default function AdminMessagesPage() {
+  const firestore = useFirestore();
+  const messagesQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'contact_messages'));
+  }, [firestore]);
+  const { data: messages, isLoading } = useCollection(messagesQuery);
+
   return (
     <div>
       <h1 className="font-headline text-3xl font-bold">Contact Messages</h1>
@@ -41,7 +50,8 @@ export default function AdminMessagesPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {messages.map((message) => (
+              {isLoading && <TableRow><TableCell colSpan={4}>Loading...</TableCell></TableRow>}
+              {messages?.map((message) => (
                 <TableRow key={message.id}>
                   <TableCell>
                     <div className="font-medium">{message.name}</div>
@@ -51,7 +61,7 @@ export default function AdminMessagesPage() {
                     <p className="max-w-xs truncate">{message.message}</p>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {format(message.receivedAt, 'PPP p')}
+                    {message.sentDate ? format(new Date(message.sentDate), 'PPP p') : ''}
                   </TableCell>
                   <TableCell className="text-right">
                     {message.walletAddress ? (
@@ -70,7 +80,7 @@ export default function AdminMessagesPage() {
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-{messages.length}</strong> of <strong>{messages.length}</strong> messages
+            Showing <strong>1-{messages?.length ?? 0}</strong> of <strong>{messages?.length ?? 0}</strong> messages
           </div>
         </CardFooter>
       </Card>

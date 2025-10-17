@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { PlusCircle, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,10 +25,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { blogPosts } from '@/lib/data';
 import { format } from 'date-fns';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query, doc, deleteDoc } from 'firebase/firestore';
 
 export default function AdminBlogPage() {
+  const firestore = useFirestore();
+  const blogPostsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'blog_posts'));
+  }, [firestore]);
+  const { data: blogPosts, isLoading } = useCollection(blogPostsQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    if (confirm('Are you sure you want to delete this post?')) {
+      await deleteDoc(doc(firestore, 'blog_posts', id));
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center">
@@ -62,11 +78,12 @@ export default function AdminBlogPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {blogPosts.map((post) => (
+              {isLoading && <TableRow><TableCell colSpan={3}>Loading...</TableCell></TableRow>}
+              {blogPosts?.map((post) => (
                 <TableRow key={post.id}>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {format(post.publishedAt, 'PPP')}
+                    {post.publishedDate ? format(new Date(post.publishedDate), 'PPP') : 'N/A'}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -78,8 +95,10 @@ export default function AdminBlogPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={`/admin/blog/edit/${post.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDelete(post.id)}>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -90,7 +109,7 @@ export default function AdminBlogPage() {
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-{blogPosts.length}</strong> of <strong>{blogPosts.length}</strong> posts
+            Showing <strong>1-{blogPosts?.length ?? 0}</strong> of <strong>{blogPosts?.length ?? 0}</strong> posts
           </div>
         </CardFooter>
       </Card>

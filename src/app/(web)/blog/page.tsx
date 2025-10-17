@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -8,10 +9,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { blogPosts } from '@/lib/data';
 import { format } from 'date-fns';
+import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { collection, query } from 'firebase/firestore';
 
 export default function BlogPage() {
+  const firestore = useFirestore();
+  const blogPostsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'blog_posts'));
+  }, [firestore]);
+  const { data: blogPosts, isLoading } = useCollection(blogPostsQuery);
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-12">
@@ -23,26 +32,29 @@ export default function BlogPage() {
         </p>
       </div>
 
+      {isLoading && <div className="text-center">Loading posts...</div>}
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`} className="group">
+        {blogPosts?.map((post) => (
+          <Link key={post.id} href={`/blog/${post.id}`} className="group">
             <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="p-0">
-                <Image
-                  src={post.imageUrl}
-                  alt={post.title}
-                  width={600}
-                  height={400}
-                  className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
-                  data-ai-hint={post.imageHint}
-                />
+                {post.imageUrl && (
+                  <Image
+                    src={post.imageUrl}
+                    alt={post.title}
+                    width={600}
+                    height={400}
+                    className="w-full object-cover rounded-t-lg aspect-[3/2] group-hover:scale-105 transition-transform duration-300"
+                  />
+                )}
               </CardHeader>
               <CardContent className="p-6 flex-grow">
                 <CardTitle className="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                   {post.title}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {format(post.publishedAt, 'MMMM d, yyyy')}
+                  {post.publishedDate ? format(new Date(post.publishedDate), 'MMMM d, yyyy') : ''}
                 </p>
                 <CardDescription className="text-muted-foreground line-clamp-3">
                   {post.content}
