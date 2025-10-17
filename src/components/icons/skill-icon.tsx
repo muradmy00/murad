@@ -17,24 +17,24 @@ type SkillIconProps = {
 };
 
 export const SkillIcon = ({ skillName, className }: SkillIconProps) => {
-  switch (skillName.toLowerCase()) {
-    case 'react':
+  switch (skillName) {
+    case 'React':
       return <SiReact className={className} color="#61DAFB" />;
-    case 'next.js':
+    case 'Next.js':
       return <SiNextdotjs className={className} color="#FFFFFF" />;
-    case 'typescript':
+    case 'TypeScript':
       return <SiTypescript className={className} color="#3178C6" />;
-    case 'javascript':
+    case 'JavaScript':
       return <SiJavascript className={className} color="#F7DF1E" />;
-    case 'tailwind css':
+    case 'Tailwind CSS':
       return <SiTailwindcss className={className} color="#06B6D4" />;
-    case 'node.js':
+    case 'Node.js':
       return <SiNodedotjs className={className} color="#339933" />;
-    case 'solidity':
+    case 'Solidity':
         return <SiSolidity className={className} color="#363636" />;
-    case 'git & github':
+    case 'Git & GitHub':
       return <SiGit className={className} color="#F05032" />;
-    case 'figma':
+    case 'Figma':
       return <SiFigma className={className} color="#F24E1E" />;
     default:
       return null;
