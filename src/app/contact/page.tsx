@@ -15,7 +15,7 @@ export default function ContactPage() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-x-16 gap-y-12 items-start">
-        <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
+        <div className="space-y-8 animate-fade-in-up lg:pr-4" style={{ animationDelay: '150ms' }}>
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
               <Mail className="w-6 h-6" />
@@ -23,7 +23,7 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold">Email</h3>
               <p className="text-muted-foreground text-sm mt-1">I'll get back to you as soon as possible.</p>
-              <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline">
+              <a href="mailto:mohiuddinmurad.my00@gmail.com" className="text-accent hover:underline break-all">
                mohiuddinmurad.my00@gmail.com
               </a>
             </div>
