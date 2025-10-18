@@ -493,7 +493,7 @@ function ThemeSwitcher() {
 export const messages: Message[] = [];
 
 export const resume = {
-  url: 'https://drive.google.com/file/d/1OxXkJIPi13NBX3EhLkrjbKrdeMgxSYpw/view?usp=drive_link'
+  url: 'https://drive.google.com/file/d/1PvSN8Xf17sodPm0dd3Oght_VbRdHl2iW/view?usp=drive_link'
 };
 
     
@@ -511,3 +511,4 @@ export const resume = {
 
 
     
+
