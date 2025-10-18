@@ -21,11 +21,7 @@ const navLinks = [
 
 const NavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
   const pathname = usePathname();
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    setIsActive(pathname === href || (href !== '/' && pathname.startsWith(href)));
-  }, [pathname, href]);
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
 
   return (
     <Link
@@ -46,18 +42,13 @@ const NavLink = ({ href, label, onClick }: { href: string; label: string; onClic
 
 const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
     const pathname = usePathname();
-    const [isActive, setIsActive] = useState(false);
-
-    useEffect(() => {
-        setIsActive(pathname === href || (href !== '/' && pathname.startsWith(href)));
-    }, [pathname, href]);
-
+    const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
 
     return (
          <Link
             href={href}
             className={cn(
-            "block w-full text-left p-3 rounded-lg font-medium text-base transition-colors",
+            "block w-full text-left p-3 rounded-lg font-medium text-sm transition-colors",
             isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
             )}
             onClick={onClick}
@@ -67,15 +58,9 @@ const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; 
     )
 }
 
-
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
@@ -87,41 +72,39 @@ export default function Header() {
         
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-2">
-          {isClient && navLinks.map((link) => (
+          {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
         </nav>
         
         {/* Mobile Menu */}
         <div className="lg:hidden">
-           {isClient && (
-            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                        <Menu className="h-6 w-6" />
-                        <span className="sr-only">Open Menu</span>
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="p-0">
-                    <SheetHeader className="p-4 border-b">
-                        <SheetTitle>
-                            <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
-                              <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
-                                Murad
-                              </span>
-                            </Link>
-                        </SheetTitle>
-                    </SheetHeader>
-                    <div className="p-4">
-                        <nav className="flex flex-col space-y-1">
-                        {navLinks.map((link) => (
-                            <MobileNavLink key={link.href} {...link} onClick={() => setMobileMenuOpen(false)} />
-                        ))}
-                        </nav>
-                    </div>
-                </SheetContent>
-            </Sheet>
-            )}
+          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                      <Menu className="h-6 w-6" />
+                      <span className="sr-only">Open Menu</span>
+                  </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0">
+                  <SheetHeader className="p-4 border-b">
+                      <SheetTitle>
+                          <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+                            <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
+                              Murad
+                            </span>
+                          </Link>
+                      </SheetTitle>
+                  </SheetHeader>
+                  <div className="p-4">
+                      <nav className="flex flex-col space-y-1">
+                      {navLinks.map((link) => (
+                          <MobileNavLink key={link.href} {...link} onClick={() => setMobileMenuOpen(false)} />
+                      ))}
+                      </nav>
+                  </div>
+              </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
