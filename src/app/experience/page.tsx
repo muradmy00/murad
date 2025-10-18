@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 export default function ExperiencePage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-20">
+      <div className="text-center mb-20 animate-fade-in-up">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           Work Experience
         </h1>
@@ -24,12 +24,13 @@ export default function ExperiencePage() {
 
       <div className="relative">
         {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2"></div>
+        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2 animate-fade-in"></div>
         <div className="space-y-12">
           {experience.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex flex-col lg:flex-row items-start lg:items-center"
+              className="relative flex flex-col lg:flex-row items-start lg:items-center animate-fade-in-up"
+              style={{ animationDelay: `${index * 200}ms` }}
             >
               <div
                 className={cn(
@@ -62,7 +63,7 @@ export default function ExperiencePage() {
         </div>
       </div>
       
-      <div className="text-center my-20 pt-10">
+      <div className="text-center my-20 pt-10 animate-fade-in-up">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           Education
         </h1>
@@ -73,12 +74,13 @@ export default function ExperiencePage() {
       
       <div className="relative">
         {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2"></div>
+        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2 animate-fade-in"></div>
         <div className="space-y-12">
           {education.map((item, index) => (
              <div
               key={item.id}
-              className="relative flex flex-col lg:flex-row items-start lg:items-center"
+              className="relative flex flex-col lg:flex-row items-start lg:items-center animate-fade-in-up"
+              style={{ animationDelay: `${index * 200}ms` }}
             >
               <div
                 className={cn(

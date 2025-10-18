@@ -15,7 +15,7 @@ import { blogPosts } from '@/lib/data';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
-const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
+const BlogPostCard = ({ post, index }: { post: (typeof blogPosts)[0], index: number }) => {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -29,46 +29,48 @@ const BlogPostCard = ({ post }: { post: (typeof blogPosts)[0] }) => {
   }, [post.content]);
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group">
-      <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
-        <CardHeader className="p-0">
-          {post.imageUrl && (
-            <div className={cn(
-              "relative w-full aspect-[3/2] rounded-t-lg overflow-hidden",
-              typeof post.imageUrl !== 'string' && 'bg-secondary/20 p-4'
-            )}>
-              <Image
-                src={post.imageUrl}
-                alt={post.title}
-                fill
-                className={cn(
-                  'object-cover group-hover:scale-105 transition-transform duration-300',
-                  typeof post.imageUrl !== 'string' && 'object-contain'
-                )}
-                data-ai-hint={post.imageHint}
-              />
+    <div className="animate-fade-in-up" style={{ animationDelay: `${index * 150}ms` }}>
+        <Link href={`/blog/${post.slug}`} className="group">
+        <Card className="overflow-hidden shadow-lg h-full flex flex-col group-hover:shadow-2xl group-hover:border-primary border-2 border-transparent transition-all duration-300">
+            <CardHeader className="p-0">
+            {post.imageUrl && (
+                <div className={cn(
+                "relative w-full aspect-[3/2] rounded-t-lg overflow-hidden",
+                typeof post.imageUrl !== 'string' && 'bg-secondary/20 p-4'
+                )}>
+                <Image
+                    src={post.imageUrl}
+                    alt={post.title}
+                    fill
+                    className={cn(
+                    'object-cover group-hover:scale-105 transition-transform duration-300',
+                    typeof post.imageUrl !== 'string' && 'object-contain'
+                    )}
+                    data-ai-hint={post.imageHint}
+                />
+                </div>
+            )}
+            </CardHeader>
+            <CardContent className="p-6 flex-grow">
+            <CardTitle className="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                {post.title}
+            </CardTitle>
+            <p className="text-sm text-muted-foreground mb-4">
+                {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
+            </p>
+            <CardDescription className="text-muted-foreground line-clamp-3">
+                {description ? `${description}...` : <span className="animate-pulse">Loading...</span>}
+            </CardDescription>
+            </CardContent>
+            <div className="p-6 pt-0 mt-auto">
+            <div className="flex items-center text-primary font-semibold">
+                Read More
+                <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
             </div>
-          )}
-        </CardHeader>
-        <CardContent className="p-6 flex-grow">
-          <CardTitle className="font-headline text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-            {post.title}
-          </CardTitle>
-          <p className="text-sm text-muted-foreground mb-4">
-            {post.publishedAt ? format(new Date(post.publishedAt), 'MMMM d, yyyy') : ''}
-          </p>
-          <CardDescription className="text-muted-foreground line-clamp-3">
-            {description ? `${description}...` : <span className="animate-pulse">Loading...</span>}
-          </CardDescription>
-        </CardContent>
-        <div className="p-6 pt-0 mt-auto">
-           <div className="flex items-center text-primary font-semibold">
-              Read More
-              <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-           </div>
-        </div>
-      </Card>
-    </Link>
+            </div>
+        </Card>
+        </Link>
+    </div>
   )
 }
 
@@ -76,7 +78,7 @@ export default function BlogPage() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 animate-fade-in-up">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           My Blog
         </h1>
@@ -86,8 +88,8 @@ export default function BlogPage() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts?.map((post) => (
-          <BlogPostCard key={post.id} post={post} />
+        {blogPosts?.map((post, index) => (
+          <BlogPostCard key={post.id} post={post} index={index} />
         ))}
       </div>
     </div>

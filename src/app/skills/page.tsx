@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 export default function SkillsPage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-16">
+      <div className="text-center mb-16 animate-fade-in-up">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           My Technical Skills
         </h1>
@@ -18,10 +18,11 @@ export default function SkillsPage() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {skills.map((skill) => (
+        {skills.map((skill, index) => (
           <div
             key={skill.id}
-            className="group relative flex flex-col items-center justify-center p-6 bg-secondary/30 rounded-lg border-2 border-transparent transition-all duration-300 hover:border-primary hover:bg-secondary/60 hover:shadow-2xl hover:shadow-primary/20"
+            className="group relative flex flex-col items-center justify-center p-6 bg-secondary/30 rounded-lg border-2 border-transparent transition-all duration-300 hover:border-primary hover:bg-secondary/60 hover:shadow-2xl hover:shadow-primary/20 animate-fade-in-up"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="h-16 w-16 mb-4 flex items-center justify-center">
               {skill.imageUrl ? (

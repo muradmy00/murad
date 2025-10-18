@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <main className="text-center">
-        <div className="relative inline-block">
+        <div className="relative inline-block animate-fade-in-up">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
           <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl min-h-[9rem] sm:min-h-[7rem] md:min-h-[8rem] lg:min-h-32 flex items-center justify-center">
             <span className="leading-tight">
@@ -75,12 +75,12 @@ export default function HomePage() {
           </h1>
         </div>
 
-        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground animate-fade-in-up" style={{ animationDelay: '150ms' }}>
           A passionate Frontend Developer creating modern, responsive, and
           performant web applications.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
           <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-primary-foreground group hover:from-primary/90 hover:to-accent/90">
             <Link href="/projects">
               View My Work <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
@@ -93,7 +93,7 @@ export default function HomePage() {
           </Button>
         </div>
         
-        <div className="mt-10 flex justify-center space-x-6">
+        <div className="mt-10 flex justify-center space-x-6 animate-fade-in-up" style={{ animationDelay: '450ms' }}>
             {socialLinks.map((link, index) => (
               <Link key={index} href={link.href} className="text-muted-foreground hover:text-primary transition-colors" aria-label={link['aria-label']}>
                 <link.icon className="h-7 w-7" />
@@ -101,7 +101,7 @@ export default function HomePage() {
             ))}
         </div>
 
-        <Card className="mt-20 max-w-6xl mx-auto bg-transparent border-none shadow-none">
+        <Card className="mt-20 max-w-6xl mx-auto bg-transparent border-none shadow-none animate-fade-in-up" style={{ animationDelay: '600ms' }}>
             <CardContent className="p-0">
                 <div className="grid md:grid-cols-5 items-center gap-8">
                     <div className="relative md:col-span-2 flex justify-center items-center">

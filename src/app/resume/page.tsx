@@ -16,7 +16,7 @@ export default function ResumePage() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 animate-fade-in-up">
         <h1 className="font-headline text-4xl sm:text-5xl font-bold text-primary">
           My Resume
         </h1>
@@ -26,7 +26,7 @@ export default function ResumePage() {
         </p>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center animate-fade-in-up" style={{ animationDelay: '150ms' }}>
         <Button asChild size="lg">
           <a href={resume.url} target="_blank" rel="noopener noreferrer">
             <Download className="mr-2 h-5 w-5" />
@@ -35,14 +35,13 @@ export default function ResumePage() {
         </Button>
       </div>
 
-      <div className="mt-12 bg-card border rounded-lg p-8 shadow-sm">
+      <div className="mt-12 bg-card border rounded-lg p-2 sm:p-4 md:p-8 shadow-sm animate-fade-in-up" style={{ animationDelay: '300ms' }}>
         <iframe
           src={embedUrl}
           title="Resume"
-          className="w-full h-[800px] border-none rounded-md"
+          className="w-full h-[600px] md:h-[800px] border-none rounded-md"
           allow="autoplay"
         />
       </div>
     </div>
   );
-}
