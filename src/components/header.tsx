@@ -69,39 +69,37 @@ export default function Header() {
             </span>
         </Link>
         
-        <div className="flex items-center">
-          <nav className="hidden lg:flex items-center space-x-2 text-sm font-medium">
-            {navLinks.map((link) => (
-              <NavLink key={link.href} {...link} />
-            ))}
-          </nav>
-          <div className="lg:hidden">
-              <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                  <SheetTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                          <Menu className="h-6 w-6" />
-                          <span className="sr-only">Open Menu</span>
-                      </Button>
-                  </SheetTrigger>
-                  <SheetContent side="left">
-                    <SheetHeader>
-                        <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
-                    </SheetHeader>
-                      <div className="p-4">
-                          <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setMobileMenuOpen(false)}>
-                            <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
-                              Murad
-                            </span>
-                          </Link>
-                          <nav className="flex flex-col space-y-2">
-                          {navLinks.map((link) => (
-                              <NavLink key={link.href} {...link} isMobile={true} />
-                          ))}
-                          </nav>
-                      </div>
-                  </SheetContent>
-              </Sheet>
-          </div>
+        <nav className="hidden lg:flex items-center space-x-2 text-sm font-medium">
+          {navLinks.map((link) => (
+            <NavLink key={link.href} {...link} />
+          ))}
+        </nav>
+        <div className="lg:hidden">
+            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                        <Menu className="h-6 w-6" />
+                        <span className="sr-only">Open Menu</span>
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <SheetHeader>
+                      <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                  </SheetHeader>
+                    <div className="p-4">
+                        <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setMobileMenuOpen(false)}>
+                          <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
+                            Murad
+                          </span>
+                        </Link>
+                        <nav className="flex flex-col space-y-2">
+                        {navLinks.map((link) => (
+                            <NavLink key={link.href} {...link} isMobile={true} />
+                        ))}
+                        </nav>
+                    </div>
+                </SheetContent>
+            </Sheet>
         </div>
       </div>
     </header>
