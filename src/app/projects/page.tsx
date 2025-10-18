@@ -9,6 +9,8 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 import { projects } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -30,7 +32,7 @@ export default function ProjectsPage() {
         {projects?.map((project, index) => (
           <div
             key={project.id}
-            className="animate-fade-in-up"
+            className="animate-fade-in-up h-full"
             style={{ animationDelay: `${index * 150}ms` }}
           >
             <Card className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-primary/20 hover:shadow-xl border-2 border-transparent hover:border-primary/30 flex flex-col bg-secondary/20 h-full">
@@ -60,11 +62,11 @@ export default function ProjectsPage() {
               </div>
 
               <CardContent className="p-6 bg-card flex-grow flex flex-col">
-                <h3 className="font-headline text-2xl font-bold group-hover:text-primary transition-colors mb-2">
+                <CardTitle className="font-headline text-2xl font-bold group-hover:text-primary transition-colors mb-2">
                   {project.title}
-                </h3>
+                </CardTitle>
                 
-                <div className="flex flex-wrap gap-2 mb-4 min-h-[56px]">
+                <div className="flex flex-wrap gap-2 mb-4 min-h-[56px] items-start">
                   {project.techStack?.map((tech: string) => (
                     <Badge key={tech} variant="secondary">{tech}</Badge>
                   ))}
