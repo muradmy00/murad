@@ -19,53 +19,51 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function Header() {
+const NavLink = ({ href, label, isMobile = false, onClick }: { href: string; label: string; isMobile?: boolean; onClick?: () => void; }) => {
   const pathname = usePathname();
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
-  const NavLink = ({ href, label, isMobile = false }: { href: string; label: string; isMobile?: boolean}) => {
+  useEffect(() => {
+    // Determine active state on the client after hydration
     const isActivePath = pathname === href || (href !== '/' && pathname.startsWith(href));
-    const [isActive, setIsActive] = useState(false);
+    setIsActive(isActivePath);
+  }, [pathname, href]);
 
-    useEffect(() => {
-      // This ensures that the active state is only set on the client-side after hydration
-      setIsActive(isActivePath);
-    }, [isActivePath]);
-    
-    const commonClasses = "transition-colors";
-    
-    if (isMobile) {
-        return (
-            <Link
-                href={href}
-                className={cn(
-                  "block w-full text-left p-2 rounded-lg font-medium",
-                  isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
-                  commonClasses
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-            >
-                {label}
-            </Link>
-        );
-    }
-    
+  if (isMobile) {
     return (
       <Link
         href={href}
         className={cn(
-          "relative px-3 py-2 text-sm font-medium hover:text-primary",
-          isActive ? "text-primary" : "text-muted-foreground",
-          commonClasses
+          "block w-full text-left p-2 rounded-lg font-medium text-base",
+          isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
+          "transition-colors"
         )}
+        onClick={onClick}
       >
         {label}
-        {isActive && (
-            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary rounded-full"></span>
-        )}
       </Link>
     );
-  };
+  }
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "relative px-3 py-2 text-sm font-medium hover:text-primary transition-colors",
+        isActive ? "text-primary" : "text-muted-foreground"
+      )}
+    >
+      {label}
+      {isActive && (
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary rounded-full"></span>
+      )}
+    </Link>
+  );
+};
+
+
+export default function Header() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -104,7 +102,7 @@ export default function Header() {
                         </Link>
                         <nav className="flex flex-col space-y-1">
                         {navLinks.map((link) => (
-                            <NavLink key={link.href} {...link} isMobile={true} />
+                            <NavLink key={link.href} {...link} isMobile={true} onClick={() => setMobileMenuOpen(false)} />
                         ))}
                         </nav>
                     </div>
