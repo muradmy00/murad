@@ -15,9 +15,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and Name */}
           <div className="flex items-center">
-             <span className="font-headline text-2xl font-bold">
-                <span className="text-primary">M</span>
-                <span className="text-foreground">urad</span>
+             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
+                Murad
             </span>
           </div>
 
