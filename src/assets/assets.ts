@@ -36,7 +36,7 @@ export const assets = {
     typescript_javascript,
     Bonnek,
     careshced,
-ecommerce,
+    ecommerce,
     food_delivery,
     gemini_clone,
     university,
@@ -44,5 +44,5 @@ ecommerce,
     quill_icon,
     zustand,
     tanstack_query,
-    yap
+    yap,
 }

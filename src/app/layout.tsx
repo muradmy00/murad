@@ -4,14 +4,15 @@ import Footer from '@/components/footer';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from 'next';
+import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
   title: 'Murad',
   description: 'Murad',
     icons: {
-    icon: '/favicon.png',
+    icon: './favicon_image.png',
+    },
   }
-};
 
 export default function RootLayout({
   children,
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
