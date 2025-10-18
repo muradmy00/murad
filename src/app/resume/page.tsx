@@ -36,7 +36,7 @@ export default function ResumePage() {
       </div>
 
       <div className="mt-12 bg-card border rounded-lg shadow-sm animate-fade-in-up overflow-hidden" style={{ animationDelay: '300ms' }}>
-        <div className="relative aspect-[8.5/11] w-full">
+        <div className="relative w-full h-[1000px]">
             <iframe
                 src={embedUrl}
                 title="Resume"
