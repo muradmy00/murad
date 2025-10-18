@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -24,7 +24,13 @@ export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const NavLink = ({ href, label, isMobile = false }: { href: string; label: string; isMobile?: boolean}) => {
-    const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+    const isActivePath = pathname === href || (href !== '/' && pathname.startsWith(href));
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+      // This ensures that the active state is only set on the client-side after hydration
+      setIsActive(isActivePath);
+    }, [isActivePath]);
     
     const commonClasses = "transition-colors";
     
@@ -33,7 +39,7 @@ export default function Header() {
             <Link
                 href={href}
                 className={cn(
-                  "block w-full text-left p-3 rounded-lg font-medium",
+                  "block w-full text-left p-2 rounded-lg font-medium",
                   isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
                   commonClasses
                 )}
