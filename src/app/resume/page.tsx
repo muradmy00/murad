@@ -35,13 +35,16 @@ export default function ResumePage() {
         </Button>
       </div>
 
-      <div className="mt-12 bg-card border rounded-lg p-2 sm:p-4 md:p-8 shadow-sm animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-        <iframe
-          src={embedUrl}
-          title="Resume"
-          className="w-full h-[600px] md:h-[800px] border-none rounded-md"
-          allow="autoplay"
-        />
+      <div className="mt-12 bg-card border rounded-lg shadow-sm animate-fade-in-up overflow-hidden" style={{ animationDelay: '300ms' }}>
+        <div className="relative aspect-[8.5/11] w-full">
+            <iframe
+                src={embedUrl}
+                title="Resume"
+                className="absolute top-0 left-0 w-full h-full border-none"
+                allow="autoplay"
+            />
+        </div>
       </div>
     </div>
   );
+}
