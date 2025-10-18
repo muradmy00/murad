@@ -34,7 +34,7 @@ const NavLink = ({ href, label, isMobile = false, onClick }: { href: string; lab
       <Link
         href={href}
         className={cn(
-          "block w-full text-left p-2 rounded-lg font-medium text-base",
+          "block w-full text-left p-3 rounded-lg font-medium text-base",
           isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
           "transition-colors"
         )}
