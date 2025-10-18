@@ -15,14 +15,15 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo and Name */}
           <div className="flex items-center">
-             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                Mohiuddin Murad
+             <span className="font-headline text-2xl font-bold">
+                <span className="text-primary">M</span>
+                <span className="text-accent">urad</span>
             </span>
           </div>
 
           {/* Copyright */}
           <div className="text-center text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Mohiuddin Murad. All Rights Reserved.
+            © {new Date().getFullYear()} Murad. All Rights Reserved.
           </div>
 
           {/* Socials Section */}

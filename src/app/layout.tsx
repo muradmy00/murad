@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
-  title: 'Mohiuddin Murad',
+  title: 'Murad',
   description: 'Murad',
     icons: {
     icon: assets.favicon.src,

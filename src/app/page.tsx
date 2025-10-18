@@ -25,7 +25,7 @@ export default function HomePage() {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const toRotate = ["Mohiuddin Murad"];
+  const toRotate = ["Murad"];
   const period = 2000; // Time between typing cycles
   const [typingSpeed, setTypingSpeed] = useState(150);
 
