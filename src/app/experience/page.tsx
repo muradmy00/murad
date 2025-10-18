@@ -24,12 +24,12 @@ export default function ExperiencePage() {
 
       <div className="relative">
         {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2 animate-fade-in"></div>
+        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:left-1/2"></div>
         <div className="space-y-12">
           {experience.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex flex-col lg:flex-row items-start lg:items-center animate-fade-in-up"
+              className="relative flex flex-col items-start animate-fade-in-up lg:flex-row lg:items-center"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               <div
@@ -43,7 +43,7 @@ export default function ExperiencePage() {
               
               <div className={cn(
                 "w-full ml-12 lg:ml-0 lg:w-1/2",
-                index % 2 === 0 ? "lg:pr-8" : "lg:pl-8 lg:order-1"
+                index % 2 === 0 ? "lg:pr-8" : "lg:pl-8 lg:self-end"
               )}>
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader className={cn(index % 2 !== 0 && 'lg:text-right')}>
@@ -56,8 +56,6 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
-              <div className="lg:w-1/2"></div>
-
             </div>
           ))}
         </div>
@@ -74,12 +72,12 @@ export default function ExperiencePage() {
       
       <div className="relative">
         {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-0.5 bg-border lg:-translate-x-1/2 animate-fade-in"></div>
+        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:left-1/2"></div>
         <div className="space-y-12">
           {education.map((item, index) => (
              <div
               key={item.id}
-              className="relative flex flex-col lg:flex-row items-start lg:items-center animate-fade-in-up"
+              className="relative flex flex-col items-start animate-fade-in-up lg:flex-row lg:items-center"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               <div
@@ -93,7 +91,7 @@ export default function ExperiencePage() {
                 
               <div className={cn(
                   "w-full ml-12 lg:ml-0 lg:w-1/2",
-                  index % 2 === 0 ? "lg:pr-8" : "lg:pl-8 lg:order-1"
+                  index % 2 === 0 ? "lg:pr-8" : "lg:pl-8 lg:self-end"
               )}>
                 <Card className="shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader className={cn(index % 2 !== 0 && 'lg:text-right')}>
@@ -106,7 +104,6 @@ export default function ExperiencePage() {
                   </CardContent>
                 </Card>
               </div>
-              <div className="lg:w-1/2"></div>
             </div>
           ))}
         </div>
