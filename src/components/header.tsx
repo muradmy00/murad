@@ -62,8 +62,8 @@ export default function Header() {
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center justify-between">
-        <Link href="/" className="flex items-center">
+      <div className="container flex h-14 items-center">
+        <Link href="/" className="flex items-center mr-auto">
             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
               Murad
             </span>
