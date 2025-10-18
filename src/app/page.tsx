@@ -13,15 +13,7 @@ import { getPlaceholder, resume } from '@/lib/data';
 import { assets } from '@/assets/assets';
 import { useState, useEffect } from 'react';
 
-export default function HomePage() {
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/muradmy00', 'aria-label': 'GitHub' },
-    { icon: Facebook, href: 'https://www.facebook.com/mdmohiudden.murad/', 'aria-label': 'Facebook' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/murad00/', 'aria-label': 'LinkedIn' },
-  ];
-
-  const aboutImage = getPlaceholder('about-me');
-
+function TypingAnimation() {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -56,9 +48,33 @@ export default function HomePage() {
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setTypingSpeed(150)
+      setTypingSpeed(150);
     }
   };
+
+  return (
+    <span className="leading-tight">
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
+        {text}
+        <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
+      </span>
+    </span>
+  )
+}
+
+export default function HomePage() {
+  const socialLinks = [
+    { icon: Github, href: 'https://github.com/muradmy00', 'aria-label': 'GitHub' },
+    { icon: Facebook, href: 'https://www.facebook.com/mdmohiudden.murad/', 'aria-label': 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/murad00/', 'aria-label': 'LinkedIn' },
+  ];
+
+  const aboutImage = getPlaceholder('about-me');
+
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -66,12 +82,7 @@ export default function HomePage() {
         <div className="relative inline-block animate-fade-in-up">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
           <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl min-h-[9rem] sm:min-h-[7rem] md:min-h-[8rem] lg:min-h-32 flex items-center justify-center">
-            <span className="leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
-                {text}
-                <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
-              </span>
-            </span>
+            {isClient ? <TypingAnimation /> : <span>&nbsp;</span>}
           </h1>
         </div>
 
