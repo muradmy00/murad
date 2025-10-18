@@ -25,7 +25,7 @@ export default function HomePage() {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const toRotate = ["Murad"];
+  const toRotate = ["Mohiuddin Murad"];
   const period = 2000; // Time between typing cycles
   const [typingSpeed, setTypingSpeed] = useState(150);
 
@@ -67,7 +67,6 @@ export default function HomePage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
           <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl min-h-[9rem] sm:min-h-[7rem] md:min-h-[8rem] lg:min-h-32 flex items-center justify-center">
             <span className="leading-tight">
-              I'm{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
                 {text}
                 <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
