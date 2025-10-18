@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Murad',
   description: 'Murad',
     icons: {
-    icon: './favicon_image.png',
+    icon: '/favicon_image.png',
     },
   }
 
