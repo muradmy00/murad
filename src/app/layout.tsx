@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: 'Mohiuddin Murad',
   description: 'Murad',
     icons: {
-    icon: './favicon_image.png',
-    shortcut: './favicon_image.png',
+    icon: '/favicon_image.png',
+    shortcut: '/favicon_image.png',
     },
   }
 
