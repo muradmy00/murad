@@ -16,7 +16,6 @@ const navLinks = [
   { href: '/skills', label: 'Skills' },
   { href: '/achievements', label: 'Achievements' },
   { href: '/blog', label: 'Blog' },
-  { href: '/resume', label: 'Resume' },
   { href: '/contact', label: 'Contact' },
 ];
 
