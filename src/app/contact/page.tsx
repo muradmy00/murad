@@ -14,7 +14,7 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-16 items-start">
+      <div className="grid md:grid-cols-2 gap-x-16 gap-y-12 items-start">
         <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
@@ -29,7 +29,7 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="flex items-start gap-4">
-            <div className="flex-shrink  -0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+            <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
               <Phone className="w-6 h-6" />
             </div>
             <div>
