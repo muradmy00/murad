@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex items-center">
              <span className="font-headline text-2xl font-bold">
                 <span className="text-primary">M</span>
-                <span className="text-accent">urad</span>
+                <span className="text-foreground">urad</span>
             </span>
           </div>
 

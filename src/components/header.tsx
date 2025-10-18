@@ -67,7 +67,7 @@ export default function Header() {
         <Link href="/" className="flex items-center">
             <span className="font-headline text-2xl font-bold">
                 <span className="text-primary">M</span>
-                <span className="text-accent">urad</span>
+                <span className="text-foreground">urad</span>
             </span>
         </Link>
         
@@ -93,7 +93,7 @@ export default function Header() {
                           <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setMobileMenuOpen(false)}>
                             <span className="font-headline text-2xl font-bold">
                                 <span className="text-primary">M</span>
-                                <span className="text-accent">urad</span>
+                                <span className="text-foreground">urad</span>
                             </span>
                           </Link>
                           <nav className="flex flex-col space-y-2">
