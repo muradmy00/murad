@@ -28,7 +28,7 @@ const TimelineItem = ({ item, icon, isLast, isEducation = false, index }: { item
       <CardHeader>
         <p className="text-sm text-muted-foreground">{item.duration}</p>
         <CardTitle className="font-headline text-xl mt-1">{isEducation ? item.degree : item.role}</CardTitle>
-        <p className={cn("font-semibold", isEducation ? "text-primary" : "text-accent")}>
+        <p className={cn("font-semibold text-primary")}>
           {isEducation ? item.institution : item.company}
         </p>
       </CardHeader>
