@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Fira Code', 'monospace'],
-        headline: ['Space Grotesk', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        headline: ['Poppins', 'sans-serif'],
         code: ['Fira Code', 'monospace'],
       },
       colors: {
