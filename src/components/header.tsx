@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -19,39 +19,18 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-const NavLink = ({ href, label, isMobile = false, onClick }: { href: string; label: string; isMobile?: boolean; onClick?: () => void; }) => {
+const NavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
   const pathname = usePathname();
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    // Determine active state on the client after hydration
-    const isActivePath = pathname === href || (href !== '/' && pathname.startsWith(href));
-    setIsActive(isActivePath);
-  }, [pathname, href]);
-
-  if (isMobile) {
-    return (
-      <Link
-        href={href}
-        className={cn(
-          "block w-full text-left p-3 rounded-lg font-medium text-base",
-          isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
-          "transition-colors"
-        )}
-        onClick={onClick}
-      >
-        {label}
-      </Link>
-    );
-  }
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
 
   return (
     <Link
       href={href}
       className={cn(
-        "relative px-3 py-2 text-sm font-medium hover:text-primary transition-colors",
+        "relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
         isActive ? "text-primary" : "text-muted-foreground"
       )}
+      onClick={onClick}
     >
       {label}
       {isActive && (
@@ -60,6 +39,24 @@ const NavLink = ({ href, label, isMobile = false, onClick }: { href: string; lab
     </Link>
   );
 };
+
+const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
+    const pathname = usePathname();
+    const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+
+    return (
+         <Link
+            href={href}
+            className={cn(
+            "block w-full text-left p-3 rounded-lg font-medium text-base transition-colors",
+            isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+            )}
+            onClick={onClick}
+        >
+            {label}
+        </Link>
+    )
+}
 
 
 export default function Header() {
@@ -102,7 +99,7 @@ export default function Header() {
                         </Link>
                         <nav className="flex flex-col space-y-1">
                         {navLinks.map((link) => (
-                            <NavLink key={link.href} {...link} isMobile={true} onClick={() => setMobileMenuOpen(false)} />
+                            <MobileNavLink key={link.href} {...link} onClick={() => setMobileMenuOpen(false)} />
                         ))}
                         </nav>
                     </div>
