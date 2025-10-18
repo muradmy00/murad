@@ -74,6 +74,7 @@ export default function Header() {
             <NavLink key={link.href} {...link} />
           ))}
         </nav>
+        
         <div className="lg:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
