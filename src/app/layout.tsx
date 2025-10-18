@@ -7,10 +7,11 @@ import type { Metadata } from 'next';
 import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
-  title: 'Murad',
+  title: 'Mohiuddin Murad',
   description: 'Murad',
     icons: {
-    icon: '/favicon_image.png',
+    icon: './favicon_image.png',
+    shortcut: './favicon_image.png',
     },
   }
 
