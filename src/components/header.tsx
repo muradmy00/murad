@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -21,7 +21,11 @@ const navLinks = [
 
 const NavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
   const pathname = usePathname();
-  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    setIsActive(pathname === href || (href !== '/' && pathname.startsWith(href)));
+  }, [pathname, href]);
 
   return (
     <Link
@@ -42,7 +46,12 @@ const NavLink = ({ href, label, onClick }: { href: string; label: string; onClic
 
 const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; onClick?: () => void; }) => {
     const pathname = usePathname();
-    const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+        setIsActive(pathname === href || (href !== '/' && pathname.startsWith(href)));
+    }, [pathname, href]);
+
 
     return (
          <Link
@@ -61,6 +70,11 @@ const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; 
 
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -73,13 +87,14 @@ export default function Header() {
         
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-2">
-          {navLinks.map((link) => (
+          {isClient && navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
         </nav>
         
         {/* Mobile Menu */}
         <div className="lg:hidden">
+           {isClient && (
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                     <Button variant="ghost" size="icon">
@@ -87,16 +102,17 @@ export default function Header() {
                         <span className="sr-only">Open Menu</span>
                     </Button>
                 </SheetTrigger>
-                <SheetContent side="left">
-                    <SheetHeader>
-                        <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                <SheetContent side="left" className="p-0">
+                    <SheetHeader className="p-4 border-b">
+                        <SheetTitle>
+                            <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+                              <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
+                                Murad
+                              </span>
+                            </Link>
+                        </SheetTitle>
                     </SheetHeader>
                     <div className="p-4">
-                        <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setMobileMenuOpen(false)}>
-                          <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
-                            Murad
-                          </span>
-                        </Link>
                         <nav className="flex flex-col space-y-1">
                         {navLinks.map((link) => (
                             <MobileNavLink key={link.href} {...link} onClick={() => setMobileMenuOpen(false)} />
@@ -105,6 +121,7 @@ export default function Header() {
                     </div>
                 </SheetContent>
             </Sheet>
+            )}
         </div>
       </div>
     </header>
