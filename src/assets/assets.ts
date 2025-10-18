@@ -21,7 +21,6 @@ import quill_icon from './quill.png'
 import zustand from './zustand.png'
 import tanstack_query from './tanstack_query.png'
 import yap from './yap.png'
-import favicon from './favicon.png'
 
 export const assets = {
     my_image,
@@ -37,7 +36,7 @@ export const assets = {
     typescript_javascript,
     Bonnek,
     careshced,
-    ecommerce,
+ecommerce,
     food_delivery,
     gemini_clone,
     university,
@@ -45,6 +44,5 @@ export const assets = {
     quill_icon,
     zustand,
     tanstack_query,
-    yap,
-    favicon
+    yap
 }

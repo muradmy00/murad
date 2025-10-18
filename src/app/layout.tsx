@@ -4,13 +4,12 @@ import Footer from '@/components/footer';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from 'next';
-import { assets } from '@/assets/assets';
 
 export const metadata: Metadata = {
   title: 'Murad',
   description: 'Murad',
     icons: {
-    icon: assets.favicon.src,
+    icon: '/favicon.png',
   }
 };
 
