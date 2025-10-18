@@ -61,25 +61,27 @@ export default function HomePage() {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <main className="text-center">
         <div className="relative inline-block">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-          <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl h-24 md:h-28 lg:h-32">
-            I'm{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
-              {text}
-              <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
+          <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl min-h-[9rem] sm:min-h-[7rem] md:min-h-[8rem] lg:min-h-32 flex items-center justify-center">
+            <span className="leading-tight">
+              I'm{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x font-medium">
+                {text}
+                <span className="border-r-2 border-accent animate-pulse">&nbsp;</span>
+              </span>
             </span>
           </h1>
         </div>
 
-        <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           A passionate Frontend Developer creating modern, responsive, and
           performant web applications.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-primary-foreground group hover:from-primary/90 hover:to-accent/90">
             <Link href="/projects">
               View My Work <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
@@ -92,7 +94,7 @@ export default function HomePage() {
           </Button>
         </div>
         
-        <div className="mt-12 flex justify-center space-x-6">
+        <div className="mt-10 flex justify-center space-x-6">
             {socialLinks.map((link, index) => (
               <Link key={index} href={link.href} className="text-muted-foreground hover:text-primary transition-colors" aria-label={link['aria-label']}>
                 <link.icon className="h-7 w-7" />
@@ -100,9 +102,9 @@ export default function HomePage() {
             ))}
         </div>
 
-        <Card className="mt-24 max-w-6xl mx-auto bg-transparent border-none shadow-none">
+        <Card className="mt-20 max-w-6xl mx-auto bg-transparent border-none shadow-none">
             <CardContent className="p-0">
-                <div className="grid md:grid-cols-5 items-center gap-8 md:gap-16">
+                <div className="grid md:grid-cols-5 items-center gap-8">
                     <div className="relative md:col-span-2 flex justify-center items-center">
                       <div className="relative w-64 h-64 md:w-80 md:h-80 group">
                          <div className="absolute inset-0 bg-primary/20 rounded-lg blur-3xl -z-10 animate-pulse transform -rotate-6"></div>
@@ -117,7 +119,7 @@ export default function HomePage() {
                          )}
                       </div>
                     </div>
-                    <div className="md:col-span-3 p-8 text-left">
+                    <div className="md:col-span-3 text-left p-4 sm:p-8">
                         <h3 className="font-headline text-3xl font-bold text-primary mb-4">About Me</h3>
                         <p className="text-muted-foreground leading-relaxed">
                             As a frontend developer, I'm driven by a passion for creating pixel-perfect, intuitive user interfaces that people love to use. I specialize in turning complex problems into beautiful, functional web experiences using modern technologies like React, Next.js, and TypeScript. My focus is on writing clean, maintainable code and building responsive applications that perform flawlessly on any device.
