@@ -23,32 +23,34 @@ export default function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const NavLink = ({ href, label, className, isMobile = false }: { href: string; label: string; className?: string; isMobile?: boolean}) => {
+  const NavLink = ({ href, label, isMobile = false }: { href: string; label: string; isMobile?: boolean}) => {
     const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+    
+    const commonClasses = "transition-colors";
     
     if (isMobile) {
         return (
             <Link
                 href={href}
                 className={cn(
-                "block w-full text-left p-3 rounded-lg text-base font-medium transition-colors",
-                isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
-                className
+                  "block w-full text-left p-3 rounded-lg font-medium",
+                  isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
+                  commonClasses
                 )}
                 onClick={() => setMobileMenuOpen(false)}
             >
                 {label}
             </Link>
-        )
+        );
     }
     
     return (
       <Link
         href={href}
         className={cn(
-          "relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
+          "relative px-3 py-2 text-sm font-medium hover:text-primary",
           isActive ? "text-primary" : "text-muted-foreground",
-          className
+          commonClasses
         )}
         onClick={() => setMobileMenuOpen(false)}
       >
@@ -63,14 +65,14 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
-        <Link href="/" className="flex items-center mr-auto">
+        <Link href="/" className="flex items-center">
             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
               Murad
             </span>
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-2 text-sm font-medium">
+        <nav className="hidden lg:flex items-center space-x-2">
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
@@ -86,16 +88,16 @@ export default function Header() {
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left">
-                  <SheetHeader>
-                      <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
-                  </SheetHeader>
+                    <SheetHeader>
+                        <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                    </SheetHeader>
                     <div className="p-4">
                         <Link href="/" className="mr-6 flex items-center mb-8" onClick={() => setMobileMenuOpen(false)}>
                           <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
                             Murad
                           </span>
                         </Link>
-                        <nav className="flex flex-col space-y-2">
+                        <nav className="flex flex-col space-y-1">
                         {navLinks.map((link) => (
                             <NavLink key={link.href} {...link} isMobile={true} />
                         ))}
