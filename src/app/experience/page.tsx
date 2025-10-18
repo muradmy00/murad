@@ -23,15 +23,18 @@ export default function ExperiencePage() {
       </div>
 
       <div className="relative">
-        {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:left-1/2"></div>
+        {/* Central timeline bar - for lg and up */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in hidden lg:block"></div>
         <div className="space-y-12">
           {experience.map((item, index) => (
             <div
               key={item.id}
-              className="relative flex flex-col items-start animate-fade-in-up lg:flex-row lg:items-center"
+              className="relative flex items-start animate-fade-in-up lg:flex-row lg:items-center"
               style={{ animationDelay: `${index * 200}ms` }}
             >
+              {/* Mobile Timeline Bar */}
+              <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:hidden"></div>
+
               <div
                 className={cn(
                   "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md left-5 -translate-x-1/2",
@@ -71,15 +74,18 @@ export default function ExperiencePage() {
       </div>
       
       <div className="relative">
-        {/* Central timeline bar - for md and up */}
-        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:left-1/2"></div>
+        {/* Central timeline bar - for lg and up */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in hidden lg:block"></div>
         <div className="space-y-12">
           {education.map((item, index) => (
              <div
               key={item.id}
-              className="relative flex flex-col items-start animate-fade-in-up lg:flex-row lg:items-center"
+              className="relative flex items-start animate-fade-in-up lg:flex-row lg:items-center"
               style={{ animationDelay: `${index * 200}ms` }}
             >
+              {/* Mobile Timeline Bar */}
+              <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 animate-fade-in lg:hidden"></div>
+
               <div
                 className={cn(
                   "absolute top-0 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md left-5 -translate-x-1/2",
