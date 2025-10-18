@@ -47,7 +47,7 @@ const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; 
          <Link
             href={href}
             className={cn(
-            "block w-full text-left p-3 rounded-lg font-medium text-base transition-colors",
+            "block w-full text-left p-3 rounded-lg font-medium transition-colors text-base",
             isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
             )}
             onClick={onClick}
