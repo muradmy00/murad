@@ -52,7 +52,6 @@ export default function Header() {
           isActive ? "text-primary" : "text-muted-foreground",
           commonClasses
         )}
-        onClick={() => setMobileMenuOpen(false)}
       >
         {label}
         {isActive && (
