@@ -48,7 +48,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 alt={post.title}
                 fill
                 className={cn(
-                  'object-cover',
+                  'object-cover w-full h-full',
                   typeof post.imageUrl !== 'string' && 'object-contain p-4 bg-secondary/20'
                 )}
                 data-ai-hint={post.imageHint}
