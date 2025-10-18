@@ -31,7 +31,7 @@ export default function Header() {
             <Link
                 href={href}
                 className={cn(
-                "block w-full text-left p-3 rounded-lg text-lg font-medium transition-colors",
+                "block w-full text-left p-3 rounded-lg text-base font-medium transition-colors",
                 isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
                 className
                 )}
@@ -63,7 +63,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center mr-auto">
             <span className="font-headline text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary-foreground animate-gradient-x">
               Murad
             </span>
