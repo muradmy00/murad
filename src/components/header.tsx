@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -48,7 +48,7 @@ const MobileNavLink = ({ href, label, onClick }: { href: string; label: string; 
          <Link
             href={href}
             className={cn(
-            "block w-full text-left p-3 rounded-lg font-medium text-sm transition-colors",
+            "block w-full text-left p-3 rounded-lg font-medium text-lg transition-colors",
             isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
             )}
             onClick={onClick}
