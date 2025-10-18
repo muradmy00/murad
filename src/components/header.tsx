@@ -24,7 +24,7 @@ export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const NavLink = ({ href, label, className, isMobile = false }: { href: string; label: string; className?: string; isMobile?: boolean}) => {
-    const isActive = pathname === href;
+    const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
     
     if (isMobile) {
         return (
@@ -69,12 +69,14 @@ export default function Header() {
             </span>
         </Link>
         
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-2 text-sm font-medium">
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
         </nav>
         
+        {/* Mobile Menu */}
         <div className="lg:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
