@@ -15,21 +15,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="bg-background py-16 sm:py-24">
+    <div className="bg-background py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <article className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex items-center space-x-2 mb-4">
-                {post.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="font-semibold text-sm">{tag}</Badge>
-                ))}
-              </div>
-            )}
-            <h1 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary leading-tight mb-4">
+          <header className="mb-8 text-center">
+            <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary leading-tight mb-4">
               {post.title}
             </h1>
-            <div className="flex items-center space-x-6 text-muted-foreground text-sm">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-muted-foreground text-sm mt-4">
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4" />
                 <span>By {post.author}</span>
@@ -39,10 +32,17 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
               </div>
             </div>
+             {post.tags && post.tags.length > 0 && (
+              <div className="flex items-center justify-center flex-wrap gap-2 mt-6">
+                {post.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="font-semibold text-xs">{tag}</Badge>
+                ))}
+              </div>
+            )}
           </header>
 
           {post.imageUrl && (
-            <div className="relative w-full aspect-[16/9] my-8 rounded-lg overflow-hidden shadow-lg border border-border">
+            <div className="relative w-full aspect-video my-8 rounded-lg overflow-hidden shadow-lg border border-border">
               <Image
                 src={post.imageUrl}
                 alt={post.title}
